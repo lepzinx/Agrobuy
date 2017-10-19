@@ -314,7 +314,7 @@ $config['charset']  = 'UTF-8';
                $caminho = 'assets/uploads/conversas/'.$de.$para;
             }
                $name =md5(time());
-       $curriculo    = $_FILES['imagem'];
+       $curriculo    = $_FILES['files[]'];
         $configuracao = array(
             'upload_path' => 'assets/uploads/conversas/'.$de.$para.'/',
             'allowed_types' => 'jpg|png',
@@ -322,7 +322,7 @@ $config['charset']  = 'UTF-8';
             'max_size' => '2048'
         );
               $this->upload->initialize($configuracao);
-        if ($this->upload->do_upload('imagem')) {
+        if ($this->upload->do_upload('files[]')) {
             $dados['mensagem_arquivo']  = $configuracao['upload_path'] . $configuracao['file_name'];
             return $this->db->insert('mensagens', $dados);
         }else{

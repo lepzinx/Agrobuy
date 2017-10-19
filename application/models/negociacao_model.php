@@ -68,4 +68,33 @@ class Negociacao_model extends CI_Model{
            $this->db->where("negociacao_id", $negociacao_id);
            return $this->db->update('disputas', $dados);
        }
+
+       public function uploadDisputa(){
+
+           $de = $this->session->userdata['usuario_id'];
+           $dados['mensagem_de'] = $de;
+           $dados['mensagem_para'] = $para;
+
+           $this->load->library('upload');
+           if (!is_dir('assets/uploads/conversas/'.$de.$para)) {
+               mkdir('assets/uploads/conversas/'.$de.$para, 0777, TRUE);
+               $caminho = 'assets/uploads/conversas/'.$de.$para;
+           }
+           $name =md5(time());
+           $curriculo    = $_FILES['imagem'];
+           $configuracao = array(
+               'upload_path' => 'assets/uploads/conversas/'.$de.$para.'/',
+               'allowed_types' => 'jpg|png',
+               'file_name' => $name . '.jpg',
+               'max_size' => '2048'
+           );
+           $this->upload->initialize($configuracao);
+           if ($this->upload->do_upload('imagem')) {
+               $dados['mensagem_arquivo']  = $configuracao['upload_path'] . $configuracao['file_name'];
+               return $this->db->insert('mensagens', $dados);
+           }else{
+               $this->upload->display_errors();
+           }
+
+       }
 }
