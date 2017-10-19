@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -76,7 +76,7 @@
                                             <a href=""><li><span class="glyphicon glyphicon-comment"></span><p> Mensagens</p></li></a>
                                             <a><li><span class="glyphicon glyphicon-file"></span><p> Pedir Orçamento</p></li></a>
                                             <a><li><span class="glyphicon glyphicon-list-alt"></span><p> Meus Orçamentos</p></li></a>
-                                            <a><li id="m1"><span class="glyphicon glyphicon-thumbs-up"></span><p> Reputo e Disputas</p></li></a>
+                                            <a><li id="m1"><span class="glyphicon glyphicon-thumbs-up"></span><p> Reputação e Disputas</p></li></a>
                                             <a><li id="m2"><span class="glyphicon glyphicon-sort-by-attributes"></span><p> Serviços</p></li></a>
                                             <a><li class="active" id="m3"><span class="glyphicon glyphicon-user"></span><p> Perfil e Configurações</p></li></a>
                                         </ul>

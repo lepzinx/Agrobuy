@@ -324,6 +324,13 @@ class Dashboard extends CI_Controller {
         }
         public function atualizarNotificacoes(){
             $this->load->model('anuncios_model');
+            $notificaMensagem = $this->anuncios_model->carregarNotificacaoMensagem();
+            $notificaDisputas = $this->anuncios_model->carregarNotificacaoDisputa();
+            $notificaAcoes = $this->anuncios_model->carregarNotificacaoAcoes();
+            $notificaAvaliacoes = $this->anuncios_model->carregarNotificacaoAvaliacao();
+
+
+
              echo '  <ul class="notifications">
                         <li><a href="" ><i class="fa fa-comment" aria-hidden="true"><span class="buttonbadge alert">4</span></i>Mensagens não lidas</a></li>
 
