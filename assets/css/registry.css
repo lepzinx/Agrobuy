@@ -1,0 +1,218 @@
+﻿.page-header{
+    margin:10px 0px;
+}
+
+.btn-radio.active{
+    background-color: #fe980f;
+    color: #fff;
+}
+
+#prural{
+    display: none;
+}
+#tcpf{
+    display: none;
+}
+
+
+#busin label{
+    display: table-cell;
+}
+#busin input{
+    display: table-cell;
+}
+#busin select{
+    display: table-cell;
+    margin: 5px;
+    border-radius: 5px;
+}
+
+span#tend, span#tpessoa{
+    margin: 0px 5px;
+}
+
+.btn-radio.active:hover{
+    color: #fff;
+}
+.nav-tabs  li.active  a, .nav-tabs  li.active  a:hover, .nav-tabs  li.active  a:focus{
+    background-color: #fe980f;
+    color: #fff;
+    font-weight: 700;
+}
+.nav-tabs  li  a, .nav-tabs  li  a:hover, .nav-tabs  li  a:focus{
+    background-color:#eee;
+    padding: 9px 15px 10px 15px;
+    pointer-events: none;
+    cursor: default;
+}
+.space{
+    width:23px;
+    color:transparent;
+}
+#nav1{
+    border-radius: 5px 0px 0px 5px;
+}
+#nav1:after {
+    content:"";
+    position:absolute;
+    border-bottom: 20px solid transparent;
+    border-left: 20px solid #fe980f;
+    border-top: 20px solid transparent;
+    height: 0px;
+    width: 0px;
+    margin-left:15px;
+    margin-top: -10px;
+}
+#nav1.done{
+    background-color:#bada55;
+    color:#fff;
+}
+#nav1.done:after{
+    border-left: 20px solid #bada55;
+    margin-left:16px;
+}
+#nav2{
+border-radius: 0px;
+}
+#nav2:before {
+    content:"";
+    position:absolute;
+    border-bottom: 20px solid #eee;
+    border-left: 20px solid transparent;
+    border-top: 20px solid #eee;
+    height: 0px;
+    width: 0px;
+    margin-left:-35px;
+    margin-top: -10px;
+}
+
+#nav2:after {
+    content:"";
+    position:absolute;
+    border-bottom: 20px solid transparent;
+    border-left: 20px solid #eee;
+    border-top: 20px solid transparent;
+    height: 0px;
+    width: 0px;
+    margin-left:15px;
+    margin-top: -10px;
+}
+#nav2.active{
+    padding: 10px 15px 11px 15px;
+}
+#nav2.active:before{
+    border-bottom: 20px solid #fe980f;
+    border-top: 20px solid #fe980f;
+}
+#nav2.active:after{
+    border-left: 20px solid #fe980f;
+}
+
+#nav2.done{
+    background-color:#bada55;
+    color:#fff;
+    padding: 9px 15px 10px 15px;
+}
+#nav2.done:after{
+    border-left: 20px solid #bada55;
+    margin-left:16px;
+}
+#nav2.done:before{
+    border-bottom: 20px solid #bada55;
+    border-top: 20px solid #bada55;
+}
+
+
+#nav3{
+    border-radius: 0px 5px 5px 0px;
+}
+#nav3:before {
+    content:"";
+    position:absolute;
+    border-bottom: 20px solid #eee;
+    border-left: 20px solid transparent;
+    border-top: 20px solid #eee;
+    height: 0px;
+    width: 0px;
+    margin-left:-35px;
+    margin-top: -10px;
+}
+#nav3.active{
+    padding: 10px 15px 11px 15px;
+}
+#nav3.active:before{
+    border-bottom: 20px solid #fe980f;
+    border-top: 20px solid #fe980f;
+}
+
+.btn-radio:hover{
+    color: #000;
+}
+
+.btn-default{
+    background-color: #fe980f;
+    color: #fff;
+}
+.btn-success{
+    background-color: #bada55;
+    color: #fff;
+}    
+
+
+#infoacc{
+    display: table;
+    width: auto;
+    height: auto;
+}
+
+em{
+    color: red;
+    font-style: italic;
+    font-weight: 700;
+}
+
+.trow{
+    display: table-row;
+}
+#infoacc p{
+    display:table-cell;
+}
+
+#infoacc input{
+    margin: 10px 5px;
+    display: table-cell;
+}
+
+#busin label{
+    display: table-cell;
+}
+
+#busin input{
+    margin: 10px 5px;
+    width: 240px;
+    display: table-cell;
+}
+ select{
+    display: table-cell;
+}
+
+label.tneg{
+    display: block;
+    font-weight: 300;
+}
+
+.labels p{
+ display: none;   
+}
+
+p.st, input.st{
+    display: inline;
+}
+
+.nd{
+    display: none;
+}
+
+#intc, #ints{
+    display: none;
+}

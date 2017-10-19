@@ -1,0 +1,175 @@
+sectio{
+    background-color: #f9f9f9;
+}
+#advertisement{
+    padding: 0px 0px 10px 0px;
+}
+
+#myCarousel{
+    width:85%;
+    margin:0px auto;
+}
+
+.item{
+    padding: 0px;
+}
+
+.carousel-control.left, .carousel-control.right {
+    background-image: none;
+    width:5%;
+}
+
+.left-sidebar h2{
+    margin: 0px 0px 10px 0px;
+}
+
+.price-range{
+    margin: 0px;
+}
+div.well{
+    padding: 10px;
+}
+
+.btn-radio.active{
+    background-color:#fe980f;
+    color: #fff;
+}
+.btn-radio.active:hover{
+    color:#fff;
+}
+.btn-radio:hover{
+    color:#000;
+}
+
+.panel-default{
+    margin: 0px 0px 5px 0px;
+    border: 0px;
+}
+.panel-heading{
+    border:0px;
+    background-color:#fff;
+}
+
+#minqt{
+    width:100px;
+    border: 0px;
+    border-radius: 5px;
+    box-shadow: inset 1px 1px 5px #a9a9a9;
+}
+#minbut{
+ 
+    margin: 0px 0px 0px 5px;
+    background-color: #fe980f;
+    color: #fff;
+}
+
+.glyphicon-ok-circle{
+color:#2b6ca3
+}
+
+.fa-get-pocket{
+    color:#face32;
+}
+
+.fa-star,.fa-star-half-o,.fa-star-o{
+    color:#face32;
+    font-size:18px;
+}
+
+
+
+label{
+    font-weight: normal;
+}
+
+#sorting{
+    width: 96%;
+    height: auto;
+    border: 1px solid #f7f7f0;
+    margin: 0px 10px 10px 15px;
+}
+
+#sorting p{
+    display: inline;
+}
+
+.dropdown-toggle{
+   display: inline;
+}
+#sortby{
+    width:200px;
+    background-color: #fff;
+    display: inline;
+}
+.par{
+    margin:0px 0px 0px 50px;
+    display: inline;
+}
+
+.product-image-wrapper{
+    border: 2px solid #f7f7f0;
+    border-radius: 2px;
+    z-index: 0;
+}
+
+.product-image-wrapper:hover{
+-webkit-box-shadow: 0px 10px 5px -5px rgba(133,133,133,0.75);
+-moz-box-shadow: 0px 10px 5px -5px rgba(133,133,133,0.75);
+box-shadow: 0px 10px 5px -5px rgba(133,133,133,0.75);
+    position: relative;
+    bottom:2px;
+    border: 2px solid #ddd;
+}
+
+.productinfo{
+    padding: 0px 0px 10px 0px;
+}
+.productinfo p{
+    margin: 0px 0px 5px 0px;
+}
+
+h3.adtitle{
+    font-weight:bold;
+    margin: 5px 0px;
+}
+
+p.adcompany{
+    margin: 0px 0px 5px 0px;
+    font-size:16px;
+}
+
+p.adcompany:hover{
+    color:#bada55;
+}
+p.companyloc{
+    margin: 0px 0px 5px 0px;
+}
+
+h5.adprice{
+    color: #fe980f;
+    font-size: 24px;
+    display: inline;
+}
+h6{
+    font-size: 14px;
+    font-weight: normal;
+    margin: 0px 0px 5px 0px;
+}
+h6.adunit{
+    display: inline;
+}
+
+.onhover{
+    background-color: #fff;
+    text-align: center;
+    z-index: 1000;
+    display: none;
+    position: absolute;
+}
+.adevaluate, .adcredit{
+    margin: 0px 0px 5px 0px;
+}
+
+.overlay-content p{
+    margin: 10px 0px 5px 0px;
+}

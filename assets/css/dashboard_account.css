@@ -1,0 +1,147 @@
+.container .container{
+    margin: 0px;
+    border: 0px;
+    padding: 0px;
+}
+
+.container{
+    width: auto;
+}
+#content{
+    z-index: 3000;
+}
+#sidebarnav{
+    padding: 0px 15px 0px 0px;
+}
+
+#sidebar{
+    background-color:#1e262d;
+    height: 400px;
+    margin: 0px;
+    padding:0px;
+    border: 0px;
+    float:left;
+}
+.well{
+    
+    margin: 15px 0px 0px 0px;
+    border:0px;
+    padding: 0px;
+    width:inherit;
+}
+
+.well, .form-horizontal, .form-group, .input-group, .btn-group,.tab-pane{
+    background-color: inherit;
+    width:inherit;
+}
+
+#pillbg{
+    margin: 0px 25px;
+    height: 33px;
+    background-color: #000;
+    border-radius: 5px 5px 5px 5px;
+}
+
+#pillbg .btn-primary{
+    background:#FE980F;
+    background-color: #000;
+    border: 0 none;
+    border-radius: 5px;
+    color:#ddd;
+    
+}
+
+#pillbg .btn-primary.active{
+    margin:0px;
+    background-color: #fe980f;
+    color: #fff;
+    border: 1px solid #fe980f;
+    border-radius: 5px;
+}
+
+
+#menu1, #menu2, .sidebars li{
+    font-size: 17px;
+    
+}
+.tab-content p{
+    display: inline;
+}
+#menu1 a li,#menu2 a li{
+    padding:0px 15px 0px 15px;
+    border-left: solid 1px #1e262d;
+    color: #bcc7bd;
+}
+#menu1 a li:hover,#menu2 a li:hover{
+    background-color:#3b4248;
+    color: #fff;
+}
+#menu2 a li.active{
+    background-color:#3b4248;
+    color:#bcc7bd;
+    border-left: solid 2px #fe980f;
+    border-right: solid 10px #1e262d;
+}
+#m1,#m2,#m3,#m4,#m5,#m6{
+    cursor: default
+}
+
+.tab-pane ul{
+    padding:0px;
+}
+
+
+
+hr{
+    border-color: #2f2f2f;
+    margin: 10px 0px;
+}
+#sidebar2,#sidebar3,#sidebar4,#sidebar5{
+
+    background-color:#3b4248;
+    width: 160px;
+    height: 400px;
+    color: #fff;
+    position: absolute;
+    top:0px;
+    left: 210px;
+    display: none;
+    z-index: 4000;
+    flex:1;
+}
+
+#sidebar2 li, #sidebar2 ul, #sidebar3 li, #sidebar3 ul, #sidebar4 li, #sidebar4 ul,#sidebar5 ul{
+    padding: 0px 10px;
+    
+}
+
+/* TABLES SECTION*/
+
+.table-fixed .row{
+    margin: 0px;
+}
+.table-fixed thead {
+  width: 97%;
+}
+.table-fixed tbody {
+  height: 218px;
+  overflow-y: auto;
+  width: 100%;
+}
+.table-fixed thead, .table-fixed tbody, .table-fixed tr, .table-fixed td, .table-fixed th {
+  display: block;
+}
+.table-fixed tbody td, .table-fixed thead > tr> th {
+  float: left;
+  border-bottom-width: 0;
+}
+
+thead{
+    margin: 0px;
+}
+
+.row th b{
+    background-color: #fff;
+    font-size: 18px;
+}
+tr:nth-child(odd) {background-color: #f2f2f2}

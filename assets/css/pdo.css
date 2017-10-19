@@ -1,0 +1,161 @@
+
+
+.container{
+    width: auto;
+    
+}
+
+h1{
+    display: inline;
+}
+
+
+#intro{
+    margin: 20px 60px;
+}
+
+#quote{
+    margin:0px 20px;
+    width:60%;
+}
+
+#comments{
+    position: fixed;
+}
+em{
+    font-weight: 900;
+    font-style: normal;
+}
+
+p{
+    font-size:21px;
+}
+
+#tags{
+    width: 550px;
+    font-size:21px;
+}
+
+option{
+    font-size:16px;
+}
+
+.categoryfilter{
+    height:220px;
+    width:auto; 
+    overflow:auto;
+    display:inline;
+    overflow-y:scroll;
+    background-color:#fff;
+    border: 1px solid #a9a9a9;
+    border-radius: 2px;
+}
+
+.smalbox{
+    max-width: 180px;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;}
+    
+#filter2,#filter3{
+display: none;    
+}
+
+#quantitybox{
+    width:270px;
+    font-size:17px;
+}
+#unitbox{
+    margin:0px 0px 0px 10px;
+    width:270px;
+    display: inline;
+    background-color: #fff;
+    border: 1px solid #a9a9a9;
+    border-radius: 2px;
+    position: relative; 
+    top: -1px;
+}
+
+.unitclass{
+    font-size: 13px;
+    font-weight: 900;
+    font-style: italic;
+    background-color:#f0f0e9;
+    color:#000;
+    
+}
+
+.unitopt{
+    font-size:15px;
+    background-color:#fff;
+}
+
+#remarkbox{
+    width:550px;
+    height: 300px;
+    background-color: #fff;
+    border: 1px solid #a9a9a9;
+    border-radius: 2px;
+    font-size:16px;
+}
+
+.control-label{
+    font-size:16px;
+}
+
+#imgbox{
+    margin:10px 0px;
+    width:550px;
+   height: auto;
+    background-color: #fff;
+    border: 1px solid #a9a9a9;
+    border-radius: 2px;
+}
+
+#addinfobox{
+    padding: 10 0px;
+    width:550px;
+    border: 1px solid #a9a9a9;
+    border-radius: 2px;
+    background-color:#fff;   
+}
+
+.panel-heading{
+    padding: 10px 5px;
+    background-color:#fff;
+}
+.panel-title{
+    font-size: 21px;
+    color: #333;
+}
+
+#desiredprice{
+    width:260px;
+}
+
+td label{
+    margin:4px;
+    font-weight: normal;
+}
+
+table td{
+    font-size: 15px;
+}
+
+table th{
+    font-size: 18px;
+}
+.addprefp{
+    font-size:16px;
+}
+
+label{
+    font-weight: normal;
+}
+
+#comments{
+    display: inline;
+}

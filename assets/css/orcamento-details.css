@@ -1,0 +1,399 @@
+﻿
+section{
+    background-color: #fff;
+}
+
+#categorytree{
+    padding:10px 0px 5px 100px;
+}
+
+#cont1{
+    background-color: #f9f9f9;
+    padding: 0px;
+    margin: 0px 0px 0px 72px;
+    
+}
+
+.padding-right{
+    padding: 0px;
+}
+
+.product-details{
+    background-color:#fff;
+    padding: 0px;
+    margin:0px 0px 20px 0px;
+}
+
+.product-details hr{
+    margin: 5px 0px;
+}
+
+.col-sm-5,.col-sm-7{
+    background-color:#fff;
+    padding: 0px;
+    display: inline;
+}
+
+.col-sm-5{
+    max-width: 350px;
+    
+}
+.img-show, #firmCarousel img{
+    cursor: pointer;
+}
+
+
+
+.img-show{
+    max-width: 350px;
+    padding: 0px;
+}
+#myCarousel .item img{
+    width: auto;
+    height: 300px;
+    max-height: 300px;
+    margin: 0px auto;
+    padding: 0px;
+    text-align: center;
+}
+
+#slider-thumbs .item{
+    padding: 0px;
+    margin: 10px 0px;
+    text-align: center;
+}
+#slider-thumbs .item a img{
+    width: auto;
+    height: 80px;
+    max-height: 80px;
+    display: inline;
+}
+.carousel-inner a{
+    display: inline;
+}
+
+.selected img {
+    opacity:0.5;
+    }
+
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 3; /* Sit on top */
+    padding-top: 50px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+}
+
+/* Modal Content (Image) */
+.modal-content {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+}
+
+/* Caption of Modal Image (Image Text) - Same Width as the Image */
+#caption {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+    text-align: center;
+    color: #ccc;
+    padding: 10px 0;
+    height: 50px;
+}
+
+/* Add Animation - Zoom in the Modal */
+.modal-content, #caption { 
+    -webkit-animation-name: zoom;
+    -webkit-animation-duration: 0.6s;
+    animation-name: zoom;
+    animation-duration: 0.6s;
+}
+
+@-webkit-keyframes zoom {
+    from {-webkit-transform:scale(0)} 
+    to {-webkit-transform:scale(1)}
+}
+
+@keyframes zoom {
+    from {transform:scale(0)} 
+    to {transform:scale(1)}
+}
+
+/* The Close Button */
+.close {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.close:hover,
+.close:focus {
+    color: #bbb;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* 100% Image Width on Smaller Screens */
+@media only screen and (max-width: 700px){
+    .modal-content {
+        width: 100%;
+    }
+}
+
+.col-sm-7{
+    margin: 0px 0px 0px 20px;
+    width: 590px;
+}
+
+.product-information{
+    padding: 0px;
+}
+
+#product-information hr{
+    margin: 0px;
+    border: solid 1px #f7f7f0;
+}
+
+
+
+#productimage{
+    width: 350px;
+}
+
+
+
+
+#productid{
+    font-size:15px;
+    color:#777;
+    margin: 2px;
+
+}
+.separator{
+    font-size: 24px;
+    color: #fe980f;}
+
+.fa-get-pocket{
+    color:#face32;
+}
+
+#qlabel{
+    margin: 10px 0px 0px 20px;
+    font-size:16px;
+}
+
+.cartinv {
+  background-color:#fff;
+  border: solid 1px #fe980f;
+  border-radius: 2;
+  color: #fe980f;
+  font-family: 'Roboto', sans-serif;
+  font-size: 15px;
+  margin-bottom: 10px;
+  margin-left: 20px;
+}
+.cartinv:hover{
+    background-color: #fe980f;
+    color: #fff;
+    border: 1px solid #fff;
+}
+
+
+#quantity{
+    width: 110px;
+    display: inline;
+}
+
+#buybuttons button{
+ margin: 5px 0px 5px 5px;
+    display: inline;
+}
+
+
+#assistbuttons p{
+    display: inline;
+}
+#assistbuttons .btn-default{
+    border: 0px;
+}
+
+.glyphicon-heart{
+    color:red;   
+}
+.fa-exclamation-triangle{
+    color: #ffcd2c;   
+}
+.fa-facebook-official{
+    color:#3b5998;
+}
+.fa-whatsapp{
+    color:#0dc143;
+}
+
+
+.fa-exclamation-triangle, .fa-facebook-official,.fa-whatsapp,.glyphicon-floppy-disk{
+    display: inline;
+    margin: 0px;
+    padding: 0px;
+    font-size:22px;
+}
+
+#contactspan{
+    width: 250px;
+    position: absolute;
+    left: 1040px;
+    top:128px;
+    background-color:#fff;
+    border: 1px solid #f7f7f0;
+    padding:10px;
+    box-shadow: 2px 2px 5px #888888;
+}
+
+#contactspan hr{
+    margin: 10px 0px;
+}
+#contactspan p{
+    display: inline;
+}
+
+#contactspan .glyphicon-ok-circle {
+    color:#2b6ca3;
+}
+
+#contactspan .glyphicon-map-marker{
+    color:#fe980f;
+}
+
+#contactspan .glyphicon-ok{
+    color: #bada55;
+}
+
+
+
+.category-tab{
+    margin: 0px;
+    padding: 0px;
+    background-color: #fff;
+}
+
+
+
+table {
+margin: 25px;
+display: inline;
+table-layout: fixed;
+
+}
+
+td.ptitle{
+    font-size:16px;
+}
+tr.titlerow td{
+ background-color:#bada55;   
+}
+
+table p{
+    margin: 0px;
+    display: inline;
+}
+
+table td{
+    width:49%;
+    border-right: dashed 1px black;
+    padding: 0px 10px;
+}
+
+table .qtd{
+    display: inline;
+    padding: 3px;
+    width: 70px;
+}
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0; 
+}
+tr:hover {background-color: #f5f5f5}
+tr.titlerow:hover{background-color: #bada55}
+
+td:nth-child(1){
+    background-color: #f5f5f5;
+}
+
+
+
+.carousel-control.left, .carousel-control.right {
+    background-image: none
+}
+
+.glyphicon-chevron-left, .glyphicon-chevron-right{
+    color:#bada55;
+}
+
+
+
+/* - MODAL DE NEGOCIAÇÃO */
+
+
+.title h4{
+    margin: 0px;
+    padding: 15px;
+    color: #fff;
+    background-color: #fe980f
+}
+
+.orcamento i{
+    font-size: 25px;
+}
+
+.modal-title{
+    background-color: #fe980f;
+    padding: 15px;
+}
+.modal-title h3{
+    color: #fff;
+}
+
+.modal-content .tdata td{
+    text-align: left;
+}
+.modal-body.action-buttons{
+    padding: 0px;
+}
+.modal-body.action-buttons button{
+    font-size: 20px;
+    padding: 15px;
+    background-color: transparent;
+    border: 0px;
+}
+.modal-body.action-buttons button:hover{
+    padding: 15px;
+    background-color: #dedede;
+    border: 0px;
+}
+
+.modal-content .form-control{
+    padding: 6px 6px 6px 6px;
+    width: 100px;
+    display: inline;
+}
+.modal-content p{
+    display: inline
+}
+

@@ -1,0 +1,335 @@
+﻿.container .container{
+    margin: 0px;
+    border: 0px;
+    padding: 0px;
+}
+
+.radio-group label {
+   overflow: hidden;
+} .radio-group input {
+   height: 1px;
+   width: 1px;
+   position: absolute;
+   top: -20px;
+} 
+
+.container{
+    width: auto;
+}
+
+.buttonbadge {
+  background-color: #333;
+  border-radius: 2px;
+  color: white;
+  padding: 1px 3px;
+  font-size: 10px;
+}
+.buttonbadge.alert {
+   background-color: #fa3e3e; 
+}
+
+#content{
+    z-index: 3000;
+}
+.notifications {
+columns: 2;
+}
+
+.notifications li{
+    margin: 0px;
+    display:block;
+    font-size: 20px;
+}
+
+.notifications i {
+    margin:0px;
+    font-size: 26px;
+    margin:10px;
+    vertical-align: baseline;
+}
+.notifications a{
+    color:#333;
+}
+.notifications .notificated{
+    color:#337ab7;
+}
+#nav-selector{
+    background-color:#f5f5f5;
+}
+#sidebarnav{
+    padding: 0px 15px 0px 0px;
+}
+
+#sidebar{
+    background-color:#1e262d;
+    
+    height: 400px;
+    margin: 0px;
+    padding:0px;
+    border: 0px;
+    float:left;
+}
+.well{
+    
+    margin: 15px 0px 0px 0px;
+    border:0px;
+    padding: 0px;
+    width:inherit;
+}
+
+.well, .form-horizontal, .form-group, .input-group, .btn-group,.tab-pane{
+    background-color: inherit;
+    width:inherit;
+}
+
+#pillbg{
+    margin: 0px 25px;
+    height: 33px;
+    background-color: #000;
+    border-radius: 5px 5px 5px 5px;
+}
+
+#pillbg .btn-primary{
+    background:#FE980F;
+    background-color: #000;
+    border: 0 none;
+    border-radius: 5px;
+    color:#ddd;
+    
+}
+
+#pillbg .btn-primary.active{
+    margin:0px;
+    background-color: #fe980f;
+    color: #fff;
+    border: 1px solid #fe980f;
+    border-radius: 5px;
+}
+
+
+#menu1, #menu2, .sidebars li{
+    font-size: 17px;
+    
+}
+.tab-content p{
+    display: inline;
+}
+#menu1 a li,#menu2 a li{
+    padding:0px 15px 0px 15px;
+    border-left: solid 1px #1e262d;
+    color: #bcc7bd;
+}
+#menu1 a li:hover,#menu2 a li:hover{
+    background-color:#3b4248;
+    color: #fff;
+}
+#menu1 a li.active{
+    background-color:#3b4248;
+    color:#bcc7bd;
+    border-left: solid 2px #fe980f;
+    border-right: solid 10px #1e262d;
+}
+#m1,#m2,#m3,#m4,#m5,#m6{
+    cursor: default
+}
+
+.tab-pane ul{
+    padding:0px;
+}
+
+
+
+hr{
+    border-color: #2f2f2f;
+    margin: 10px 0px;
+}
+#sidebar2,#sidebar3,#sidebar4,#sidebar5{
+
+    background-color:#3b4248;
+    width: 160px;
+    height: 400px;
+    color: #fff;
+    position: absolute;
+    top:0px;
+    left: 210px;
+    display: none;
+    z-index: 4000;
+    flex:1;
+}
+
+#sidebar2 li, #sidebar2 ul, #sidebar3 li, #sidebar3 ul, #sidebar4 li, #sidebar4 ul,#sidebar5 ul{
+    padding: 0px 10px;
+    
+}
+
+
+.page-header{
+    margin:10px 0px;
+}
+
+.btn-radio.active{
+    background-color: #fe980f;
+    color: #fff;
+}
+
+#prural{
+    display: none;
+}
+#tcpf{
+    display: none;
+}
+
+
+#busin label{
+    display: table-cell;
+}
+#busin input{
+    display: table-cell;
+}
+#busin select{
+    display: table-cell;
+    margin: 5px;
+    border-radius: 5px;
+}
+
+span#tend, span#tpessoa{
+    margin: 0px 5px;
+}
+
+.btn-radio.active:hover{
+    color: #fff;
+}
+.nav-tabs  li.active  a, .nav-tabs  li.active  a:hover, .nav-tabs  li.active  a:focus{
+    background-color: #fe980f;
+    color: #fff;
+    font-weight: 700;
+}
+.nav-tabs  li  a, .nav-tabs  li  a:hover, .nav-tabs  li  a:focus{
+    background-color:#eee;
+}
+.space{
+    width:23px;
+    color:transparent;
+}
+#nav1{
+    border-radius: 5px 0px 0px 5px;
+    border-right: 1px solid #fe980e;
+}
+
+
+#nav2{
+border-radius: 0px;
+border-right: 1px solid #fe980e ;   
+}
+
+#nav2.active{
+    padding: 10px 15px 11px 15px;
+}
+#nav2.done{
+    background-color:#bada55;
+    color:#fff;
+    padding: 9px 15px 10px 15px;
+}
+
+
+
+
+#nav3{
+    border-radius: 0px 5px 5px 0px;
+}
+
+#nav3.active{
+    padding: 10px 15px 11px 15px;
+}
+
+.btn-radio:hover{
+    color: #000;
+}
+
+.btn-default{
+    background-color: #fe980f;
+    color: #fff;
+}
+
+.btn-default:hover{
+    background-color: #fff;
+    color: #fe980f;
+    border: 1px solid #fe980f;
+}
+.btn-success{
+    background-color: #bada55;
+    color: #fff;
+}    
+
+
+#infoacc{
+    display: table;
+    width: auto;
+    height: auto;
+}
+
+em{
+    color: red;
+    font-style: italic;
+    font-weight: 700;
+}
+
+.trow{
+    display: table-row;
+}
+#infoacc p{
+    display:table-cell;
+}
+
+
+#busin label{
+    display: table-cell;
+}
+
+#busin input{
+    margin: 10px 5px;
+    width: 240px;
+    display: table-cell;
+}
+ select{
+    display: table-cell;
+}
+
+label.tneg{
+    display: block;
+    font-weight: 300;
+}
+
+.labels p{
+ display: none;   
+}
+
+p.st, input.st{
+    display: inline;
+}
+
+.nd{
+    display: none;
+}
+
+#intc, #ints{
+    display: none;
+}
+
+.list-group{
+    margin: 5px;
+}
+
+.endinfo td, .contactinfo td{
+    padding: 0px 10px;
+}
+
+#filter2,#filter3{
+display: none;    
+}
+
+#account .modal-dialog{
+    width: auto;
+}
+
+

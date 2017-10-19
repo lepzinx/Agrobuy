@@ -1,0 +1,23 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26730.16
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{A0786B88-2ADB-4C21-ABE8-AA2D79766269}") = "Agrobuyci", "Agrobuyci.phpproj", "{494886C5-483E-4BA3-9637-1CBBD7AE8142}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{494886C5-483E-4BA3-9637-1CBBD7AE8142}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{494886C5-483E-4BA3-9637-1CBBD7AE8142}.Release|Any CPU.ActiveCfg = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6697E317-558C-448B-9D67-798BD3B47001}
+	EndGlobalSection
+EndGlobal

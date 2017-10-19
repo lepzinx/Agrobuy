@@ -1,0 +1,237 @@
+.container .container{
+    margin: 0px;
+    border: 0px;
+    padding: 0px;
+}
+
+.radio-group label {
+   overflow: hidden;
+} .radio-group input {
+   height: 1px;
+   width: 1px;
+   position: absolute;
+   top: -20px;
+} 
+
+.container{
+    width: auto;
+}
+
+.buttonbadge {
+  background-color: #333;
+  border-radius: 2px;
+  color: white;
+  padding: 1px 3px;
+  font-size: 10px;
+}
+.buttonbadge.alert {
+   background-color: #fa3e3e; 
+}
+
+#content{
+    z-index: 3000;
+}
+.notifications {
+columns: 2;
+}
+
+.notifications li{
+    margin: 0px;
+    display:block;
+    font-size: 20px;
+}
+
+.notifications i {
+    margin:0px;
+    font-size: 26px;
+    margin:10px;
+    vertical-align: baseline;
+}
+.notifications a{
+    color:#333;
+}
+.notifications .notificated{
+    color:#337ab7;
+}
+#nav-selector{
+    background-color:#f5f5f5;
+}
+#sidebarnav{
+    padding: 0px 15px 0px 0px;
+}
+
+#sidebar{
+    background-color:#1e262d;
+    
+    height: 400px;
+    margin: 0px;
+    padding:0px;
+    border: 0px;
+    float:left;
+}
+.well{
+    
+    margin: 15px 0px 0px 0px;
+    border:0px;
+    padding: 0px;
+    width:inherit;
+}
+
+.well, .form-horizontal, .form-group, .input-group, .btn-group,.tab-pane{
+    background-color: inherit;
+    width:inherit;
+}
+
+#pillbg{
+    margin: 0px 25px;
+    height: 33px;
+    background-color: #000;
+    border-radius: 5px 5px 5px 5px;
+}
+
+#pillbg .btn-primary{
+    background:#FE980F;
+    background-color: #000;
+    border: 0 none;
+    border-radius: 5px;
+    color:#ddd;
+    
+}
+
+#pillbg .btn-primary.active{
+    margin:0px;
+    background-color: #fe980f;
+    color: #fff;
+    border: 1px solid #fe980f;
+    border-radius: 5px;
+}
+
+
+#menu1, #menu2, .sidebars li{
+    font-size: 17px;
+    
+}
+.tab-content p{
+    display: inline;
+}
+#menu1 a li,#menu2 a li{
+    padding:0px 15px 0px 15px;
+    border-left: solid 1px #1e262d;
+    color: #bcc7bd;
+}
+#menu1 a li:hover,#menu2 a li:hover{
+    background-color:#3b4248;
+    color: #fff;
+}
+#menu1 a li.active{
+    background-color:#3b4248;
+    color:#bcc7bd;
+    border-left: solid 2px #fe980f;
+    border-right: solid 10px #1e262d;
+}
+#m1,#m2,#m3,#m4,#m5,#m6{
+    cursor: default
+}
+
+.tab-pane ul{
+    padding:0px;
+}
+
+
+
+hr{
+    border-color: #2f2f2f;
+    margin: 10px 0px;
+}
+#sidebar2,#sidebar3,#sidebar4,#sidebar5{
+
+    background-color:#3b4248;
+    width: 160px;
+    height: 400px;
+    color: #fff;
+    position: absolute;
+    top:0px;
+    left: 210px;
+    display: none;
+    z-index: 4000;
+    flex:1;
+}
+
+#sidebar2 li, #sidebar2 ul, #sidebar3 li, #sidebar3 ul, #sidebar4 li, #sidebar4 ul,#sidebar5 ul{
+    padding: 0px 10px;
+    
+}
+
+/* CONTENT */
+
+#companyprofile table {
+display: inline;
+}
+
+td{
+    border: solid 0px black;
+    padding: 3px;
+}
+
+.feature{
+    font-weight: 700;
+}
+
+.carousel-control.left, .carousel-control.right {
+    background-image: none
+}
+
+.glyphicon-chevron-left, .glyphicon-chevron-right{
+    color:#bada55;
+}
+
+#companyname{
+    text-align: center;
+}
+
+#companyprofilepic{
+    border: 1px solid black;border-radius: 100%; display: block;margin: 10px auto;
+    height: 100px;
+}
+
+
+
+.spdesc{
+    margin:0px auto; text-align:center;
+}
+
+#reputacao{
+    margin: 10px auto;
+    background: #fff;
+    border-bottom: 1px solid #bada55;   
+    
+}
+
+#reputacao .active a{
+    background-color:#1e262d;
+}
+
+.glyphicon-plus-sign {
+    color: green;
+}
+.glyphicon-minus-sign{
+    color:#2b6ca3;
+}
+.glyphicon-remove-sign{
+    color:orangered;
+}
+
+.evaluation{
+    margin: 0px 0px 20px 0px;
+}
+#firmCarousel{
+    max-width: 900px;
+    height: 600px;
+    max-height: 400px;
+    margin: 20px 0px;
+}
+#firmCarousel img{
+    margin: 0px auto;
+    text-align: center;
+}
+

@@ -1,0 +1,476 @@
+﻿
+section{
+    background-color: #f9f9f9;
+}
+
+#categorytree{
+    padding:10px 0px 5px 100px;
+}
+
+#cont1{
+    background-color: #f9f9f9;
+    padding: 0px;
+    margin: 0px 0px 0px 72px;
+    
+}
+
+.padding-right{
+    padding: 0px;
+}
+
+.product-details{
+    background-color:#f9f9f9;
+    padding: 0px;
+    margin:0px 0px 20px 0px;
+}
+
+.product-details hr{
+    margin: 5px 0px;
+}
+
+.col-sm-5,.col-sm-7{
+    background-color:#fff;
+    padding: 0px;
+    display: inline;
+}
+
+.col-sm-5{
+    max-width: 350px;
+    
+}
+.img-show, #firmCarousel img{
+    cursor: pointer;
+}
+
+
+
+.img-show{
+    max-width: 350px;
+    padding: 0px;
+}
+#myCarousel .item img{
+    width: auto;
+    height: 300px;
+    max-height: 300px;
+    margin: 0px auto;
+    padding: 0px;
+    text-align: center;
+}
+
+#slider-thumbs .item{
+    padding: 0px;
+    margin: 10px 0px;
+    text-align: center;
+}
+#slider-thumbs .item a img{
+    width: auto;
+    height: 80px;
+    max-height: 80px;
+    display: inline;
+}
+.carousel-inner a{
+    display: inline;
+}
+
+.selected img {
+    opacity:0.5;
+    }
+
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 3; /* Sit on top */
+    padding-top: 50px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+}
+
+/* Modal Content (Image) */
+.modal-content {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+}
+
+/* Caption of Modal Image (Image Text) - Same Width as the Image */
+#caption {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+    text-align: center;
+    color: #ccc;
+    padding: 10px 0;
+    height: 50px;
+}
+
+/* Add Animation - Zoom in the Modal */
+.modal-content, #caption { 
+    -webkit-animation-name: zoom;
+    -webkit-animation-duration: 0.6s;
+    animation-name: zoom;
+    animation-duration: 0.6s;
+}
+
+@-webkit-keyframes zoom {
+    from {-webkit-transform:scale(0)} 
+    to {-webkit-transform:scale(1)}
+}
+
+@keyframes zoom {
+    from {transform:scale(0)} 
+    to {transform:scale(1)}
+}
+
+/* The Close Button */
+.close {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.close:hover,
+.close:focus {
+    color: #bbb;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* 100% Image Width on Smaller Screens */
+@media only screen and (max-width: 700px){
+    .modal-content {
+        width: 100%;
+    }
+}
+
+.col-sm-7{
+    margin: 0px 0px 0px 20px;
+    width: 590px;
+}
+
+.product-information{
+    padding: 0px;
+}
+
+#product-information hr{
+    margin: 0px;
+    border: solid 1px #f7f7f0;
+}
+
+
+#itemtitle{
+   font-size: 40px; 
+    margin:20px;
+}
+#productimage{
+    width: 350px;
+}
+
+#productprice{
+    margin: 10px 0px 5px 0px;
+    font-size: 24px;
+    color: #fe980f;
+    font-weight: 700;
+  
+}
+
+em {
+    font-style: italic;
+    color:#808080;
+}
+
+.product-information p{
+    font-size:16px;
+    margin: 10px 0px 0px 20px;
+}
+
+b{
+    color: #000;
+}
+
+#productid{
+    font-size:15px;
+    color:#777;
+    margin: 2px;
+
+}
+.separator{
+    font-size: 24px;
+    color: #fe980f;}
+
+.fa-get-pocket{
+    color:#face32;
+}
+
+#qlabel{
+    margin: 10px 0px 0px 20px;
+    font-size:16px;
+}
+
+.cartinv {
+  background-color:#fff;
+  border: solid 1px #fe980f;
+  border-radius: 2;
+  color: #fe980f;
+  font-family: 'Roboto', sans-serif;
+  font-size: 15px;
+  margin-bottom: 10px;
+  margin-left: 20px;
+}
+.cartinv:hover{
+    background-color: #fe980f;
+    color: #fff;
+    border: 1px solid #fff;
+}
+
+
+#quantity{
+    width: 110px;
+    display: inline;
+}
+
+#buybuttons button{
+ margin: 5px 0px 5px 5px;
+    display: inline;
+}
+
+
+#assistbuttons p{
+    display: inline;
+}
+#assistbuttons .btn-default{
+    border: 0px;
+}
+
+.glyphicon-heart{
+    color:red;   
+}
+.fa-exclamation-triangle{
+    color: #ffcd2c;   
+}
+.fa-facebook-official{
+    color:#3b5998;
+}
+.fa-whatsapp{
+    color:#0dc143;
+}
+
+
+.fa-exclamation-triangle, .fa-facebook-official,.fa-whatsapp,.glyphicon-floppy-disk{
+    display: inline;
+    margin: 0px;
+    padding: 0px;
+    font-size:22px;
+}
+
+#contactspan{
+    width: 250px;
+    position: absolute;
+    left: 1040px;
+    top:128px;
+    background-color:#fff;
+    border: 1px solid #f7f7f0;
+    padding:10px;
+    box-shadow: 2px 2px 5px #888888;
+}
+
+#contactspan hr{
+    margin: 10px 0px;
+}
+#contactspan p{
+    display: inline;
+}
+
+#contactspan .glyphicon-ok-circle {
+    color:#2b6ca3;
+}
+
+#contactspan .glyphicon-map-marker{
+    color:#fe980f;
+}
+
+#contactspan .glyphicon-ok{
+    color: #bada55;
+}
+
+#msgsupplier{
+    margin:0px;
+    padding: 0px;
+    width:100%;
+    border-radius: 2px;
+}
+
+#msgsubmit{
+    margin:0px;
+}
+
+.category-tab{
+    margin: 0px;
+    padding: 0px;
+    background-color: #fff;
+}
+
+#category{
+    margin: 0px;
+    width: 960px;
+    
+}
+
+table {
+ margin: 25px;
+    display: inline;
+}
+
+td{
+    border: solid 0px black;
+    padding: 5px;
+}
+
+.feature{
+    font-weight: 700;
+}
+
+.pddesc{
+    margin:0px 0px 0px 15px;
+}
+
+#productdesc{
+    height: 1000px;
+}
+
+
+
+
+.carousel-control.left, .carousel-control.right {
+    background-image: none
+}
+
+.glyphicon-chevron-left, .glyphicon-chevron-right{
+    color:#bada55;
+}
+
+#companyname{
+    text-align: center;
+}
+
+#companyprofilepic{
+    border: 1px solid black;border-radius: 100%; display: block;margin: 10px auto;
+    height: 100px;
+}
+
+
+
+.spdesc{
+    margin:0px auto; text-align:center;
+}
+
+#reputacao{
+    margin: 10px auto;
+    background: #fff;
+    border-bottom: 1px solid #bada55;   
+    
+}
+
+#reputacao .active a{
+    background-color:#1e262d;
+}
+
+.glyphicon-plus-sign {
+    color: green;
+}
+.glyphicon-minus-sign{
+    color:#2b6ca3;
+}
+.glyphicon-remove-sign{
+    color:orangered;
+}
+
+.evaluation{
+    margin: 0px 0px 20px 0px;
+}
+#firmCarousel{
+    max-width: 900px;
+    height: 600px;
+    max-height: 400px;
+    margin: 20px 0px;
+}
+#firmCarousel img{
+    margin: 0px auto;
+    text-align: center;
+}
+
+/* - MODAL DE NEGOCIAÇÃO */
+
+#dealModal{
+    z-index: 3000;
+}
+.modal-content h3{
+    margin: 0px;
+    display: inline;
+}
+.modal-content p, .modal-content h5{
+    display: inline;
+    color: #000;
+}
+.modal-content em{
+    color: #fff;
+}
+.modal-content i, .modal-content span{
+    font-size: 25px;
+}
+
+.modal-content td span{
+    font-size: 14px;
+}
+.modal-content img{
+    margin-bottom: 10px;
+}
+.modal-header{
+    background-color: #bada55;
+}
+.modal-title{
+    background-color: #fe980f;
+    padding: 15px;
+}
+.modal-title h3{
+    color: #fff;
+}
+
+.modal-content .tdata td{
+    text-align: left;
+}
+.modal-body.action-buttons{
+    padding: 0px;
+}
+.modal-body.action-buttons button{
+    font-size: 20px;
+    padding: 15px;
+    background-color: transparent;
+    border: 0px;
+}
+.modal-body.action-buttons button:hover{
+    padding: 15px;
+    background-color: #dedede;
+    border: 0px;
+}
+
+.modal-content .form-control{
+    padding: 6px 6px 6px 6px;
+    width: 100px;
+    display: inline;
+}
+.modal-content p{
+    display: inline
+}
+
