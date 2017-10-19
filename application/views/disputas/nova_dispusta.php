@@ -175,16 +175,16 @@
 									<div class="form-group">
 										<div class="pb">
 											<label> Qual foi o problema que ocorreu com o pagamento? </label>
-											<select id="pm0" class="form-control">
+											<select id="pm0" name="disputa_qual" class="form-control">
 												<option selected disabled>Por favor, escolha o problema</option>
-												<option value="c0">Eu efetuei um pagamento há mais de 3 dias úteis e ele ainda não foi compensado</option>
-												<option value="c1">Meu boleto expirou e não consegui pagá-lo a tempo</option>
-												<option value="s1">Meu cliente ainda não efetuou o pagamento do produto que comprou </option>
+												<option value="Eu efetuei um pagamento há mais de 3 dias úteis e ele ainda não foi compensado">Eu efetuei um pagamento há mais de 3 dias úteis e ele ainda não foi compensado</option>
+												<option value="Meu boleto expirou e não consegui pagá-lo a tempo">Meu boleto expirou e não consegui pagá-lo a tempo</option>
+												<option value="Meu cliente ainda não efetuou o pagamento do produto que comprou">Meu cliente ainda não efetuou o pagamento do produto que comprou </option>
 											</select>
 										</div>
 									</div>
 									<br>
-									<button class="btn-default btn-sm cartinv">Iniciar disputa</button>
+									<button type="submit" class="btn-default btn-sm cartinv">Iniciar disputa</button>
 									<a>Cancelar</a>
 								</form>
 
@@ -195,77 +195,77 @@
 									<div class="form-group">
 
 										<h3> Qual foi o problema com sua compra? </h3>
-										<select id="pb0" class="form-control">
+										<select id="pb0" name="disputa_qual" class="form-control">
 											<option selected disabled>Por favor, escolha um problema da lista</option>
-											<option value="n">Eu ainda não recebi o produto</option>
-											<option value="s1">Eu recebi um produto defeituoso, incompleto ou diferente das condições anunciadas</option>
+											<option value="Eu ainda não recebi o produto">Eu ainda não recebi o produto</option>
+											<option value="Eu recebi um produto defeituoso, incompleto ou diferente das condições anunciadas">Eu recebi um produto defeituoso, incompleto ou diferente das condições anunciadas</option>
 										</select>
 
 
 										<div id="actionn">
 											<label>O que deseja fazer?</label>
-											<select class="form-control">
+											<select class="form-control" name="disputa_oque">
 												<option selected disabled>Por favor, escolha uma opção da lista</option>
-												<option>Gostaria de receber o produto</option>
-												<option>Gostaria de cancelar o pedido de receber meu dinheiro de volta</option>
+                                                                                                <option value="Gostaria de receber o produto">Gostaria de receber o produto</option>
+                                                                                                <option value="Gostaria de cancelar o pedido de receber meu dinheiro de volta">Gostaria de cancelar o pedido de receber meu dinheiro de volta</option>
 											</select>
 											<label>
 												Por favor, escreva uma mensagem ao seu vendedor detalhando seu problema.
 												<em> Se o fornecedor não responder em 3 dias úteis, iremos interceder para ajudar você.</em>
-												<textarea class="form-control" placeholder="Embora você possa estar nervoso, por gentileza, mantenha a calma e a gentileza ao tratar com o fornecedor; nós faremos o melhor para ajudá-los a resolver esse problema da melhor forma possível." rows="6" cols="120"></textarea>
+												<textarea class="form-control" name="disputa_mensagem" placeholder="Embora você possa estar nervoso, por gentileza, mantenha a calma e a gentileza ao tratar com o fornecedor; nós faremos o melhor para ajudá-los a resolver esse problema da melhor forma possível." rows="6" cols="120"></textarea>
 											</label>
 											<br>
 
 											<br>
-											<button class="btn-default btn-sm cartinv">Iniciar disputa</button>
+											<button type="submit" class="btn-default btn-sm cartinv">Iniciar disputa</button>
 											<a>Cancelar</a>
 
 										</div>
 
 										<div id="actions">
 											<label>O que deseja fazer?</label>
-											<select id="pb1" class="form-control">
+											<select id="pb1" class="form-control" name="disputa_oque">
 												<option selected disabled>Por favor, escolha uma opção da lista</option>
-												<option value="change">Gostaria de trocar o produto que recebi por um novo</option>
-												<option value="bargain">Gostaria pedir um abatimento no preço total</option>
-												<option value="devolution">Gostaria de devolver o produto e receber meu dinheiro de volta</option>
+												<option value="Gostaria de trocar o produto que recebi por um novo">Gostaria de trocar o produto que recebi por um novo</option>
+												<option value="Gostaria pedir um abatimento no preço total">Gostaria pedir um abatimento no preço total</option>
+												<option value="Gostaria de devolver o produto e receber meu dinheiro de volta">Gostaria de devolver o produto e receber meu dinheiro de volta</option>
 											</select>
 											<div id="description0">
 												<label>O que, exatamente, aconteceu?</label>
-												<select id="pb2" class="form-control">
+												<select id="pb2" class="form-control" name="disputa_detalhe1">
 													<option selected disabled>Por favor, escolha um evento da lista</option>
-													<option value="event0">O produto que recebi veio com defeito</option>
-													<option value="event1">O produto que recebi veio incompleto</option>
-													<option value="event2">O produto que recebi é diferente do anunciado</option>
-													<option>O produto que recebi é falso</option>
-													<option>O produto que recebi chegou com atraso</option>
+													<option value="O produto que recebi veio com defeito">O produto que recebi veio com defeito</option>
+													<option value="O produto que recebi veio incompleto">O produto que recebi veio incompleto</option>
+													<option value="O produto que recebi é diferente do anunciado">O produto que recebi é diferente do anunciado</option>
+                                                                                                        <option value="O produto que recebi é falso">O produto que recebi é falso</option>
+                                                                                                        <option value="O produto que recebi chegou com atraso">O produto que recebi chegou com atraso</option>
 												</select>
 
-												<select id="event0" class="form-control">
+												<select id="event0" class="form-control" name="disputa_detalhe2">
 													<option selected disabled>Por favor, escolha um defeito da lista</option>
-													<option>O produto que recebi está quebrado ou avariado</option>
-													<option>O produto que recebi não funciona</option>
-													<option>Outro &#40;Favor descrever no campo abaixo &#41;</option>
+                                                                                                        <option value="O produto que recebi está quebrado ou avariado">O produto que recebi está quebrado ou avariado</option>
+                                                                                                        <option value="O produto que recebi não funciona">O produto que recebi não funciona</option>
+                                                                                                        <option value="Outro &#40;Favor descrever no campo abaixo &#41;">Outro &#40;Favor descrever no campo abaixo &#41;</option>
 												</select>
 
-												<select id="event1" class="form-control">
+												<select id="event1" class="form-control" name="disputa_detalhe3">
 													<option selected disabled>Por favor, escolha uma inconformidade da lista</option>
-													<option>O produto que recebi não é o mesmo que era mencionado no anúncio</option>
-													<option>O produto que recebi difere em marca/modelo/tamanho/etc</option>
-													<option>Outro &#40;Favor descrever no campo abaixo &#41;</option>
+                                                                                                        <option value="O produto que recebi não é o mesmo que era mencionado no anúncio">O produto que recebi não é o mesmo que era mencionado no anúncio</option>
+                                                                                                        <option value="O produto que recebi difere em marca/modelo/tamanho/etc">O produto que recebi difere em marca/modelo/tamanho/etc</option>
+                                                                                                        <option value="Outro &#40;Favor descrever no campo abaixo &#41;">Outro &#40;Favor descrever no campo abaixo &#41;</option>
 												</select>
 
-												<select id="event2" class="form-control">
+												<select id="event2" class="form-control" name="disputa_detalhe4">
 													<option selected disabled>Por favor, escolha uma opção da lista</option>
-													<option>Recebi menos produtos do que comprei</option>
-													<option>Faltam partes/acessórios</option>
-													<option>Outro &#40;Favor descrever no campo abaixo &#41;</option>
+                                                                                                        <option value="Recebi menos produtos do que comprei">Recebi menos produtos do que comprei</option>
+                                                                                                        <option value="Faltam partes/acessórios">Faltam partes/acessórios</option>
+                                                                                                        <option value="Outro &#40;Favor descrever no campo abaixo &#41;">Outro &#40;Favor descrever no campo abaixo &#41;</option>
 												</select>
 											</div>
 											<label>
 												Por favor, escreva uma mensagem ao seu vendedor detalhando seu problema.
 												<em> Se o fornecedor não responder em 3 dias úteis, iremos interceder para ajudar você.</em>
-												<textarea class="form-control" placeholder="Embora você possa estar nervoso, por gentileza, mantenha a calma e a gentileza ao tratar com o fornecedor; nós faremos o melhor para ajudá-los a resolver esse problema da melhor forma possível." rows="6" cols="120"></textarea>
+												<textarea class="form-control" name="disputa_mensagem" placeholder="Embora você possa estar nervoso, por gentileza, mantenha a calma e a gentileza ao tratar com o fornecedor; nós faremos o melhor para ajudá-los a resolver esse problema da melhor forma possível." rows="6" cols="120"></textarea>
 											</label>
 											<div class="iimg">
 												<br>
@@ -297,7 +297,7 @@
 													</div>
 												</div>
 											</div>
-											<button class="btn-default btn-sm cartinv">Iniciar disputa</button>
+                                                                                        <button type="submit" class="btn-default btn-sm cartinv">Iniciar disputa</button>
 											<a>Cancelar</a>
 
 										</div>
