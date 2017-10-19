@@ -175,7 +175,7 @@
 									<div class="form-group">
 										<div class="pb">
 											<label> Qual foi o problema que ocorreu com o pagamento? </label>
-											<select id="pm0" class="form-control">
+											<select id="pm0" name="disputa_qual" class="form-control">
 												<option selected disabled>Por favor, escolha o problema</option>
 												<option value="c0">Eu efetuei um pagamento há mais de 3 dias úteis e ele ainda não foi compensado</option>
 												<option value="c1">Meu boleto expirou e não consegui pagá-lo a tempo</option>
@@ -195,10 +195,10 @@
 									<div class="form-group">
 
 										<h3> Qual foi o problema com sua compra? </h3>
-										<select id="pb0" class="form-control">
+										<select id="pb0" name="disputa_qual" class="form-control">
 											<option selected disabled>Por favor, escolha um problema da lista</option>
-											<option value="n">Eu ainda não recebi o produto</option>
-											<option value="s1">Eu recebi um produto defeituoso, incompleto ou diferente das condições anunciadas</option>
+											<option value="Eu ainda não recebi o produto">Eu ainda não recebi o produto</option>
+											<option value="Eu recebi um produto defeituoso, incompleto ou diferente das condições anunciadas">Eu recebi um produto defeituoso, incompleto ou diferente das condições anunciadas</option>
 										</select>
 
 
