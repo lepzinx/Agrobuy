@@ -30,20 +30,20 @@ class Anuncios extends CI_Controller {
             $dados['agropecuario'] =  $this->anuncios_model->pegarAnunciosCategoria("Sementes e Mudas", 4);
 		   $this->load->view('index', $dados);
 	}
-    
-    
+
+
     public function pesquisa(){
         $this->load->model('anuncios_model');
             $this->load->model('usuarios_model');
-        
+
                 $this->load->library('pagination');
-            
+
             $config = array(
             "base_url" => base_url()."index.php/anuncios/pesquisa/p",
             "per_page" => 9,
             "num_links" => 6,
             "uri_segment" => 4,
-            "total_rows" => $this->anuncios_model->pegarQtdPesquisa(),   
+            "total_rows" => $this->anuncios_model->pegarQtdPesquisa(),
             "full_tag_open" => "<ul class='pagination'>",
             "full_tag_close" => "</ul>",
             "first_link" => TRUE,
@@ -64,34 +64,34 @@ class Anuncios extends CI_Controller {
             "num_tag_close" => "</li>"
         );
               $this->pagination->initialize($config);
-        
+
         $dados["pagination"] = $this->pagination->create_links();
         $offset = ($this->uri->segment(4)) ? $this->uri->segment(4) :0;
-        
+
         $dados["anuncios"] = $this->anuncios_model->pegarAnunciosPesquisa($config['per_page'],$offset);
-        
+
 		$this->load->view('anuncios/anuncios_pesquisa', $dados);
     }
-    
-    
+
+
         public function novoAnuncio()
 	{
             $this->load->model('usuarios_model');
                  if($this->usuarios_model->checarSessao()){
 		$this->load->view('anuncios/novo_anuncio');
            }else{
-               redirect(base_url()."index.php/usuarios");  
+               redirect(base_url()."index.php/usuarios");
            }
-		
+
 	}
-        
-       
-        
-        
+
+
+
+
           public function fazerCadastroAnuncio(){
-            
+
             $this->load->model("anuncios_model");
-            
+
                $result = $this->anuncios_model->cadastroAnuncioCate();
 		$msg['success'] = false;
 		$msg['type'] = 'add';
@@ -102,9 +102,9 @@ class Anuncios extends CI_Controller {
 
         }
           public function fazerCadastroAnuncioDados(){
-            
+
             $this->load->model("anuncios_model");
-            
+
                $result = $this->anuncios_model->cadastroAnuncioDados();
 		$msg['success'] = false;
 		$msg['type'] = 'add';
@@ -115,20 +115,20 @@ class Anuncios extends CI_Controller {
 
         }
            public function finalizarCadastroAnuncios(){
-            
+
             $this->load->model("anuncios_model");
-            
+
                $result = true;
 		$msg['success'] = false;
 		$msg['type'] = 'add';
 		if($result){
-                    
+
 			$msg['success'] = true;
                         $this->session->unset_userdata('cadastroProduto');
 		}
                 echo json_encode($msg);
         }
-        
+
         public function visualizarproduto($indice = null){
             $this->load->model('anuncios_model');
         $this->load->model('usuarios_model');
@@ -136,7 +136,7 @@ class Anuncios extends CI_Controller {
             redirect(base_url());
         } else if($this->anuncios_model->contarAnuncioId($indice) == 1){
             $dados['anuncio'] = $this->anuncios_model->pegarAnuncioId($indice);
-            
+
             $this->load->view('anuncios/visualizar_produto', $dados);
         }else{
              $dados['heading'] = "O produto não existe";
@@ -144,7 +144,7 @@ class Anuncios extends CI_Controller {
              $this->load->view('errors/html/error_general', $dados);
         }
     }
-    
+
        public function editarAnuncio($indice = null)
 	  {
             $this->load->model('usuarios_model');
@@ -166,45 +166,45 @@ class Anuncios extends CI_Controller {
             redirect(base_url() . "index.php/usuarios");
         }
     }
-    
+
     public function alterarAnuncio($id){
         $this->load->model('anuncios_model');
         $this->load->model('usuarios_model');
          if ($this->usuarios_model->checarSessao()) {
             if($this->anuncios_model->editarAnuncio($id)){
-               redirect(base_url()."index.php/anuncios/visualizarproduto/".$id);  
+               redirect(base_url()."index.php/anuncios/visualizarproduto/".$id);
             }
          }else{
              redirect(base_url() . "index.php/usuarios");
          }
-        
+
     }
         public function deletarAnuncio($id){
          $this->load->model('anuncios_model');
         $this->load->model('usuarios_model');
          if ($this->usuarios_model->checarSessao()) {
             if($this->anuncios_model->deletarAnuncio($id)){
-               redirect(base_url()."index.php/dashboard/venda");  
+               redirect(base_url()."index.php/dashboard/venda");
             }
          }else{
              redirect(base_url() . "index.php/usuarios");
          }
-        
+
     }
     public function categoria1($indice = null){
           $this->load->model('anuncios_model');
             $this->load->model('usuarios_model');
-        
+
                 $this->load->library('pagination');
             if(!$indice == null){
-                
-            
+
+
             $config = array(
             "base_url" => base_url()."index.php/anuncios/pesquisa/p",
             "per_page" => 9,
             "num_links" => 6,
             "uri_segment" => 4,
-            "total_rows" => $this->anuncios_model->pegarQtdProdutosCategoria1($indice),   
+            "total_rows" => $this->anuncios_model->pegarQtdProdutosCategoria1($indice),
             "full_tag_open" => "<ul class='pagination'>",
             "full_tag_close" => "</ul>",
             "first_link" => TRUE,
@@ -225,30 +225,30 @@ class Anuncios extends CI_Controller {
             "num_tag_close" => "</li>"
         );
               $this->pagination->initialize($config);
-        
+
         $dados["pagination"] = $this->pagination->create_links();
         $offset = ($this->uri->segment(4)) ? $this->uri->segment(4) :0;
-        
+
         $dados["anuncios"] = $this->anuncios_model->pegarProdutosCategoria1($config['per_page'],$offset,$indice);
-        
+
 		$this->load->view('anuncios/anuncios_pesquisa', $dados);
     }else{
         redirect(base_url() . "index.php/anuncios");
     }
-        
+
     }
     public function pesquisaAv(){
        $this->load->model('anuncios_model');
             $this->load->model('usuarios_model');
-        
+
                 $this->load->library('pagination');
-            
+
             $config = array(
             "base_url" => base_url()."index.php/anuncios/pesquisa/p",
             "per_page" => 9,
             "num_links" => 6,
             "uri_segment" => 4,
-            "total_rows" => $this->anuncios_model->pegarQtdAvancada(),   
+            "total_rows" => $this->anuncios_model->pegarQtdAvancada(),
             "full_tag_open" => "<ul class='pagination'>",
             "full_tag_close" => "</ul>",
             "first_link" => TRUE,
@@ -269,14 +269,28 @@ class Anuncios extends CI_Controller {
             "num_tag_close" => "</li>"
         );
               $this->pagination->initialize($config);
-        
+
         $dados["pagination"] = $this->pagination->create_links();
         $offset = ($this->uri->segment(4)) ? $this->uri->segment(4) :0;
-        
+
         $dados["anuncios"] = $this->anuncios_model->pesquisaAvancada($config['per_page'],$offset);
-        
+
 		$this->load->view('anuncios/anuncios_pesquisa', $dados);
     }
-    
+
+    public function iniciarNegociacao($indice){
+         $this->load->model('negociacao_model');
+        $this->load->model('usuarios_model');
+         if ($this->usuarios_model->checarSessao()) {
+            if($this->negociacao_model->iniciarNegociacao($indice)){
+                redirect(base_url()."index.php/dashboard");
+            }
+         }else{
+             redirect(base_url() . "index.php/usuarios");
+         }
+
+
+    }
+
 
 }

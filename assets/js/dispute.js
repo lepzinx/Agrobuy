@@ -81,10 +81,10 @@ $( "#back" ).click(function(e) {
 
 $('#pb0').change(function() {
     var selected_option = $('#pb0').val();
-    if (selected_option == 'n'){
+    if (selected_option == 'Eu ainda não recebi o produto'){
         $('#actionn').fadeIn();
         $('#actions').fadeOut();
-    } else if ( selected_option =='s1'){
+    } else if (selected_option =='Eu recebi um produto defeituoso, incompleto ou diferente das condições anunciadas'){
         $('#actions').fadeIn();
         $('#actionn').fadeOut();
     }
@@ -94,13 +94,13 @@ $('#pb0').change(function() {
 $('#pb1').change(function() {
     var selected_option = $('#pb1').val();
     
-    if (selected_option == 'change'){
+    if (selected_option == 'Gostaria de trocar o produto que recebi por um novo'){
         $('#description0').fadeIn();
-    } else if ( selected_option =='bargain'){
+    } else if (selected_option =='Gostaria pedir um abatimento no preço total'){
         $('#description0').fadeIn();
     }
     
-    else if ( selected_option =='devolution'){
+    else if (selected_option =='Gostaria de devolver o produto e receber meu dinheiro de volta'){
        $('#description0').fadeIn();
     }
     
@@ -109,17 +109,17 @@ $('#pb1').change(function() {
 $('#pb2').change(function() {
     var selected_option = $('#pb2').val();
     
-    if (selected_option == 'event0'){
+    if (selected_option == 'O produto que recebi veio com defeito'){
         $('#event0').fadeIn();
         $('#event1').fadeOut();
         $('#event2').fadeOut();
-    } else if ( selected_option =='event1'){
+    } else if (selected_option =='O produto que recebi veio incompleto'){
         $('#event0').fadeOut();
         $('#event1').fadeIn();
         $('#event2').fadeOut();
     }
     
-    else if ( selected_option =='event2'){
+    else if (selected_option =='O produto que recebi é diferente do anunciado'){
        $('#event0').fadeOut();
         $('#event1').fadeOut();
         $('#event2').fadeIn();

@@ -1,3 +1,12 @@
+$(document).ready(function () {
+
+
+    carregarnotificacoes();
+    setInterval(function () {
+        carregarnotificacoes();
+    }, 1000);
+});
+
 //// ADD ACTIVE CLASS TO SELECTED RADIO INPUT
 $('.radio-group label').on('click', function () {
     $('a label.active').removeClass('active');
@@ -106,3 +115,10 @@ $('[id^=carousel-selector-'+id+']').addClass('selected');
 //$('#modalqtd').replaceWith('<input class="form-control" value="100"></input>');
 //                                });
 
+function carregarnotificacoes() {
+    var url;
+    url = $('#url').attr('action');
+    jQuery.post(url, function (data) {
+        $("#notify").empty().append(data);
+    });
+}

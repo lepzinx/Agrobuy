@@ -630,6 +630,7 @@
                              <button type="button" class="close" data-dismiss="modal" aria-label="Close" data-toggle="tooltip" title="Fechar">
                                  <span aria-hidden="true" class="glyphicon glyphicon-remove"></span>
                             </button>
+                            <form method="post" action="<?=base_url()?>index.php/anuncios/iniciarnegociacao/<?=$anun->anuncio_id?>">
                             <div class="modal-header">
                                     <h2> Negociação Nº <em><?=$anun->anuncio_id?></em></h2>
                                 </div>
@@ -639,42 +640,15 @@
                                 <h3> Preço Unitário <b> R$ <?=$anun->anuncio_preco?></b></h3>
                             </div>
                             <div class="modal-title">
-                                <h3> Produtos</h3>
-                            </div>
-                            <div class="modal-body">
-                                
-                                <table class="tabledisplay">
-                                    <tbody>
-                                        <tr class="theader3" >
-                                            <td></td>
-                                            <td><a><span class="glyphicon glyphicon-user"></span> Fazenda Sta. Agnobalda da Serra</a></td>
-                                            <td colspan="2"><p>Produto</p></td>
-                                            <td><p>Quantidade</p></td>
-                                            <td><p>Unidade</p></td>
-                                            <td><p>Preço Unitário</p></td>
-                                            <td>Preço dos Produtos</td>
-                                        </tr>
-                                        <tr class="tdata">
-                                            <td colspan="2"><img class="productimg" src="<?=base_url()?>assets/images/placeholders/mock1.jpg" height="100" width="100"></td>
-                                            <td colspan="2"><a> Soja em Saca Bibibi Bobobó</a></td>    
-                                            <td><p> 100 </p></td>
-                                            <td><p> Sacas &#40;sc.&#41; </p></td>
-                                            <td><p> R$ 100,00 </p></td>
-                                            <td><p> R$ 10.000,00</p></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div class="modal-title">
                                 <h3> Condições de Compra</h3>
                             </div>
                             <div class="modal-body">
                                 <h4>Quantidade:</h4>
-                                <input value="100" class="form-control"><p> Sacas &#40;sc.&#41; </p>
+                                <input name="quantidade" value="<?=$anun->anuncio_disponibilidade?>" class="form-control" /><p> <?=$anun->anuncio_unidade?> </p>
                                 <h4>Preço Unitário:</h4>
-                                <input value="R$ 100,00" class="form-control">
+                                <input name="preco" value="<?=$anun->anuncio_preco?>" class="form-control">
                                 <h4>Pagamento</h4>
-                                <p> <i class="fa fa-barcode" aria-hidden="true" data-toggle="tooltip" title="Boleto Bancário"></i><img src="images/ico/cards.png" width="100" data-toggle="tooltip" title="Cartões de Crédito"> </p>
+                                <p> <i class="fa fa-barcode" aria-hidden="true" data-toggle="tooltip" title="Boleto Bancário"></i><img src="<?=base_url()?>assets/images/ico/cards.png" width="100" data-toggle="tooltip" title="Cartões de Crédito"> </p>
                             </div>
                             <div class="modal-title">
                                 <h3> Condições de Frete</h3>
@@ -696,7 +670,7 @@
                                     
                                     <tr class="tdata">
                                     <td><h4> Fornecedor Entrega</h4></td>
-                                    <td><input value="R$ 100,00" class="form-control"></td>
+                                    <td><input name="fornecedor_entrega" value="R$ 100,00" class="form-control"></td>
                                     </tr>
                                 </table>
                             </div>
@@ -704,7 +678,8 @@
                                 <h3> Ações</h3>
                             </div>
                             <div class="modal-body action-buttons">
-                                <a><button href="#" data-toggle="modal" data-target="#confirmationModal"><span class="glyphicon glyphicon-new-window"></span> Enviar Proposta</button></a>
+                                <button type="submit"><span class="glyphicon glyphicon-new-window"></span> Enviar Proposta</button>
+                            </form>
                             </div>
                         </div>
                     </div>

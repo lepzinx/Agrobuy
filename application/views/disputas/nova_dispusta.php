@@ -155,13 +155,13 @@
 
 							<div class="return">
 
-								<form class="form-inline">
+								<form method="post" action="<?=base_url()?>index.php/dashboard/criardisputaarrependimento/<?=$indice?>"  class="form-inline">
 									<div class="form-group">
 										<label> Você tem certeza? </label>
-										<select id="dv0" class="form-control">
+										<select id="dv0" name="disputa_qual" class="form-control">
 											<option selected disabled>Por favor, confirme sua escolha</option>
-											<option value="n">Sim, estou arrependido da compra e desejo ser reembolsado</option>
-											<option value="s1">Não, mudei de ideia e gostaria de ficar com o produto </option>
+											<option value=">Sim, estou arrependido da compra e desejo ser reembolsado">Sim, estou arrependido da compra e desejo ser reembolsado</option>
+											<option value="Não, mudei de ideia e gostaria de ficar com o produto">Não, mudei de ideia e gostaria de ficar com o produto </option>
 										</select>
 										<br>
 										<button class="btn-default btn-sm cartinv">Exercer direito de arrependimento</button>
@@ -171,7 +171,7 @@
 							</div>
 
 							<div class="payment">
-								<form class="form-inline">
+								<form method="post" action="<?=base_url()?>index.php/dashboard/criardisputapagamento/<?=$indice?>" class="form-inline">
 									<div class="form-group">
 										<div class="pb">
 											<label> Qual foi o problema que ocorreu com o pagamento? </label>
@@ -191,7 +191,7 @@
 							</div>
 
 							<div class="product">
-								<form class="form-inline">
+								<form method="post" action="<?=base_url()?>index.php/dashboard/criardisputacompra/<?=$indice?>"  class="form-inline">
 									<div class="form-group">
 
 										<h3> Qual foi o problema com sua compra? </h3>

@@ -901,11 +901,34 @@ class Anuncios_model extends CI_Model{
          $dados['usuario_id'] = $usuario_id;
          return $this->db->insert('notificacoes', $dados);
      }
+     public function vernotificacao($notificacao_id){
+         $this->db->where("notificacao_id", $notificacao_id);
+         $dados['notificacao_visto'] = 1;
+         $this->db->update("notificacoes", $dados);
+     }
      public function carregarNotificacaoMensagem(){
          $this->db->where('usuario_id', $this->session->userdata['usuario_id']);
          $this->db->where('notificacao_tipo', 1);
-          $this->db->where('notificacao_visto', 0);
-         return $this->db->get('notificacoes')->num_rows();
+         //$this->db->where("notificacao_remetente")->distinct();
+         $this->db->where('notificacao_visto', 0)->distinct("notificacao_remetente");
+         return  $this->db->get('notificacoes')->num_rows();
+
+     }
+     public function carregarLinksMensagem(){
+         $this->db->where('usuario_id', $this->session->userdata['usuario_id']);
+         $this->db->where('notificacao_tipo', 1);
+         //$this->db->where("notificacao_remetente")->distinct();
+         $this->db->where('notificacao_visto', 0);
+         return  $this->db->get('notificacoes')->row()->notificacao_remetente;
+
+     }
+     public function carregarLinksDisputa(){
+         $this->db->where('usuario_id', $this->session->userdata['usuario_id']);
+         $this->db->where('notificacao_tipo', 2);
+         //$this->db->where("notificacao_remetente")->distinct();
+         $this->db->where('notificacao_visto', 0);
+         return  $this->db->get('notificacoes')->row()->notificacao_remetente;
+
      }
      public function carregarNotificacaoDisputa(){
          $this->db->where('usuario_id', $this->session->userdata['usuario_id']);
@@ -925,6 +948,15 @@ class Anuncios_model extends CI_Model{
          $this->db->where('notificacao_visto', 0);
          return $this->db->get('notificacoes')->num_rows();
      }
+     public function pegarTituloPorId($anuncio_id){
+         $this->db->where('anuncio_id', $anuncio_id);
+         return $this->db->get('anuncios')->row()->anuncio_titulo;
+     }
+     public function pegarUnidadePorId($anuncio_id){
+         $this->db->where('anuncio_id', $anuncio_id);
+         return $this->db->get('anuncios')->row()->anuncio_unidade;
+     }
+
 
 
 }

@@ -129,16 +129,7 @@
 				<div class="col-sm-9" id="content">
 					<h2>Notificações</h2>
 					<div class="notify">
-						<ul class="notifications">
-							<li><a href="" class="notificated"><i class="fa fa-comment" aria-hidden="true"><span class="buttonbadge alert">4</span></i>Mensagens não lidas</a></li>
-
-							<li><a href="" class="notificated"><i class="fa fa-list" aria-hidden="true"><span class="buttonbadge alert">10</span></i>Ações Pendentes</a></li>
-						</ul>
-						<ul class="notifications">
-							<li><a href=""><i class="fa fa-exclamation-triangle" aria-hidden="true"><span class="buttonbadge">0</span></i>Disputas Pendentes </a></li>
-
-							<li><a href=""><i class="fa fa-thumbs-o-up" aria-hidden="true"><span class="buttonbadge">0</span></i>Avaliações Pendentes </a></li>
-						</ul>
+					
 					</div>
 					<div class="outterborder">
 						
@@ -239,7 +230,7 @@
 <footer id="footer">
 	<!--Footer-->
 </footer><!--/Footer-->
-
+<form id='url' action='<?=base_url()?>index.php/dashboard/atualizarNotificacoes'></form>
 
 <script src="<?=base_url()?>assets/js/jquery.js"></script>
 <script src="<?=base_url()?>assets/js/price-range.js"></script>

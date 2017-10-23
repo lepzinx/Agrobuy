@@ -5,6 +5,7 @@ class Usuarios_model extends CI_Model{
     function __construct(){
 
         parent::__construct();
+        $this->load->model("anuncios_model");
     }
 
     public function checarSessao(){
@@ -262,7 +263,10 @@ $config['charset']  = 'UTF-8';
         $this->db->where('usuario_id', $id);
         return  $this->db->get('usuarios')->row()->usuario_estado;
     }
-
+    public function pegarIdPorAnuncio($anuncio_id){
+        $this->db->where('anuncio_id', $anuncio_id);
+        return $this->db->get('anuncios')->row()->usuario_id;
+    }
 
 
 
@@ -284,6 +288,7 @@ $config['charset']  = 'UTF-8';
     }
 
     public function enviarMensagem($para, $texto){
+
          $de = $this->session->userdata['usuario_id'];
            $dados['mensagem_de'] = $de;
            $dados['mensagem_para'] = $para;
@@ -297,6 +302,7 @@ $config['charset']  = 'UTF-8';
                     $data['usuario2_id'] = $para;
                     $this->db->insert('conversas', $data);
                 }
+                $this->anuncios_model->novanotificacao(1, $para);
                         return true;
 		}else{
 			return false;
@@ -324,6 +330,7 @@ $config['charset']  = 'UTF-8';
               $this->upload->initialize($configuracao);
         if ($this->upload->do_upload('files[]')) {
             $dados['mensagem_arquivo']  = $configuracao['upload_path'] . $configuracao['file_name'];
+            $this->anuncios_model->novanotificacao(1, $para);
             return $this->db->insert('mensagens', $dados);
         }else{
             $this->upload->display_errors();
@@ -343,6 +350,11 @@ $config['charset']  = 'UTF-8';
 
         $pegarId2 =  $this->db->get('mensagens');
         if($pegarId2->num_rows() > 0 ){
+            $this->db->where('notificacao_remetente', $indice);
+            $id = $this->db->get('notificacoes')->result();
+            foreach($id as $id1){
+                $this->anuncios_model->vernotificacao($id1->notificacao_id);
+            }
             return $pegarId2->result();
         }
         return false;

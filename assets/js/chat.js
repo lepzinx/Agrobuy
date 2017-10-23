@@ -31,7 +31,8 @@ $("#enviarMensagem").click(function (e) {
         async: false,
         dataType: 'json',
         success: function () {
-            $('#mensagens').prop("scrollTop", $('$mensagens').prop("scrollHeight"));
+            document.getElementById("texto").value = "";
+            $('#mensagens').animate({ scrollTop: 9999999 }, 500);
 		    carregarmensagens();
            
         },
@@ -58,7 +59,7 @@ $('#texto').keydown(function(e){
         success: function () {
             document.getElementById("texto").value = "";
 
-            $('#mensagens').prop("scrollTop", $('$mensagens').prop("scrollHeight"));
+            $('#mensagens').animate({ scrollTop: 9999999 }, 500);
 		    carregarmensagens();
            
         },

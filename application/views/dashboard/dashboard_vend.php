@@ -117,16 +117,6 @@
             <div class="col-sm-9" id="content"  >
             <h2>Notificações</h2>
                 <div class="notify">
-                    <ul class="notifications">
-                        <li><a href="" class="notificated"><i class="fa fa-comment" aria-hidden="true"><span class="buttonbadge alert">4</span></i>Mensagens não lidas</a></li>
-                
-                        <li><a href="" class="notificated"><i class="fa fa-list" aria-hidden="true"><span class="buttonbadge alert">10</span></i>Ações Pendentes</a></li>
-                    </ul>
-                    <ul class="notifications">   
-                        <li><a href=""><i class="fa fa-exclamation-triangle" aria-hidden="true"><span class="buttonbadge">0</span></i>Disputas Pendentes </a></li>
-                
-                        <li><a href=""><i class="fa fa-thumbs-o-up" aria-hidden="true"><span class="buttonbadge">0</span></i>Avaliações Pendentes </a></li>
-                    </ul>
                 </div>
             <div class="outterborder">
                 <select id="nav-selector">
@@ -137,27 +127,118 @@
                     <option value="evaluation">Minhas Avaliações</option>
                     <option value="disputes">Minhas Disputas</option>
                 </select>
-                <div id="pannel-content">
-                    <div id="minhasvend">
+              <div id="pannel-content">
+                    <div id="minhascomp">
                         <ul class="nav nav-tabs nav-justified">
-                    <li class="active"><a data-toggle="tab" href="#compra0">Ativas <br>&#40;20&#41;</a></li>
-                    <li><a data-toggle="tab" href="#compra6">Finalizadas <br>&#40;34&#41;</a></li>
-                </ul>
-                        <div class="tab-content">
-                    <div id="compra0" class="tab-pane fade in active">
-                        <ul class="nav nav-tabs nav-justified deal-phases">
-                            <li id="step1" class="active"><a data-toggle="tab" href="#compra1">Negociando <br>&#40;10&#41;</a></li>
-                            <li id="pl1" class="progressline"></li>
-                            <li id="step2"><a data-toggle="tab" href="#compra2">Pagamento Pendente <br>&#40;7&#41;</a></li>
-                            <li id="pl2" class="progressline"></li>
-                            <li id="step3"><a data-toggle="tab" href="#compra3">Envio Pendente<br>&#40;2&#41;</a></li>
-                            <li id="pl3" class="progressline"></li>
-                            <li id="step4"><a data-toggle="tab" href="#compra4">Em Trânsito <br>&#40;1&#41;</a></li>
-                            <li id="pl4" class="progressline"></li>
-                            <li id="step5"><a data-toggle="tab" href="#compra5">Em Conferência <br>&#40;1&#41;</a></li>
+                            <li class="active"><a data-toggle="tab" href="#compra0">Ativas <br>&#40;20&#41;</a></li>
+                            <li><a data-toggle="tab" href="#compra6">Finalizadas <br>&#40;34&#41;</a></li>
                         </ul>
                         <div class="tab-content">
+                            <div id="compra0" class="tab-pane fade in active">
+                                <ul class="nav nav-tabs nav-justified deal-phases">
+                                    <li id="step1" class="active"><a data-toggle="tab" href="#compra1">Negociando <br>&#40;<?=$qtd1?>&#41;</a></li>
+                                    <li id="pl1" class="progressline"></li>
+                                    <li id="step2"><a data-toggle="tab" href="#compra2">Pagamento Pendente <br>&#40;<?=$qtd2?>&#41;</a></li>
+                                    <li id="pl2" class="progressline"></li>
+                                    <li id="step3"><a data-toggle="tab" href="#compra3">Envio Pendente<br>&#40;<?=$qtd3?>&#41;</a></li>
+                                    <li id="pl3" class="progressline"></li>
+                                    <li id="step4"><a data-toggle="tab" href="#compra4">Em Trânsito <br>&#40;<?=$qtd4?>&#41;</a></li>
+                                    <li id="pl4" class="progressline"></li>
+                                    <li id="step5"><a data-toggle="tab" href="#compra5">Em Conferência <br>&#40;<?=$qtd5?>&#41;</a></li>
+                                </ul>
+                        <div class="tab-content">
                             <div id="compra1" class="tab-pane fade in active">
+								<?php if($compra1 != null){
+                                          foreach($compra1 as $cmp){?>
+                                <table class="tabledisplay">
+                                    <tbody class="titem">
+                                        <tr class="theader1">
+                                            <th></th>
+                                            <th>Negociação Nº</th>
+                                            <th>Data</th>
+                                            <th>Preço do Frete</th>
+                                            <th>Preço Total</th>
+                                            <th colspan="2">Status</th>
+                                            <th>Ações</th>
+                                        </tr>      
+                                        <tr class="theader2">
+                                            
+                                            <td></td>
+                                            <td><span data-toggle="tooltip" title="Clique para ver mais detalhes"><a href="" data-toggle="modal" data-target="#dealModal"><?=$cmp->negociacao_id?></a></span></td>
+                                            <td><p><?=$cmp->negociacao_data?></p></td>
+                                            <td> R$ <?=$cmp->negociacao_frete?></td>
+                                            <td> R$ <?=$cmp->negociacao_preco?></td>
+                                            <td colspan="2"> <?=$this->negociacao_model->verificaStatus($cmp->negociacao_id);?></td>
+                                            <td>
+                                                <div class="dropdown show">
+                                                    <a class="btn btn-primary dropdown-toggle" href="" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                        <i class="fa fa-list" aria-hidden="true"></i>
+                                                    </a>
+                                                    <ul id="actiondropdown" class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                                        <li class=""><a href="#" data-toggle="modal" id="aceitarProposta" data-per="aceitar a proposta?" data-act="<?=base_url()?>index.php/dashboard/aceitarproposta/<?=$cmp->negociacao_id?>" data-target="#confirmationModal"><i class="fa fa-handshake-o" aria-hidden="true"></i> Aceitar proposta</a></li>
+                                                        <li><a href="#"><span class="glyphicon glyphicon-edit"></span>Editar Proposta</a></li>
+                                                        <li><a href="#" data-toggle="modal" data-target="#confirmationModal"><i class="fa fa-thumbs-o-down" aria-hidden="true"></i> Recusar Proposta</a></li>
+                                                        <li role="separator" class="divider"></li>
+                                                        <li><a href="#" data-toggle="modal" data-act="<?=base_url()?>" data-target="#confirmationModal"><span class="glyphicon glyphicon-remove"></span>Excluir Proposta</a></li>
+                                                    </ul>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                    <tbody class="titem">
+                                        <tr class="theader3" >
+                                            <td></td>
+                                            <td><a><span class="glyphicon glyphicon-user"></span> <?=$this->usuarios_model->nomeEmpresa($cmp->usuario2_id)?></a></td>
+                                            <td colspan="2"><p>Produto</p></td>
+                                            <td><p>Quantidade</p></td>
+                                            <td><p>Unidade</p></td>
+                                            <td><p>Preço Unitário</p></td>
+                                            <td>Preço dos Produtos</td>
+                                        </tr>
+                                        <tr class="tdata">
+                                            <td colspan="2"><img class="productimg" src="<?=base_url().$this->usuarios_model->fotoPerfil($cmp->usuario2_id)?>" height="100" width="100"></td>
+                                            <td colspan="2"><a data-toggle="modal" data-target="#productModal"> <?=$this->anuncios_model->pegarTituloPorId($cmp->anuncio_id)?></a></td>    
+                                            <td><p> <?=$cmp->negociacao_qtd?> </p></td>
+                                            <td><p> <?=$this->anuncios_model->pegarUnidadePorId($cmp->anuncio_id)?> </p></td>
+                                            <td><p> R$ <?=$cmp->negociacao_precounitario?> </p></td>
+                                            <td><p> R$ <?=$cmp->negociacao_preco?></p></td>
+                                        </tr>
+                                    </tbody>
+                                </table>  
+                                <?php } ?>
+                                <div class="container bottomnav" >
+                               <?=$paginacao_compra1;?>
+                                </div>
+								<?php
+                                      }else{?>
+								<table class="tabledisplay">
+									<tbody class="titem">
+										<tr class="theader1">
+											<th></th>
+											<th>Não existem negociações</th>
+											<th></th>
+											<th></th>
+											<th></th>
+											<th colspan="2"></th>
+											<th></th>
+										</tr>
+										<tr class="theader2">
+
+											<td></td>
+											<td></td>
+											<td><p></p></td>
+											<td> </td>
+											<td> </td>
+											<td colspan="2"> </td>
+											<td></td>
+										</tr>
+									</tbody>
+
+								</table><?php } ?>
+                            </div>
+                            <div id="compra2" class="tab-pane fade">
+								<?php if($compra2 != null){
+                                          foreach($compra2 as $cmp){?>
                                 <table class="tabledisplay">
                                     <tbody class="titem">
                                         <tr class="theader1">
@@ -170,50 +251,308 @@
                                             <th>Ações</th>
                                         </tr>      
                                         <tr class="theader2">
-                                            <td></td>
-                                            <td><span data-toggle="tooltip" title="Clique para ver mais detalhes da Negociação"><a href="" data-toggle="modal" data-target="#dealModal">12345678</a></span></td>
-                                            <td><p>12/12/2013</p></td>
-                                            <td> R$ 1,000.00</td>
-                                            <td> R$ 11,000.00</td>
-                                            <td colspan="2"> <a data-toggle="tooltip" title="Aguardando o Cliente fechar negócio">Aguardando o Cliente</a></td>
+											
+											<td></td>
+											<td><span data-toggle="tooltip" title="Clique para ver mais detalhes"><a href="" data-toggle="modal" data-target="#dealModal"><?=$cmp->negociacao_id?></a></span></td>
+											<td><p><?=$cmp->negociacao_data?></p></td>
+											<td> R$ <?=$cmp->negociacao_frete?></td>
+											<td> R$ <?=$cmp->negociacao_preco?></td>
+                                            <td colspan="2"> <a href="#" data-toggle="tooltip" title="Para prosseguir, por gentileza pague pelo pedido">Aguardando Pagamento</a></td>
                                             <td>
                                                 <div class="dropdown show">
-                                                    <a class="btn btn-primary dropdown-toggle" href="" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                        <i class="fa fa-list" aria-hidden="true"></i>
+                                                    <a class="btn btn-success dropdown-toggle" href="" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                        <i class="fa fa-usd" aria-hidden="true"></i> Pagar
                                                     </a>
-                                                    <ul id="actiondropdown" class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                                        <li class="disabled"><a href="#" data-toggle="modal" data-target="#confirmationModal"><i class="fa fa-handshake-o" aria-hidden="true"></i> Fechar Negócio</a></li>
-                                                        <li><a href="#"><span class="glyphicon glyphicon-edit"></span>Editar Proposta</a></li>
-                                                        <li><a href="#" data-toggle="modal" data-target="#confirmationModal"><i class="fa fa-thumbs-o-down" aria-hidden="true"></i> Recusar Proposta</a></li>
-                                                        <li role="separator" class="divider"></li>
-                                                        <li><a href="#" data-toggle="modal" data-target="#confirmationModal"><span class="glyphicon glyphicon-remove"></span>Excluir Proposta</a></li>
+                                                    <ul id="paymentdropdown" class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                                        <li><a class="dropdown-item" href="#"><i class="fa fa-barcode" aria-hidden="true"></i> Boleto Bancário</a></li>
+                                                        <li><a class="dropdown-item" href="#"><i class="fa fa-credit-card" aria-hidden="true"></i> Cartão de Crédito</a></li>
+                                                        <li><a class="dropdown-item" href="#"><i class="fa fa-paypal" aria-hidden="true"></i>  PayPal</a></li>
                                                     </ul>
                                                 </div>
                                             </td>
                                         </tr>
                                     </tbody>
                                     <tbody class="titem">
-                                        <tr class="theader3" >
+										<tr class="theader3">
+											<td></td>
+											<td><a><span class="glyphicon glyphicon-user"></span> <?=$this->usuarios_model->nomeEmpresa($cmp->usuario2_id)?></a></td>
+											<td colspan="2"><p>Produto</p></td>
+											<td><p>Quantidade</p></td>
+											<td><p>Unidade</p></td>
+											<td><p>Preço Unitário</p></td>
+											<td>Preço dos Produtos</td>
+										</tr>
+										<tr class="tdata">
+											<td colspan="2"><img class="productimg" src="<?=base_url().$this->usuarios_model->fotoPerfil($cmp->usuario2_id)?>" height="100" width="100"></td>
+											<td colspan="2"><a data-toggle="modal" data-target="#productModal"> <?=$this->anuncios_model->pegarTituloPorId($cmp->anuncio_id)?></a></td>
+											<td><p> <?=$cmp->negociacao_qtd?> </p></td>
+											<td><p> <?=$this->anuncios_model->pegarUnidadePorId($cmp->anuncio_id)?> </p></td>
+											<td><p> R$ <?=$cmp->negociacao_precounitario?> </p></td>
+											<td><p> R$ <?=$cmp->negociacao_preco?></p></td>
+										</tr>
+                                    </tbody>
+                                </table>  
+								<?php } ?>
+								<div class="container bottomnav"><?=$paginacao_compra2;?>
+                                </div>
+								<?php
+                                      }else{?>
+								<table class="tabledisplay">
+									<tbody class="titem">
+										<tr class="theader1">
+											<th></th>
+											<th>Não existem negociações esperando pagamento.</th>
+											<th></th>
+											<th></th>
+											<th></th>
+											<th colspan="2"></th>
+											<th></th>
+										</tr>
+										<tr class="theader2">
+
+											<td></td>
+											<td></td>
+											<td><p></p></td>
+											<td> </td>
+											<td> </td>
+											<td colspan="2"> </td>
+											<td></td>
+										</tr>
+									</tbody>
+
+								</table><?php } ?>
+                            </div>
+                            <div id="compra3" class="tab-pane fade">
+								<?php
+                                if($compra3 != null){
+                                    foreach($compra3 as $cmp){?>
+                                <table class="tabledisplay">
+                                    <tbody class="titem">
+                                        <tr class="theader1">
+                                            <th></th>
+                                            <th>Negociação Nº</th>
+                                            <th>Data</th>
+                                            <th>Preço do Frete</th>
+                                            <th >Preço Total</th>
+                                            <th colspan="2">Status</th>
+                                            <th>Ações</th>
+                                        </tr>      
+                                        <tr class="theader2">
+											
                                             <td></td>
-                                            <td><a data-toggle="tooltip" title="Clique para ver as informações do Fornecedor."><span class="glyphicon glyphicon-user"></span> Fazenda Sta. Agnobalda da Serra</a></td>
-                                            <td colspan="2"><p>Produto</p></td>
-                                            <td><p>Quantidade</p></td>
-                                            <td><p>Unidade</p></td>
-                                            <td><p>Preço Unitário</p></td>
-                                            <td>Preço dos Produtos</td>
-                                        </tr>
-                                        <tr class="tdata">
-                                            <td colspan="2"><img class="productimg" src="<?=base_url()?>assets/images/placeholders/mock1.jpg" height="100" width="100"></td>
-                                            <td colspan="2"><span data-toggle="tooltip" title="Clique para ver mais detalhes do Produto"><a data-toggle="modal" data-target="#productModal"> Soja em Saca Bibibi Bobobó</a></span></td>    
-                                            <td><p> 100 </p></td>
-                                            <td><p> Sacas &#40;sc.&#41; </p></td>
-                                            <td><p> R$ 100,00 </p></td>
-                                            <td><p> R$ 10.000,00</p></td>
+											<td><span data-toggle="tooltip" title="Clique para ver mais detalhes"><a href="" data-toggle="modal" data-target="#dealModal"><?=$cmp->negociacao_id?></a></span></td>
+											<td><p><?=$cmp->negociacao_data?></p></td>
+											<td> R$ <?=$cmp->negociacao_frete?></td>
+											<td> R$ <?=$cmp->negociacao_preco?></td>
+                                            <td colspan="2"> <a href="#" data-toggle="tooltip" title="Por gentileza, aguarde enquanto o fornecedor providencia o envio do seu produto.">Aguardando Envio</a></td>
+                                            <td><a href="#" data-toggle="tooltip" title="Fazer Reclamação"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i></a></td>
                                         </tr>
                                     </tbody>
-                                </table>
-                        <div class="container bottomnav" >
-                       
+                                    <tbody class="titem">
+										<tr class="theader3">
+											<td></td>
+											<td><a><span class="glyphicon glyphicon-user"></span> <?=$this->usuarios_model->nomeEmpresa($cmp->usuario2_id)?></a></td>
+											<td colspan="2"><p>Produto</p></td>
+											<td><p>Quantidade</p></td>
+											<td><p>Unidade</p></td>
+											<td><p>Preço Unitário</p></td>
+											<td>Preço dos Produtos</td>
+										</tr>
+										<tr class="tdata">
+											<td colspan="2"><img class="productimg" src="<?=base_url().$this->usuarios_model->fotoPerfil($cmp->usuario2_id)?>" height="100" width="100"></td>
+											<td colspan="2"><a data-toggle="modal" data-target="#productModal"> <?=$this->anuncios_model->pegarTituloPorId($cmp->anuncio_id)?></a></td>
+											<td><p> <?=$cmp->negociacao_qtd?> </p></td>
+											<td><p> <?=$this->anuncios_model->pegarUnidadePorId($cmp->anuncio_id)?> </p></td>
+											<td><p> R$ <?=$cmp->negociacao_precounitario?> </p></td>
+											<td><p> R$ <?=$cmp->negociacao_preco?></p></td>
+										</tr>
+                                    </tbody>
+                                </table>  
+                            <?php } ?>
+								<div class="container bottomnav"><?=$paginacao_compra3;?>
+                                </div>
+								<?php
+                                }else{?>
+								<table class="tabledisplay">
+									<tbody class="titem">
+										<tr class="theader1">
+											<th></th>
+											<th>Não existem negociações com envio pendente</th>
+											<th></th>
+											<th></th>
+											<th></th>
+											<th colspan="2"></th>
+											<th></th>
+										</tr>
+										<tr class="theader2">
+
+											<td></td>
+											<td></td>
+											<td><p></p></td>
+											<td> </td>
+											<td> </td>
+											<td colspan="2"> </td>
+											<td></td>
+										</tr>
+									</tbody>
+
+								</table><?php } ?>
+                            </div>
+                            <div id="compra4" class="tab-pane fade">
+								<?php if($compra4 != null){
+                                          foreach($compra4 as $cmp){?>
+                                <table class="tabledisplay">
+                                    <tbody class="titem">
+                                        <tr class="theader1">
+                                            <th></th>
+                                            <th>Negociação Nº</th>
+                                            <th>Data</th>
+                                            <th>Preço do Frete</th>
+                                            <th >Preço Total</th>
+                                            <th colspan="2">Status</th>
+                                            <th>Ações</th>
+                                        </tr>      
+                                        <tr class="theader2">
+											
+                                            <td></td>
+											<td><span data-toggle="tooltip" title="Clique para ver mais detalhes"><a href="" data-toggle="modal" data-target="#dealModal"><?=$cmp->negociacao_id?></a></span></td>
+											<td><p><?=$cmp->negociacao_data?></p></td>
+											<td> R$ <?=$cmp->negociacao_frete?></td>
+											<td> R$ <?=$cmp->negociacao_preco?></td>
+                                            <td colspan="2"> <a href="#" data-toggle="tooltip" title="Por favor, aguarde. Seu produto está a caminho.">Produto em Trânsito</a></td>
+                                            <td><a href="#" data-toggle="tooltip" title="Fazer Reclamação"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i></a></td>
+                                        </tr>
+                                    </tbody>
+                                    <tbody class="titem">
+										<tr class="theader3">
+											<td></td>
+											<td><a><span class="glyphicon glyphicon-user"></span> <?=$this->usuarios_model->nomeEmpresa($cmp->usuario2_id)?></a></td>
+											<td colspan="2"><p>Produto</p></td>
+											<td><p>Quantidade</p></td>
+											<td><p>Unidade</p></td>
+											<td><p>Preço Unitário</p></td>
+											<td>Preço dos Produtos</td>
+										</tr>
+										<tr class="tdata">
+											<td colspan="2"><img class="productimg" src="<?=base_url().$this->usuarios_model->fotoPerfil($cmp->usuario2_id)?>" height="100" width="100"></td>
+											<td colspan="2"><a data-toggle="modal" data-target="#productModal"> <?=$this->anuncios_model->pegarTituloPorId($cmp->anuncio_id)?></a></td>
+											<td><p> <?=$cmp->negociacao_qtd?> </p></td>
+											<td><p> <?=$this->anuncios_model->pegarUnidadePorId($cmp->anuncio_id)?> </p></td>
+											<td><p> R$ <?=$cmp->negociacao_precounitario?> </p></td>
+											<td><p> R$ <?=$cmp->negociacao_preco?></p></td>
+										</tr>
+                                    </tbody>
+                                </table>  
+                               <?php } ?>
+								<div class="container bottomnav"><?=$paginacao_compra4;?>
+                                </div>
+								<?php
+                                      }else{?>
+								<table class="tabledisplay">
+									<tbody class="titem">
+										<tr class="theader1">
+											<th></th>
+											<th>Não existem negociações em trânsito</th>
+											<th></th>
+											<th></th>
+											<th></th>
+											<th colspan="2"></th>
+											<th></th>
+										</tr>
+										<tr class="theader2">
+
+											<td></td>
+											<td></td>
+											<td><p></p></td>
+											<td> </td>
+											<td> </td>
+											<td colspan="2"> </td>
+											<td></td>
+										</tr>
+									</tbody>
+
+								</table><?php } ?>
+                            </div>
+                            <div id="compra5" class="tab-pane fade">
+								<?php if($compra5 != null){
+                                          foreach($compra5 as $cmp){?>
+                                <table class="tabledisplay">
+                                    <tbody class="titem">
+                                        <tr class="theader1">
+                                            <th></th>
+                                            <th>Negociação Nº</th>
+                                            <th>Data</th>
+                                            <th>Preço do Frete</th>
+                                            <th >Preço Total</th>
+                                            <th colspan="2">Status</th>
+                                            <th>Ações</th>
+                                        </tr>      
+                                        <tr class="theader2">
+											
+                                            <td></td>
+											<td><span data-toggle="tooltip" title="Clique para ver mais detalhes"><a href="" data-toggle="modal" data-target="#dealModal"><?=$cmp->negociacao_id?></a></span></td>
+											<td><p><?=$cmp->negociacao_data?></p></td>
+											<td> R$ <?=$cmp->negociacao_frete?></td>
+											<td> R$ <?=$cmp->negociacao_preco?></td>
+                                            <td colspan="2"> <a href="#" data-toggle="tooltip" title="Por favor, confira se está tudo certo com o produto">Conferência Pendente</a></td>
+                                            <td><a href="#" data-toggle="tooltip" title="Está tudo Ok!"><span class="glyphicon glyphicon-check"></span></a>
+                                                <a href="#" data-toggle="tooltip" title="Tem algo de errado.Fazer Reclamação"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i></a></td>
+                                        </tr>
+                                    </tbody>
+                                    <tbody class="titem">
+										<tr class="theader3">
+											<td></td>
+											<td><a><span class="glyphicon glyphicon-user"></span> <?=$this->usuarios_model->nomeEmpresa($cmp->usuario2_id)?></a></td>
+											<td colspan="2"><p>Produto</p></td>
+											<td><p>Quantidade</p></td>
+											<td><p>Unidade</p></td>
+											<td><p>Preço Unitário</p></td>
+											<td>Preço dos Produtos</td>
+										</tr>
+										<tr class="tdata">
+											<td colspan="2"><img class="productimg" src="<?=base_url().$this->usuarios_model->fotoPerfil($cmp->usuario2_id)?>" height="100" width="100"></td>
+											<td colspan="2"><a data-toggle="modal" data-target="#productModal"> <?=$this->anuncios_model->pegarTituloPorId($cmp->anuncio_id)?></a></td>
+											<td><p> <?=$cmp->negociacao_qtd?> </p></td>
+											<td><p> <?=$this->anuncios_model->pegarUnidadePorId($cmp->anuncio_id)?> </p></td>
+											<td><p> R$ <?=$cmp->negociacao_precounitario?> </p></td>
+											<td><p> R$ <?=$cmp->negociacao_preco?></p></td>
+										</tr>
+                                    </tbody>
+                                </table>  
+                               <?php } ?>
+								<div class="container bottomnav"><?=$paginacao_compra5;?>
+                                </div>
+								<?php 
+                                      }else{?>
+								    <table class="tabledisplay">
+                                    <tbody class="titem">
+                                        <tr class="theader1">
+                                            <th></th>
+                                            <th>Não existem negociações em conferência</th>
+                                            <th></th>
+                                            <th></th>
+                                            <th ></th>
+                                            <th colspan="2"></th>
+                                            <th></th>
+                                        </tr>      
+                                        <tr class="theader2">
+											
+                                            <td></td>
+											<td></td>
+											<td><p></p></td>
+											<td> </td>
+											<td> </td>
+                                            <td colspan="2"> </td>
+                                            <td ></td>
+                                        </tr>
+                                    </tbody>
+                              
+                                </table>  
+                               
+                           <?php } ?>
+                            </div>
+                        </div>
+                    </div>
                     </div>
                 </div>
                     </div>
@@ -422,17 +761,17 @@
                         </div>
                     </div>
                 </div> <!-- /MODAL DETALHE DA NEGOCIAÇÃO-------------------->
-                <div Id="confirmationModal" class="modal fade">
-                    <div class="modal-dialog modal-sm" role="document">
-                        <div class="modal-content">
-                            <div class="modal-body">
-                                <h5> Você tem certeza? que deseja <p> ISSO AKI?</p></h5>
-                                <button type="button" class="btn btn-success">Sim</button>
-                                <button type="button" class="btn btn-danger" data-dismiss="modal">Não</button>
-                            </div>
-                        </div>
-                    </div>
-                </div> <!-- /MODAL DE CONFIRMAÇÃO-------------------->
+			<div Id="confirmationModal" class="modal fade">
+				<div class="modal-dialog modal-sm" role="document">
+					<div class="modal-content">
+						<div class="modal-body">
+							<h5> Você tem certeza que deseja <p id="pergunta"> ISSO AKI?</p></h5><br />
+							<a type="button" id="confirmar" href="#" class="btn btn-success">Sim</a>
+							<button type="button" class="btn btn-danger" data-dismiss="modal">Não</button>
+						</div>
+					</div>
+				</div>
+			</div> <!-- /MODAL DE CONFIRMAÇÃO-------------------->
                 
             <!--<div class="col-sm-3" id="reputacao">
                    
@@ -513,7 +852,7 @@
 	<footer id="footer"><!--Footer-->		
 	</footer><!--/Footer-->
 	
-
+<form id='url' action='<?=base_url()?>index.php/dashboard/atualizarNotificacoes'></form>
   
     <script src="<?=base_url()?>assets/js/jquery.js"></script>
 	<script src="<?=base_url()?>assets/js/price-range.js"></script>
@@ -522,5 +861,13 @@
     <script src="<?=base_url()?>assets/js/jquery.prettyPhoto.js"></script>
     <script src="<?=base_url()?>assets/js/main.js"></script>
    <script src="<?=base_url()?>assets/js/dashboard_vend.js"></script>
+<script type="text/javascript">
+    $('#aceitarProposta').on('click', function () {
+        var id = $(this).data('act'); // vamos buscar o valor do atributo data-id
+        var pergunta = $(this).data('per');
+        $('p#pergunta').text(pergunta); // inserir na o nome na pergunta de confirmação dentro da modal
+        $('a#confirmar').attr('href', id); // mudar dinamicamente o link, href do botão confirmar da modal
+    });
+</script>
 </body>
 </html>

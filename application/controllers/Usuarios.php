@@ -21,14 +21,14 @@ class Usuarios extends CI_Controller {
 	public function index()
 	{
            $this->load->model("usuarios_model");
-          
+
            if(!$this->usuarios_model->checarSessao()){
 		$this->load->view('usuario/login');
            }else{
-               redirect(base_url());  
+               redirect(base_url());
            }
 	}
-        
+
         public function cadastro()
 	{
            $this->load->model("usuarios_model");
@@ -38,14 +38,14 @@ class Usuarios extends CI_Controller {
 	}
         public function sair(){
          $this->session->sess_destroy();
-                 redirect(base_url()."index.php/usuarios");  
-            
+                 redirect(base_url()."index.php/usuarios");
+
         }
-        
-        
+
+
         public function fazerCadastroInfo(){
             $this->load->model("usuarios_model");
-            
+
                $result = $this->usuarios_model->cadastrarAccInfo();;
 		$msg['success'] = false;
 		$msg['type'] = 'add';
@@ -55,10 +55,10 @@ class Usuarios extends CI_Controller {
 		echo json_encode($msg);
 
         }
-        	
+
             public function fazerCadastroBus(){
             $this->load->model("usuarios_model");
-            
+
                $result = $this->usuarios_model->cadastrarBusInfo($this->session->userdata['IDCADASTRO']);;
 		$msg['success'] = false;
 		$msg['type'] = 'add';
@@ -70,22 +70,22 @@ class Usuarios extends CI_Controller {
         }
                public function cadastroFinal(){
             $this->load->model("usuarios_model");
-            
+
                if($this->usuarios_model->cadastrarFinal($this->session->userdata['IDCADASTRO']) == true){
-                   redirect("index.php/usuarios"); 
+                   redirect("index.php/usuarios");
                }
         }
-        
+
         public function fazerLogin(){
            $this->load->model("usuarios_model");
            $email = $this->input->post("email");
            $senha = $this->input->post("senha");
-           
+
            if(!$this->usuarios_model->checarSessao()){
                 if($this->usuarios_model->entrar($email, $senha)){
                     redirect(base_url());
                 }else{
-                    redirect(base_url()."index.php/usuarios");  
+                    redirect(base_url()."index.php/usuarios");
                 }
            }
         }
@@ -96,26 +96,26 @@ class Usuarios extends CI_Controller {
             $dados['indice'] = $indice;
             $primeiraConversa = $this->usuarios_model->pegarPrimeiraConversa();
             if($indice == null){
-              redirect(base_url()."index.php/usuarios/mensagens/".$primeiraConversa);    
+              redirect(base_url()."index.php/usuarios/mensagens/".$primeiraConversa);
             }
-          
-          
+
+
            if(!$this->usuarios_model->checarSessao()){
 		$this->load->view('usuarios/login');
            }else{
                $this->load->view('includes/messages', $dados);
            }
         }
-        
+
         public function atualizarMensagens($indice = null){
             $this->load->model('usuarios_model');
             $conversa = $this->usuarios_model->verMensagens($indice);
-                     if($conversa == null) { 
+                     if($conversa == null) {
                      echo '<div class="col-md-10 col-xs-10">
                         Não existem mensagens entre você e este usuario!
                      </div>';
                      }else{
-                     foreach($conversa as $con){ 
+                     foreach($conversa as $con){
                          if($con->mensagem_texto == ''){
                              $exibe = '<img lass="img-responsive" height="250" width="250" src="'.base_url().$con->mensagem_arquivo.'"></img>';
                          }else{
@@ -125,47 +125,47 @@ class Usuarios extends CI_Controller {
                      if($con->mensagem_de == $this->session->userdata['usuario_id']){
               echo '<div class="row msg_container base_sent">
                         <div class="col-md-10 col-xs-10">
-                            
-                            <div class="messages msg_sent" data-toggle="tooltip" title="12:37">
+
+                            <div class="messages msg_sent" data-toggle="tooltip" title="'.$con->mensagens_data.'">
                                 <p>'.$exibe.'</p>
-                                
+
                             </div>
                         </div>
                         <div class="col-md-2 col-xs-2 avatar">
                             <img src="'.base_url().$this->usuarios_model->fotoPerfil($this->session->userdata['usuario_id']).'" class=" img-responsive ">
                         </div>
                     </div>';
-                     }else{ 
-                    echo '<div class="row msg_container base_receive" data-toggle="tooltip" title="12:38">
+                     }else{
+                    echo '<div class="row msg_container base_receive" data-toggle="tooltip" title="'.$con->mensagens_data.'">
                         <div class="col-md-2 col-xs-2 avatar">
                             <img class="img-responsive" src="'.base_url().$this->usuarios_model->fotoPerfil($indice).'" width="50px" style="border-radius: 100px;">
                         </div>
                         <div class="col-md-10 col-xs-10">
                             <div class="messages msg_receive">
                                 <p>'.$exibe.'</p>
-                                
+
                             </div>
                         </div>
-                   
+
                     </div>';
-                     } 
-                    
-                    
-                    
+                     }
+
+
+
                echo '</div>';
-                     } 
-                     } 
+                     }
+                     }
           }
-        
+
         public function mandarmensagem($indice = null){
-            
+
                  $this->load->model("usuarios_model");
                  $texto = $this->input->post('texto');
            if(!$this->usuarios_model->checarSessao()){
 		$this->load->view('usuario/login');
            }else{
-                     
-               $result =  $this->usuarios_model->enviarMensagem($indice, $texto);  
+
+               $result =  $this->usuarios_model->enviarMensagem($indice, $texto);
 		$msg['success'] = false;
 		$msg['type'] = 'add';
 		if($result){
@@ -173,22 +173,22 @@ class Usuarios extends CI_Controller {
 		}
 		echo json_encode($msg);
            }
-            
-            
+
+
         }
        public function mandarArquivo($indice = null){
-            
+
                  $this->load->model("usuarios_model");
 
            if(!$this->usuarios_model->checarSessao()){
 		       $this->load->view('usuario/login');
            }else{
                  $this->usuarios_model->enviarArquivo($indice);
-                  redirect(base_url()."index.php/usuarios/mensagens/".$indice); 
+                  redirect(base_url()."index.php/usuarios/mensagens/".$indice);
            }
- 
+
         }
-    
+
     public function confirmarCadastro($indice = null){
         if(!$indice == null){
             if($this->usuarios_model->confirmarEmail){
@@ -198,10 +198,10 @@ class Usuarios extends CI_Controller {
             }
             $this->load->view('usuarios/confirma_email', $dados);
         }else{
-            redirect(base_url()."index.php/usuarios/"); 
+            redirect(base_url()."index.php/usuarios/");
         }
-        
+
     }
 
-        
+
 }
