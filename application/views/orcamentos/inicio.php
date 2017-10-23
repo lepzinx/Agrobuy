@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Salve Leo | Agrobuy</title>
+    <title>Resultados da Busca | Agrobuy</title>
     <link href="<?=base_url()?>assets/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
     <link href="<?=base_url()?>assets/css/prettyPhoto.css" rel="stylesheet">
