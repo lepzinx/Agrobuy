@@ -542,7 +542,14 @@ class Dashboard extends CI_Controller {
         }
 
 
-
+       public function transportes(){
+            $this->load->model('usuarios_model');
+                 if($this->usuarios_model->checarSessao()){
+		$this->load->view('dashboard/dashboard_freight');
+           }else{
+               redirect(base_url()."index.php/usuarios");
+           }
+       }
 
 
         public function perfil(){
@@ -775,6 +782,22 @@ class Dashboard extends CI_Controller {
                 if($indice  != null){
                     if($this->negociacao_model->aceitarProposta($indice)){
                         redirect(base_url()."index.php/dashboard/venda");
+                    }
+                }else{
+                    redirect(base_url()."index.php/dashboard");
+                }
+            }else{
+                redirect(base_url()."index.php/usuarios");
+            }
+        }
+        public function fecharNegocio($indice){
+            $this->load->model('usuarios_model');
+
+            $this->load->model('negociacao_model');
+            if($this->usuarios_model->checarSessao()){
+                if($indice  != null){
+                    if($this->negociacao_model->fecharNegocio($indice)){
+                        redirect(base_url()."index.php/dashboard");
                     }
                 }else{
                     redirect(base_url()."index.php/dashboard");

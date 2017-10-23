@@ -97,6 +97,7 @@ $route['dashboard/c5/(:num)'] = 'dashboard';
 $route['dashboard/c6'] = 'dashboard';
 $route['dashboard/c6/(:num)'] = 'dashboard';
 $route['dashboard/aceitarproposta/(:num)'] = 'dashboard/aceitarproposta/$1';
+$route['dashboard/fecharnegocio/(:num)'] = 'dashboard/fecharnegocio/$1';
 
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

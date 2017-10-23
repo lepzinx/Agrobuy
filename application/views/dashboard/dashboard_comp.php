@@ -178,9 +178,9 @@
                                                     </a>
                                                     <ul id="actiondropdown" class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                                         <?php if($this->negociacao_model->verificaStatus($cmp->negociacao_id) == "Aguardando cliente fechar negocio"){?>
-                                                        <li class=""><a href="#" id="fecharProposta" data-toggle="modal" data-per="fechar negócio?" data-act="<?=base_url()?>" data-target="#confirmationModal"><i class="fa fa-handshake-o" aria-hidden="true"></i> Fechar Negócio</a></li>
+                                                        <li class=""><a href="#" id="fecharProposta" data-toggle="modal" data-per="fechar negócio?" data-act="<?=base_url()?>index.php/dashboard/fecharnegocio/<?=$cmp->negociacao_id?>" data-target="#confirmationModal"><i class="fa fa-handshake-o" aria-hidden="true"></i> Fechar Negócio</a></li>
                                                         <?php }else{?>
-														<li class=""><a href="#" class="disabled"><i class="fa fa-handshake-o" aria-hidden="true"></i> Fechar Negócio</a></li>
+														<li class="disabled"><a href="#" class="disabled"><i class="fa fa-handshake-o" aria-hidden="true"></i> Fechar Negócio</a></li>
                                                         <?php }?>
                                                         <li><a href="#"><span class="glyphicon glyphicon-edit"></span>Editar Proposta</a></li>
                                                         <li><a href="#" data-toggle="modal" data-target="#confirmationModal"><i class="fa fa-thumbs-o-down" aria-hidden="true"></i> Recusar Proposta</a></li>
