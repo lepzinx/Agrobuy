@@ -174,6 +174,7 @@ class Negociacao_model extends CI_Model{
        public function listarNegociacoesCompra1($limit, $offset){
            $this->db->where('usuario1_id', $this->session->userdata['usuario_id']);
            $this->db->where('negociacao_status', 0);
+           $this->db->where('negociacao_cancelada', 0);
            $this->db->limit($limit,$offset);
            $this->db->order_by("negociacao_id","desc");
            return $this->db->get('negociacoes')->result();
@@ -181,6 +182,7 @@ class Negociacao_model extends CI_Model{
        public function qtdNegociacoesCompra1(){
            $this->db->where('usuario1_id', $this->session->userdata['usuario_id']);
            $this->db->where('negociacao_status', 0);
+           $this->db->where('negociacao_cancelada', 0);
            return $this->db->get('negociacoes')->num_rows();
        }
        public function listarNegociacoesCompra2($limit, $offset){
@@ -235,6 +237,7 @@ class Negociacao_model extends CI_Model{
        public function listarNegociacoesVenda1($limit, $offset){
            $this->db->where('usuario2_id', $this->session->userdata['usuario_id']);
            $this->db->where('negociacao_status', 0);
+           $this->db->where('negociacao_cancelada', 0);
            $this->db->limit($limit,$offset);
            $this->db->order_by("negociacao_id","desc");
            return $this->db->get('negociacoes')->result();
@@ -242,6 +245,7 @@ class Negociacao_model extends CI_Model{
        public function qtdNegociacoesVenda1(){
            $this->db->where('usuario2_id', $this->session->userdata['usuario_id']);
            $this->db->where('negociacao_status', 0);
+           $this->db->where('negociacao_cancelada', 0);
            return $this->db->get('negociacoes')->num_rows();
        }
        public function listarNegociacoesVenda2($limit, $offset){
@@ -303,10 +307,11 @@ class Negociacao_model extends CI_Model{
            }
        }
        public function aceitarProposta($negociacao_id){
-           $this->db->where('usuario2_id', $this->session->userdata['usuario_id']);
            $this->db->where('negociacao_id',$negociacao_id);
            $resultado = $this->db->get('negociacoes');
            $dados['negociacao_aceitafornecedor'] = 1;
+           $this->db->where('usuario2_id', $this->session->userdata['usuario_id']);
+           $this->db->where('negociacao_id',$negociacao_id);
            $this->db->update('negociacoes', $dados);
 
            $mensagem = 'A negociação foi aceita por parte do fornecedor! Ela está aguardando o Cliente fechar negocio agora!<br>'.
@@ -322,6 +327,8 @@ class Negociacao_model extends CI_Model{
            $resultado = $this->db->get('negociacoes');
            $dados['negociacao_aceitacliente'] = 1;
            $dados['negociacao_status'] = 1;
+            $this->db->where('usuario1_id', $this->session->userdata['usuario_id']);
+           $this->db->where('negociacao_id',$negociacao_id);
            $this->db->update('negociacoes', $dados);
 
            $mensagem = 'A negociação foi fechada! Estamos indo para a fase de pagamento!<br>'.
@@ -331,17 +338,23 @@ class Negociacao_model extends CI_Model{
            $this->anuncios_model->novanotificacao(3, $resultado->row()->usuario2_id);
            return $this->usuarios_model->enviarMensagem($resultado->row()->usuario2_id, $mensagem);
        }
-       public function deletarNegocio($negociacao_id){
+       public function recusarProposta($negociacao_id){
            $this->db->where('negociacao_id',$negociacao_id);
            $resultado = $this->db->get('negociacoes');
-           $this->db->delete('negociacoes');
+           $dados['negociacao_cancelada'] = 1;
+           $this->db->where('negociacao_id',$negociacao_id);
+           $this->db->update('negociacoes', $dados);
 
-           $mensagem = 'A negociação foi fechada! Estamos indo para a fase de pagamento!<br>'.
+           $mensagem = 'Sua proposta não foi aceita!! Estamos cancelando as negociacções<br>'.
                'Anuncio : <a href="'.base_url().'index.php/anuncios/visualizarproduto/'.$resultado->row()->anuncio_id.'">'.$this->anuncios_model->pegarTituloPorId($resultado->row()->anuncio_id).'</a><br>'.
                'Preco unitario : R$'.$resultado->row()->negociacao_precounitario.'<br>'.
                'Quantidade : '.$resultado->row()->negociacao_qtd.'<br>'.
            $this->anuncios_model->novanotificacao(3, $resultado->row()->usuario2_id);
            return $this->usuarios_model->enviarMensagem($resultado->row()->usuario2_id, $mensagem);
+       }
+       public function excluirProposta($negociacao_id){
+           $this->db->where('negociacao_id',$negociacao_id);
+           return $this->db->delete('negociacoes');
        }
 
 

@@ -806,5 +806,37 @@ class Dashboard extends CI_Controller {
                 redirect(base_url()."index.php/usuarios");
             }
         }
+         public function recusarProposta($indice){
+            $this->load->model('usuarios_model');
+
+            $this->load->model('negociacao_model');
+            if($this->usuarios_model->checarSessao()){
+                if($indice  != null){
+                    if($this->negociacao_model->recusarProposta($indice)){
+                        redirect(base_url()."index.php/dashboard");
+                    }
+                }else{
+                    redirect(base_url()."index.php/dashboard");
+                }
+            }else{
+                redirect(base_url()."index.php/usuarios");
+            }
+        }
+            public function excluirProposta($indice){
+            $this->load->model('usuarios_model');
+
+            $this->load->model('negociacao_model');
+            if($this->usuarios_model->checarSessao()){
+                if($indice  != null){
+                    if($this->negociacao_model->excluirProposta($indice)){
+                        redirect(base_url()."index.php/dashboard");
+                    }
+                }else{
+                    redirect(base_url()."index.php/dashboard");
+                }
+            }else{
+                redirect(base_url()."index.php/usuarios");
+            }
+        }
 
 }

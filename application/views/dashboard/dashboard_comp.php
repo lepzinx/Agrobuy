@@ -35,7 +35,7 @@
 				<div class="row">
 					<div class="col-sm-4">
 						<div class="logo pull-left">
-							<a href="index.php"><img src="images/home/logo.png" alt="" /></a>
+							<a href=""><img src="<?=base_url()?>assets/images/home/logo.png" alt="" /></a>
 						</div>
 				
 					</div>
@@ -166,7 +166,17 @@
                                         <tr class="theader2">
                                             
                                             <td></td>
-                                            <td><span data-toggle="tooltip" title="Clique para ver mais detalhes"><a href="" data-toggle="modal" data-target="#dealModal"><?=$cmp->negociacao_id?></a></span></td>
+                                            <td><span data-toggle="tooltip" title="Clique para ver mais detalhes"><a href="" data-toggle="modal" 
+                                                                                                                     data-negocioid ="<?=$cmp->negociacao_id?>"
+                                                                                                                     data-status="<?=$this->negociacao_model->verificaStatus($cmp->negociacao_id)?>"
+                                                                                                                     
+                                                                                                                     
+                                                                                                                     
+                                                                                                                     
+                                                                                                                     
+                                                                                                                     
+                                                                                                                     id="negocioModal"
+                                                                                                                     data-target="#dealModal"><?=$cmp->negociacao_id?></a></span></td>
                                             <td><p><?=$cmp->negociacao_data?></p></td>
                                             <td> R$ <?=$cmp->negociacao_frete?></td>
                                             <td> R$ <?=$cmp->negociacao_preco?></td>
@@ -183,9 +193,9 @@
 														<li class="disabled"><a href="#" class="disabled"><i class="fa fa-handshake-o" aria-hidden="true"></i> Fechar Negócio</a></li>
                                                         <?php }?>
                                                         <li><a href="#"><span class="glyphicon glyphicon-edit"></span>Editar Proposta</a></li>
-                                                        <li><a href="#" data-toggle="modal" data-target="#confirmationModal"><i class="fa fa-thumbs-o-down" aria-hidden="true"></i> Recusar Proposta</a></li>
+                                                        <li><a href="#" data-toggle="modal" data-per="recusar proposta?" id="recusaProposta" data-act="<?=base_url()?>index.php/dashboard/recusarproposta/<?=$cmp->negociacao_id?>" data-target="#confirmationModal"><i class="fa fa-thumbs-o-down" aria-hidden="true"></i> Recusar Proposta</a></li>
                                                         <li role="separator" class="divider"></li>
-                                                        <li><a href="#" data-toggle="modal" data-target="#confirmationModal"><span class="glyphicon glyphicon-remove"></span>Excluir Proposta</a></li>
+                                                        <li><a href="#" data-toggle="modal" data-per="excluir a proposta?" id="excluirProposta" data-act="<?=base_url()?>index.php/dashboard/excluirproposta/<?=$cmp->negociacao_id?>" data-target="#confirmationModal"><span class="glyphicon glyphicon-remove"></span>Excluir Proposta</a></li>
                                                     </ul>
                                                 </div>
                                             </td>
@@ -202,6 +212,7 @@
                                             <td>Preço dos Produtos</td>
                                         </tr>
                                         <tr class="tdata">
+                                            
                                             <td colspan="2"><img class="productimg" src="<?=base_url().$this->usuarios_model->fotoPerfil($cmp->usuario2_id)?>" height="100" width="100"></td>
                                             <td colspan="2"><a data-toggle="modal" data-target="#productModal"> <?=$this->anuncios_model->pegarTituloPorId($cmp->anuncio_id)?></a></td>    
                                             <td><p> <?=$cmp->negociacao_qtd?> </p></td>
@@ -1021,7 +1032,7 @@
                                  <span aria-hidden="true" class="glyphicon glyphicon-remove"></span>
                             </button>
                             <div class="modal-header">
-                                    <h2> Negociação Nº <em>12345678</em></h2>
+                                    <h2> Negociação Nº <em id="negocioid"></em></h2>
                                 </div>
                             <div class="modal-body">
                                 <h3 data-toggle="tooltip" title="Aguardando o Cliente fechar negócio">Aguardando o Cliente fechar negócio</h3>
@@ -1389,12 +1400,28 @@
     <script src="<?=base_url()?>assets/js/main.js"></script>
    <script src="<?=base_url()?>assets/js/dashboard.js"></script>
 <script type="text/javascript">
-    $('#fecharProposta').on('click', function () {
-        var id = $(this).data('act'); // vamos buscar o valor do atributo data-id
-        var pergunta = $(this).data('per');
-        $('p#pergunta').text(pergunta); // inserir na o nome na pergunta de confirmação dentro da modal
-        $('a#confirmar').attr('href', id); // mudar dinamicamente o link, href do botão confirmar da modal
-    });
+    
+    	$('#dealModal').on('show.bs.modal', function (event) {
+		 var button = $(event.relatedTarget) // Button that triggered the modal
+                 var negocioid = button.data('negocioid');
+                  // inserir na o nome na pergunta de confirmação dentro da modal
+		 var modal = $(this)
+		 modal.find('#negocioid').text(negocioid)
+		  
+		})
+                
+                $('#confirmationModal').on('show.bs.modal', function (event) {
+		 var button = $(event.relatedTarget) // Button that triggered the modal
+                  var id = button.data('act'); // vamos buscar o valor do atributo data-id
+                  var pergunta = button.data('per');
+                  // inserir na o nome na pergunta de confirmação dentro da modal
+		 var modal = $(this)
+		 modal.find('p#pergunta').text(pergunta);
+                 modal.find('a#confirmar').attr('href', id); // mudar dinamicamente o link, href do botão confirmar da modal
+		  
+		})
+    
+    
 </script>
 </body>
 </html>

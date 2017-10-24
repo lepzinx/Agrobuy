@@ -177,9 +177,9 @@
                                                     <ul id="actiondropdown" class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                                         <li class=""><a href="#" data-toggle="modal" id="aceitarProposta" data-per="aceitar a proposta?" data-act="<?=base_url()?>index.php/dashboard/aceitarproposta/<?=$cmp->negociacao_id?>" data-target="#confirmationModal"><i class="fa fa-handshake-o" aria-hidden="true"></i> Aceitar proposta</a></li>
                                                         <li><a href="#"><span class="glyphicon glyphicon-edit"></span>Editar Proposta</a></li>
-                                                        <li><a href="#" data-toggle="modal" data-target="#confirmationModal"><i class="fa fa-thumbs-o-down" aria-hidden="true"></i> Recusar Proposta</a></li>
+                                                          <li><a href="#" data-toggle="modal" data-per="recusar proposta?" id="recusaProposta" data-act="<?=base_url()?>index.php/dashboard/recusarproposta/<?=$cmp->negociacao_id?>" data-target="#confirmationModal"><i class="fa fa-thumbs-o-down" aria-hidden="true"></i> Recusar Proposta</a></li>
                                                         <li role="separator" class="divider"></li>
-                                                        <li><a href="#" data-toggle="modal" data-act="<?=base_url()?>" data-target="#confirmationModal"><span class="glyphicon glyphicon-remove"></span>Excluir Proposta</a></li>
+                                                      <li><a href="#" data-toggle="modal" data-per="excluir a proposta?" id="excluirProposta" data-act="<?=base_url()?>index.php/dashboard/excluirproposta/<?=$cmp->negociacao_id?>" data-target="#confirmationModal"><span class="glyphicon glyphicon-remove"></span>Excluir Proposta</a></li>
                                                     </ul>
                                                 </div>
                                             </td>
@@ -862,12 +862,25 @@
     <script src="<?=base_url()?>assets/js/main.js"></script>
    <script src="<?=base_url()?>assets/js/dashboard_vend.js"></script>
 <script type="text/javascript">
-    $('#aceitarProposta').on('click', function () {
-        var id = $(this).data('act'); // vamos buscar o valor do atributo data-id
-        var pergunta = $(this).data('per');
-        $('p#pergunta').text(pergunta); // inserir na o nome na pergunta de confirmação dentro da modal
-        $('a#confirmar').attr('href', id); // mudar dinamicamente o link, href do botão confirmar da modal
-    });
+ 	$('#dealModal').on('show.bs.modal', function (event) {
+		 var button = $(event.relatedTarget) // Button that triggered the modal
+                 var negocioid = button.data('negocioid');
+                  // inserir na o nome na pergunta de confirmação dentro da modal
+		 var modal = $(this)
+		 modal.find('#teste').text(negocioid)
+		  
+		})
+                
+                $('#confirmationModal').on('show.bs.modal', function (event) {
+		 var button = $(event.relatedTarget) // Button that triggered the modal
+                  var id = button.data('act'); // vamos buscar o valor do atributo data-id
+                  var pergunta = button.data('per');
+                  // inserir na o nome na pergunta de confirmação dentro da modal
+		 var modal = $(this)
+		 modal.find('p#pergunta').text(pergunta);
+                 modal.find('a#confirmar').attr('href', id); // mudar dinamicamente o link, href do botão confirmar da modal
+		  
+		})
 </script>
 </body>
 </html>

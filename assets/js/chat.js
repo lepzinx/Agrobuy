@@ -8,13 +8,13 @@ $(document).ready(function() {
 	                     },1000);
                           });
             
-            function carregarmensagens() {
+function carregarmensagens() {
 	var url;
 	url = $('#url').attr('action');
 	jQuery.post(url, function(data) {
 		$("#mensagens").empty().append(data);
 	});
-            }
+}
 
           
 
