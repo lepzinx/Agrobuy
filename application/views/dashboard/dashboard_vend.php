@@ -164,7 +164,24 @@
                                         <tr class="theader2">
                                             
                                             <td></td>
-                                            <td><span data-toggle="tooltip" title="Clique para ver mais detalhes"><a href="" data-toggle="modal" data-target="#dealModal"><?=$cmp->negociacao_id?></a></span></td>
+                                                                                        <td><span data-toggle="tooltip" title="Clique para ver mais detalhes"><a href="" data-toggle="modal" 
+                                                                                                                     data-negocioid ="<?=$cmp->negociacao_id?>"
+                                                                                                                     data-status="<?=$this->negociacao_model->verificaStatus($cmp->negociacao_id)?>"
+                                                                                                                     data-data="<?=$cmp->negociacao_data?>"
+                                                                                                                     data-preco="<?=$cmp->negociacao_preco?>"
+                                                                                                                     data-img="<?=base_url().$this->usuarios_model->fotoPerfil($cmp->usuario2_id)?>"
+                                                                                                                     data-titulo="<?=$this->anuncios_model->pegarTituloPorId($cmp->anuncio_id)?>"
+                                                                                                                     data-nomeEmpresa="<?=$this->usuarios_model->nomeEmpresa($cmp->usuario2_id)?>"
+                                                                                                                     data-qtd="<?=$cmp->negociacao_qtd?>"
+                                                                                                                     data-unidade="<?=$this->anuncios_model->pegarUnidadePorId($cmp->anuncio_id)?>"
+                                                                                                                     data-precounitario="<?=$cmp->negociacao_precounitario?>"
+                                                                                                                     data-endereco="<?=$this->usuarios_model->enderecoEmpresa($cmp->usuario1_id)?>"
+                                                                                                                     data-estado="<?=$this->usuarios_model->estadoEmpresa($cmp->usuario1_id)?>"
+                                                                                                                     data-rua="<?=$this->usuarios_model->ruaEmpresa($cmp->usuario1_id)?>"
+                                                                                                                     
+                                                                                                                     
+                                                                                                                     id="negocioModal"
+                                                                                                                     data-target="#dealModal"><?=$cmp->negociacao_id?></a></span></td>
                                             <td><p><?=$cmp->negociacao_data?></p></td>
                                             <td> R$ <?=$cmp->negociacao_frete?></td>
                                             <td> R$ <?=$cmp->negociacao_preco?></td>
@@ -176,7 +193,7 @@
                                                     </a>
                                                     <ul id="actiondropdown" class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                                         <li class=""><a href="#" data-toggle="modal" id="aceitarProposta" data-per="aceitar a proposta?" data-act="<?=base_url()?>index.php/dashboard/aceitarproposta/<?=$cmp->negociacao_id?>" data-target="#confirmationModal"><i class="fa fa-handshake-o" aria-hidden="true"></i> Aceitar proposta</a></li>
-                                                        <li><a href="#"><span class="glyphicon glyphicon-edit"></span>Editar Proposta</a></li>
+                                                                                                                <li><a href="<?=base_url()?>index.php/dashboard/alterarnegociacao/<?=$cmp->negociacao_id?>"><span class="glyphicon glyphicon-edit"></span>Editar Proposta</a></li>
                                                           <li><a href="#" data-toggle="modal" data-per="recusar proposta?" id="recusaProposta" data-act="<?=base_url()?>index.php/dashboard/recusarproposta/<?=$cmp->negociacao_id?>" data-target="#confirmationModal"><i class="fa fa-thumbs-o-down" aria-hidden="true"></i> Recusar Proposta</a></li>
                                                         <li role="separator" class="divider"></li>
                                                       <li><a href="#" data-toggle="modal" data-per="excluir a proposta?" id="excluirProposta" data-act="<?=base_url()?>index.php/dashboard/excluirproposta/<?=$cmp->negociacao_id?>" data-target="#confirmationModal"><span class="glyphicon glyphicon-remove"></span>Excluir Proposta</a></li>
@@ -197,9 +214,17 @@
                                         </tr>
                                         <tr class="tdata">
                                             <td colspan="2"><img class="productimg" src="<?=base_url().$this->usuarios_model->fotoPerfil($cmp->usuario2_id)?>" height="100" width="100"></td>
-                                            <td colspan="2"><a data-toggle="modal" data-target="#productModal"> <?=$this->anuncios_model->pegarTituloPorId($cmp->anuncio_id)?></a></td>    
-                                            <td><p> <?=$cmp->negociacao_qtd?> </p></td>
-                                            <td><p> <?=$this->anuncios_model->pegarUnidadePorId($cmp->anuncio_id)?> </p></td>
+                                              <td colspan="2"><a data-toggle="modal" data-target="#productModal"> <?php if($cmp->anuncio_id == 0){
+                                                                                            echo $this->orcamento_model->pegarTituloPorId($cmp->orcamento_id);
+                                                                                        }else{
+                                                                                            echo $this->anuncios_model->pegarTituloPorId($cmp->anuncio_id);
+                                                                                        }?></a></td>
+											<td><p> <?=$cmp->negociacao_qtd?> </p></td>
+											<td><p><?php if($cmp->anuncio_id == 0){
+                                                                                            echo $this->orcamento_model->pegarUnidadePorId($cmp->orcamento_id);
+                                                                                        }else{
+                                                                                            echo $this->anuncios_model->pegarUnidadePorId($cmp->anuncio_id);
+                                                                                        }?>  </p></td>
                                             <td><p> R$ <?=$cmp->negociacao_precounitario?> </p></td>
                                             <td><p> R$ <?=$cmp->negociacao_preco?></p></td>
                                         </tr>
@@ -284,9 +309,18 @@
 										</tr>
 										<tr class="tdata">
 											<td colspan="2"><img class="productimg" src="<?=base_url().$this->usuarios_model->fotoPerfil($cmp->usuario2_id)?>" height="100" width="100"></td>
-											<td colspan="2"><a data-toggle="modal" data-target="#productModal"> <?=$this->anuncios_model->pegarTituloPorId($cmp->anuncio_id)?></a></td>
+											  <td colspan="2"><a data-toggle="modal" data-target="#productModal">
+                                                                               <?php if($cmp->anuncio_id == 0){
+                                                                                            echo $this->orcamento_model->pegarTituloPorId($cmp->orcamento_id);
+                                                                                        }else{
+                                                                                            echo $this->anuncios_model->pegarTituloPorId($cmp->anuncio_id);
+                                                                                        }?></a></td>
 											<td><p> <?=$cmp->negociacao_qtd?> </p></td>
-											<td><p> <?=$this->anuncios_model->pegarUnidadePorId($cmp->anuncio_id)?> </p></td>
+											<td><p><?php if($cmp->anuncio_id == 0){
+                                                                                            echo $this->orcamento_model->pegarUnidadePorId($cmp->orcamento_id);
+                                                                                        }else{
+                                                                                            echo $this->anuncios_model->pegarUnidadePorId($cmp->anuncio_id);
+                                                                                        }?>  </p></td>
 											<td><p> R$ <?=$cmp->negociacao_precounitario?> </p></td>
 											<td><p> R$ <?=$cmp->negociacao_preco?></p></td>
 										</tr>
@@ -435,9 +469,17 @@
 										</tr>
 										<tr class="tdata">
 											<td colspan="2"><img class="productimg" src="<?=base_url().$this->usuarios_model->fotoPerfil($cmp->usuario2_id)?>" height="100" width="100"></td>
-											<td colspan="2"><a data-toggle="modal" data-target="#productModal"> <?=$this->anuncios_model->pegarTituloPorId($cmp->anuncio_id)?></a></td>
+											          <td colspan="2"><a data-toggle="modal" data-target="#productModal"> <?php if($cmp->anuncio_id == 0){
+                                                                                            echo $this->orcamento_model->pegarTituloPorId($cmp->orcamento_id);
+                                                                                        }else{
+                                                                                            echo $this->anuncios_model->pegarTituloPorId($cmp->anuncio_id);
+                                                                                        }?></a></td>
 											<td><p> <?=$cmp->negociacao_qtd?> </p></td>
-											<td><p> <?=$this->anuncios_model->pegarUnidadePorId($cmp->anuncio_id)?> </p></td>
+											<td><p><?php if($cmp->anuncio_id == 0){
+                                                                                            echo $this->orcamento_model->pegarUnidadePorId($cmp->orcamento_id);
+                                                                                        }else{
+                                                                                            echo $this->anuncios_model->pegarUnidadePorId($cmp->anuncio_id);
+                                                                                        }?>  </p></td>
 											<td><p> R$ <?=$cmp->negociacao_precounitario?> </p></td>
 											<td><p> R$ <?=$cmp->negociacao_preco?></p></td>
 										</tr>
@@ -511,9 +553,17 @@
 										</tr>
 										<tr class="tdata">
 											<td colspan="2"><img class="productimg" src="<?=base_url().$this->usuarios_model->fotoPerfil($cmp->usuario2_id)?>" height="100" width="100"></td>
-											<td colspan="2"><a data-toggle="modal" data-target="#productModal"> <?=$this->anuncios_model->pegarTituloPorId($cmp->anuncio_id)?></a></td>
+											          <td colspan="2"><a data-toggle="modal" data-target="#productModal"> <?php if($cmp->anuncio_id == 0){
+                                                                                            echo $this->orcamento_model->pegarTituloPorId($cmp->orcamento_id);
+                                                                                        }else{
+                                                                                            echo $this->anuncios_model->pegarTituloPorId($cmp->anuncio_id);
+                                                                                        }?></a></td>
 											<td><p> <?=$cmp->negociacao_qtd?> </p></td>
-											<td><p> <?=$this->anuncios_model->pegarUnidadePorId($cmp->anuncio_id)?> </p></td>
+											<td><p><?php if($cmp->anuncio_id == 0){
+                                                                                            echo $this->orcamento_model->pegarUnidadePorId($cmp->orcamento_id);
+                                                                                        }else{
+                                                                                            echo $this->anuncios_model->pegarUnidadePorId($cmp->anuncio_id);
+                                                                                        }?>  </p></td>
 											<td><p> R$ <?=$cmp->negociacao_precounitario?> </p></td>
 											<td><p> R$ <?=$cmp->negociacao_preco?></p></td>
 										</tr>
@@ -658,21 +708,21 @@
             </div>
                 
  
-                <div id="dealModal" class="modal fade">
+           <div id="dealModal" class="modal fade">
                     <div class="modal-dialog modal-lg" role="document">
                         <div class="modal-content">
                              <button type="button" class="close" data-dismiss="modal" aria-label="Close" data-toggle="tooltip" title="Fechar">
                                  <span aria-hidden="true" class="glyphicon glyphicon-remove"></span>
                             </button>
                             <div class="modal-header">
-                                    <h2> Negociação Nº <em>12345678</em></h2>
+                                    <h2> Negociação Nº <em id="negocioid"></em></h2>
                                 </div>
                             <div class="modal-body">
-                                <h3 data-toggle="tooltip" title="Por gentileza, avalie essa negociação. Se tudo estiver Ok, é hora de fechar negócio!">Resposta Pendente</h3>
+                                <h3 data-toggle="tooltip" id="status" title="Aguardando o Cliente fechar negócio">Aguardando o Cliente fechar negócio</h3>
                                 <br>
-                                <h5 data-toggle="tooltip" title="Data de início da negociação">12/12/2013</h5>
+                                <h5 data-toggle="tooltip" id="data" title="Data de início da negociação">12/12/2013</h5>
                                 <br>
-                                <h3> Preço Total <b> R$ 11.000,00</b></h3>
+                                <h3> Preço Total R$<b id="preco_total">  </b></h3>
                             </div>
                             <div class="modal-title">
                                 <h3> Produtos</h3>
@@ -683,7 +733,7 @@
                                     <tbody>
                                         <tr class="theader3" >
                                             <td></td>
-                                            <td><a><span class="glyphicon glyphicon-user"></span> Fazenda Sta. Agnobalda da Serra</a></td>
+                                            <td><a><span class="glyphicon glyphicon-user"></span> <div id='nomeEmpresa'>Fazenda Sta. Agnobalda da Serra</div></a></td>
                                             <td colspan="2"><p>Produto</p></td>
                                             <td><p>Quantidade</p></td>
                                             <td><p>Unidade</p></td>
@@ -691,12 +741,12 @@
                                             <td>Preço dos Produtos</td>
                                         </tr>
                                         <tr class="tdata">
-                                            <td colspan="2"><img class="productimg" src="<?=base_url()?>assets/images/placeholders/mock1.jpg" height="100" width="100"></td>
-                                            <td colspan="2"><a> Soja em Saca Bibibi Bobobó</a></td>    
-                                            <td><p> 100 </p></td>
-                                            <td><p> Sacas &#40;sc.&#41; </p></td>
-                                            <td><p> R$ 100,00 </p></td>
-                                            <td><p> R$ 10.000,00</p></td>
+                                            <td colspan="2"><img class="productimg" id="img" src="<?=base_url()?>assets/images/placeholders/mock1.jpg" height="100" width="100"></td>
+                                            <td colspan="2"><a id="titulo"> Soja em Saca Bibibi Bobobó</a></td>    
+                                            <td><p id='qtd'> 100 </p></td>
+                                            <td><p id='unidade'> Sacas &#40;sc.&#41; </p></td>
+                                            <td><p id='preocunitario'> R$ 100,00 </p></td>
+                                            <td><p id='precototal'> R$ 10.000,00</p></td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -706,11 +756,11 @@
                             </div>
                             <div class="modal-body">
                                 <h4>Quantidade:</h4>
-                                <p class="form-control"> 100</p><p> Sacas &#40;sc.&#41; </p>
+                                <p id='qtd_c'> 100</p><p id='_c'> Sacas &#40;sc.&#41; </p>
                                 <h4>Preço Unitário</h4>
-                                <p class="form-control"> R$ 100,00</p>
+                                <p id='preco_uc'> R$ 100,00</p>/<p id='unidade_c2'>/ Saca (sc.)</p>
                                 <h4>Pagamento</h4>
-                                <p> <i class="fa fa-barcode" aria-hidden="true" data-toggle="tooltip" title="Boleto Bancário"></i><img src="images/ico/cards.png" width="100" data-toggle="tooltip" title="Cartões de Crédito"> </p>
+                                <p> <i class="fa fa-barcode" aria-hidden="true" data-toggle="tooltip" title="Boleto Bancário"></i><img src="<?=base_url()?>assets/images/ico/cards.png" width="100" data-toggle="tooltip" title="Cartões de Crédito"> </p>
                             </div>
                             <div class="modal-title">
                                 <h3> Condições de Frete</h3>
@@ -723,8 +773,8 @@
                                             
                                         </tr>
                                         <tr class="tdata">
-                                            <td><h4>Rua Charlinho de Menezes, 900</h4></td>
-                                            <td><h4>Marília - SP</h4></td>
+                                            <td><h4 id='rua'>Rua Charlinho de Menezes, 900</h4></td>
+                                            <td><h4 id='endereco'>Marília - <span id="estado">SP</span></h4></td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -733,20 +783,37 @@
                                         <th>Custo</th>
                                     </tr>
                                     <tr class="tdata">
-                                    <td><h4> Transportadora - EXW </h4></td>
-                                    <td><h4> <a data-toggle="tooltip" title="O Fornecedor está cotando a melhor solução logística">Aguardando Cotação</a> </h4></td>
+                                        <td>
+                                            <div class="radio">
+                                                <label><input type="radio" id='transp' name="optradio" disabled><h4> Transportadora - EXW </h4></label>
+                                            </div>
+                                        </td>
+                                    <td><label for="trans"><h4> <a data-toggle="tooltip" title="O Fornecedor está cotando a melhor solução logística">Aguardando Cotação</a> </h4></label></td>
                                     </tr>
                                     <tr class="tdata">
-                                    <td><h4> Cliente Busca</h4></td>
-                                    <td><h4> R$ 0,00 </h4></td>
+                                    <td> <div class="radio">
+                                                <label><input type="radio" id='clib' name="optradio"><h4> Cliente Busca</h4></label>
+                                            </div></td>
+                                    <td><label for="clib"><h4> R$ 0,00 </h4></label></td>
                                     </tr>
                                     
                                     <tr class="tdata">
-                                    <td><h4> Fornecedor Entrega</h4></td>
-                                    <td><h4> R$ 100,00 </h4></td>
+                                    <td><div class="radio">
+                                                <label><input type="radio" id='forne' name="optradio"><h4> Fornecedor Entrega</h4></label>
+                                            </div></td>
+                                    <td><label for="forne"><h4> R$ 100,00 </h4></label></td>
+                                    </tr>
+                                        <tr class="tdata">
+                                    <td><div class="radio">
+                                                <label><input type="radio" id='forne' name="optradio"><h4> Correios - PAC</h4></label>
+                                            </div></td>
+                                    <td><label for="forne"><h4> R$ 16,90 </h4></label></td>
                                     </tr>
                                     </tbody>
                                 </table>
+                            </div>
+                            <div class="modal-title">
+                                <h3> Ações</h3>
                             </div>
                             <div class="modal-title">
                                 <h3> Ações</h3>
@@ -862,12 +929,45 @@
     <script src="<?=base_url()?>assets/js/main.js"></script>
    <script src="<?=base_url()?>assets/js/dashboard_vend.js"></script>
 <script type="text/javascript">
- 	$('#dealModal').on('show.bs.modal', function (event) {
+ 		$('#dealModal').on('show.bs.modal', function (event) {
 		 var button = $(event.relatedTarget) // Button that triggered the modal
                  var negocioid = button.data('negocioid');
+                 var preco = button.data('preco');
+                 var status = button.data('status');
+                 var data = button.data('data');
+                 var nomeEmpresa = button.data('nomeEmpresa');
+                 var img = button.data('img');
+                 var qtd = button.data('qtd');
+                 var titulo = button.data('titulo');
+                 var precounitario = button.data('precounitario');
+                 var unidade = button.data('unidade');
+                 var endereco = button.data('endereco');
+                 var rua = button.data('rua');
+                 var estado = button.data('estado');
+
+                 
+                 
                   // inserir na o nome na pergunta de confirmação dentro da modal
 		 var modal = $(this)
-		 modal.find('#teste').text(negocioid)
+		 modal.find('#negocioid').text(negocioid)
+                 modal.find('#preco_total').text(preco)
+                 modal.find('#data').text(data)
+                 modal.find('#status').text(status)
+                 modal.find('#nomeEmpresa').text(nomeEmpresa)
+                 modal.find('#qtd').text(qtd)
+                 modal.find('#titulo').text(titulo)
+                 modal.find('#preocunitario').text(precounitario)
+                 modal.find('#precototal').text(preco)
+                 modal.find('#unidade').text(unidade)
+                 modal.find('#unidade_c').text(unidade)
+                 modal.find('#unidade_c2').text(unidade)
+                 modal.find('#qtd_c').text(qtd)
+                 modal.find('#preco_uc').text(preco)
+                 modal.find('#preco_tc').text(preco)
+                 modal.find('#endereco').text(endereco)
+                 modal.find('#rua').text(rua)
+                 modal.find('#estado').text(estado)
+                 
 		  
 		})
                 

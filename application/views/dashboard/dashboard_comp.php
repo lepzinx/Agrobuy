@@ -169,10 +169,17 @@
                                             <td><span data-toggle="tooltip" title="Clique para ver mais detalhes"><a href="" data-toggle="modal" 
                                                                                                                      data-negocioid ="<?=$cmp->negociacao_id?>"
                                                                                                                      data-status="<?=$this->negociacao_model->verificaStatus($cmp->negociacao_id)?>"
-                                                                                                                     
-                                                                                                                     
-                                                                                                                     
-                                                                                                                     
+                                                                                                                     data-data="<?=$cmp->negociacao_data?>"
+                                                                                                                     data-preco="<?=$cmp->negociacao_preco?>"
+                                                                                                                     data-img="<?=base_url().$this->usuarios_model->fotoPerfil($cmp->usuario2_id)?>"
+                                                                                                                     data-titulo="<?=$this->anuncios_model->pegarTituloPorId($cmp->anuncio_id)?>"
+                                                                                                                     data-nomeEmpresa="<?=$this->usuarios_model->nomeEmpresa($cmp->usuario2_id)?>"
+                                                                                                                     data-qtd="<?=$cmp->negociacao_qtd?>"
+                                                                                                                     data-unidade="<?=$this->anuncios_model->pegarUnidadePorId($cmp->anuncio_id)?>"
+                                                                                                                     data-precounitario="<?=$cmp->negociacao_precounitario?>"
+                                                                                                                     data-endereco="<?=$this->usuarios_model->enderecoEmpresa($cmp->usuario1_id)?>"
+                                                                                                                     data-estado="<?=$this->usuarios_model->estadoEmpresa($cmp->usuario1_id)?>"
+                                                                                                                     data-rua="<?=$this->usuarios_model->ruaEmpresa($cmp->usuario1_id)?>"
                                                                                                                      
                                                                                                                      
                                                                                                                      id="negocioModal"
@@ -192,7 +199,7 @@
                                                         <?php }else{?>
 														<li class="disabled"><a href="#" class="disabled"><i class="fa fa-handshake-o" aria-hidden="true"></i> Fechar Negócio</a></li>
                                                         <?php }?>
-                                                        <li><a href="#"><span class="glyphicon glyphicon-edit"></span>Editar Proposta</a></li>
+                                                        <li><a href="<?=base_url()?>index.php/dashboard/alterarnegociacao/<?=$cmp->negociacao_id?>"><span class="glyphicon glyphicon-edit"></span>Editar Proposta</a></li>
                                                         <li><a href="#" data-toggle="modal" data-per="recusar proposta?" id="recusaProposta" data-act="<?=base_url()?>index.php/dashboard/recusarproposta/<?=$cmp->negociacao_id?>" data-target="#confirmationModal"><i class="fa fa-thumbs-o-down" aria-hidden="true"></i> Recusar Proposta</a></li>
                                                         <li role="separator" class="divider"></li>
                                                         <li><a href="#" data-toggle="modal" data-per="excluir a proposta?" id="excluirProposta" data-act="<?=base_url()?>index.php/dashboard/excluirproposta/<?=$cmp->negociacao_id?>" data-target="#confirmationModal"><span class="glyphicon glyphicon-remove"></span>Excluir Proposta</a></li>
@@ -214,9 +221,17 @@
                                         <tr class="tdata">
                                             
                                             <td colspan="2"><img class="productimg" src="<?=base_url().$this->usuarios_model->fotoPerfil($cmp->usuario2_id)?>" height="100" width="100"></td>
-                                            <td colspan="2"><a data-toggle="modal" data-target="#productModal"> <?=$this->anuncios_model->pegarTituloPorId($cmp->anuncio_id)?></a></td>    
-                                            <td><p> <?=$cmp->negociacao_qtd?> </p></td>
-                                            <td><p> <?=$this->anuncios_model->pegarUnidadePorId($cmp->anuncio_id)?> </p></td>
+                                                  <td colspan="2"><a data-toggle="modal" data-target="#productModal"> <?php if($cmp->anuncio_id == 0){
+                                                                                            echo $this->orcamento_model->pegarTituloPorId($cmp->orcamento_id);
+                                                                                        }else{
+                                                                                            echo $this->anuncios_model->pegarTituloPorId($cmp->anuncio_id);
+                                                                                        }?></a></td>
+											<td><p> <?=$cmp->negociacao_qtd?> </p></td>
+											<td><p><?php if($cmp->anuncio_id == 0){
+                                                                                            echo $this->orcamento_model->pegarUnidadePorId($cmp->orcamento_id);
+                                                                                        }else{
+                                                                                            echo $this->anuncios_model->pegarUnidadePorId($cmp->anuncio_id);
+                                                                                        }?>  </p></td>
                                             <td><p> R$ <?=$cmp->negociacao_precounitario?> </p></td>
                                             <td><p> R$ <?=$cmp->negociacao_preco?></p></td>
                                         </tr>
@@ -301,9 +316,17 @@
 										</tr>
 										<tr class="tdata">
 											<td colspan="2"><img class="productimg" src="<?=base_url().$this->usuarios_model->fotoPerfil($cmp->usuario2_id)?>" height="100" width="100"></td>
-											<td colspan="2"><a data-toggle="modal" data-target="#productModal"> <?=$this->anuncios_model->pegarTituloPorId($cmp->anuncio_id)?></a></td>
+                                                                                        <td colspan="2"><a data-toggle="modal" data-target="#productModal"> <?php if($cmp->anuncio_id == 0){
+                                                                                            echo $this->orcamento_model->pegarTituloPorId($cmp->orcamento_id);
+                                                                                        }else{
+                                                                                            echo $this->anuncios_model->pegarTituloPorId($cmp->anuncio_id);
+                                                                                        }?></a></td>
 											<td><p> <?=$cmp->negociacao_qtd?> </p></td>
-											<td><p> <?=$this->anuncios_model->pegarUnidadePorId($cmp->anuncio_id)?> </p></td>
+											<td><p><?php if($cmp->anuncio_id == 0){
+                                                                                            echo $this->orcamento_model->pegarUnidadePorId($cmp->orcamento_id);
+                                                                                        }else{
+                                                                                            echo $this->anuncios_model->pegarUnidadePorId($cmp->anuncio_id);
+                                                                                        }?>  </p></td>
 											<td><p> R$ <?=$cmp->negociacao_precounitario?> </p></td>
 											<td><p> R$ <?=$cmp->negociacao_preco?></p></td>
 										</tr>
@@ -377,9 +400,17 @@
 										</tr>
 										<tr class="tdata">
 											<td colspan="2"><img class="productimg" src="<?=base_url().$this->usuarios_model->fotoPerfil($cmp->usuario2_id)?>" height="100" width="100"></td>
-											<td colspan="2"><a data-toggle="modal" data-target="#productModal"> <?=$this->anuncios_model->pegarTituloPorId($cmp->anuncio_id)?></a></td>
+											       <td colspan="2"><a data-toggle="modal" data-target="#productModal"> <?php if($cmp->anuncio_id == 0){
+                                                                                            echo $this->orcamento_model->pegarTituloPorId($cmp->orcamento_id);
+                                                                                        }else{
+                                                                                            echo $this->anuncios_model->pegarTituloPorId($cmp->anuncio_id);
+                                                                                        }?></a></td>
 											<td><p> <?=$cmp->negociacao_qtd?> </p></td>
-											<td><p> <?=$this->anuncios_model->pegarUnidadePorId($cmp->anuncio_id)?> </p></td>
+											<td><p><?php if($cmp->anuncio_id == 0){
+                                                                                            echo $this->orcamento_model->pegarUnidadePorId($cmp->orcamento_id);
+                                                                                        }else{
+                                                                                            echo $this->anuncios_model->pegarUnidadePorId($cmp->anuncio_id);
+                                                                                        }?>  </p></td>
 											<td><p> R$ <?=$cmp->negociacao_precounitario?> </p></td>
 											<td><p> R$ <?=$cmp->negociacao_preco?></p></td>
 										</tr>
@@ -452,9 +483,17 @@
 										</tr>
 										<tr class="tdata">
 											<td colspan="2"><img class="productimg" src="<?=base_url().$this->usuarios_model->fotoPerfil($cmp->usuario2_id)?>" height="100" width="100"></td>
-											<td colspan="2"><a data-toggle="modal" data-target="#productModal"> <?=$this->anuncios_model->pegarTituloPorId($cmp->anuncio_id)?></a></td>
+											       <td colspan="2"><a data-toggle="modal" data-target="#productModal"> <?php if($cmp->anuncio_id == 0){
+                                                                                            echo $this->orcamento_model->pegarTituloPorId($cmp->orcamento_id);
+                                                                                        }else{
+                                                                                            echo $this->anuncios_model->pegarTituloPorId($cmp->anuncio_id);
+                                                                                        }?></a></td>
 											<td><p> <?=$cmp->negociacao_qtd?> </p></td>
-											<td><p> <?=$this->anuncios_model->pegarUnidadePorId($cmp->anuncio_id)?> </p></td>
+											<td><p><?php if($cmp->anuncio_id == 0){
+                                                                                            echo $this->orcamento_model->pegarUnidadePorId($cmp->orcamento_id);
+                                                                                        }else{
+                                                                                            echo $this->anuncios_model->pegarUnidadePorId($cmp->anuncio_id);
+                                                                                        }?>  </p></td>
 											<td><p> R$ <?=$cmp->negociacao_precounitario?> </p></td>
 											<td><p> R$ <?=$cmp->negociacao_preco?></p></td>
 										</tr>
@@ -528,9 +567,17 @@
 										</tr>
 										<tr class="tdata">
 											<td colspan="2"><img class="productimg" src="<?=base_url().$this->usuarios_model->fotoPerfil($cmp->usuario2_id)?>" height="100" width="100"></td>
-											<td colspan="2"><a data-toggle="modal" data-target="#productModal"> <?=$this->anuncios_model->pegarTituloPorId($cmp->anuncio_id)?></a></td>
+											       <td colspan="2"><a data-toggle="modal" data-target="#productModal"> <?php if($cmp->anuncio_id == 0){
+                                                                                            echo $this->orcamento_model->pegarTituloPorId($cmp->orcamento_id);
+                                                                                        }else{
+                                                                                            echo $this->anuncios_model->pegarTituloPorId($cmp->anuncio_id);
+                                                                                        }?></a></td>
 											<td><p> <?=$cmp->negociacao_qtd?> </p></td>
-											<td><p> <?=$this->anuncios_model->pegarUnidadePorId($cmp->anuncio_id)?> </p></td>
+											<td><p><?php if($cmp->anuncio_id == 0){
+                                                                                            echo $this->orcamento_model->pegarUnidadePorId($cmp->orcamento_id);
+                                                                                        }else{
+                                                                                            echo $this->anuncios_model->pegarUnidadePorId($cmp->anuncio_id);
+                                                                                        }?>  </p></td>
 											<td><p> R$ <?=$cmp->negociacao_precounitario?> </p></td>
 											<td><p> R$ <?=$cmp->negociacao_preco?></p></td>
 										</tr>
@@ -608,9 +655,17 @@
 										</tr>
 										<tr class="tdata">
 											<td colspan="2"><img class="productimg" src="<?=base_url().$this->usuarios_model->fotoPerfil($cmp->usuario2_id)?>" height="100" width="100"></td>
-											<td colspan="2"><a data-toggle="modal" data-target="#productModal"> <?=$this->anuncios_model->pegarTituloPorId($cmp->anuncio_id)?></a></td>
+											       <td colspan="2"><a data-toggle="modal" data-target="#productModal"> <?php if($cmp->anuncio_id == 0){
+                                                                                            echo $this->orcamento_model->pegarTituloPorId($cmp->orcamento_id);
+                                                                                        }else{
+                                                                                            echo $this->anuncios_model->pegarTituloPorId($cmp->anuncio_id);
+                                                                                        }?></a></td>
 											<td><p> <?=$cmp->negociacao_qtd?> </p></td>
-											<td><p> <?=$this->anuncios_model->pegarUnidadePorId($cmp->anuncio_id)?> </p></td>
+											<td><p><?php if($cmp->anuncio_id == 0){
+                                                                                            echo $this->orcamento_model->pegarUnidadePorId($cmp->orcamento_id);
+                                                                                        }else{
+                                                                                            echo $this->anuncios_model->pegarUnidadePorId($cmp->anuncio_id);
+                                                                                        }?>  </p></td>
 											<td><p> R$ <?=$cmp->negociacao_precounitario?> </p></td>
 											<td><p> R$ <?=$cmp->negociacao_preco?></p></td>
 										</tr>
@@ -649,6 +704,7 @@
                 </div>
                     </div>
                     <br /><br />
+                    <?php if($orcamentos != null){?>
                     <div id="meusorc">
                         <ul class="nav nav-tabs nav-justified">
                             <li class="active"><a data-toggle="tab" href="#orc0">Recebidos <br>&#40;20&#41;</a></li>
@@ -657,7 +713,9 @@
                     </div>
                     <div class="tab-content">
                     <div id="orc0" class="tab-pane fade in active">
+                        
                         <table class="tabledisplay">
+                            <?php foreach($orcamentos as $orc){ ?>
                                     <tbody class="titem">
                                         <tr class="theader1">
                                             
@@ -673,16 +731,30 @@
                                         </tr>      
                                         <tr class="theader2">
                                             
-                                            <td><span data-toggle="tooltip" title="Clique para ver mais detalhes"><a href="" data-toggle="modal" data-target="#dealModal">12345678</a></span></td>
-                                            <td colspan="2"><p>12/12/2013</p></td>
-                                            <td> 100</td>
-                                            <td> Sacas (sc.)</td>
+                                            <td><span><?=$orc->orcamento_id?></span></td>
+                                            <td colspan="2"><p><?=$orc->orcamento_datainicio?></p></td>
+                                            <td> <?=$orc->orcamento_qtd?></td>
+                                            <td> <?=$orc->orcamento_unidade?></td>
                                             <td colspan="2"> <a href="#" data-toggle="tooltip" title="O pedido de Orçamento está em aberto">Recebendo Orçamentos</a></td>
-                                            <td>Transportadora - EXW, Cliete Busca</td>
+                                          
+                                            <td>
+                                                 <?php if($orc->orcamento_exwon == 1){ ?>
+                                                Transportadora - EXW, 
+                                                 <?php } if($orc->orcamento_ddpon == 1){ ?>
+                                                Transportadora - DDP,
+                                            <?php } if($orc->orcamento_correioon == 1){ ?>
+                                                Correios,
+                                                <?php } if($orc->orcamento_levaon == 1){ ?>
+                                                Fornecedor Entrega
+                                                 <?php } if($orc->orcamento_buscaon == 1){ ?>
+                                                Cliente busca
+                                                 <?php }?>
+                                            </td>
                                             <td>Boleto, Cartão de Crédito, PayPal</td>
                                             <td ><a href="#" data-toggle="tooltip" title="Excluir Pedido de Orçamento"><span class="glyphicon glyphicon-remove"></span></a></td>
                                         </tr>
                                     </tbody>
+                                 
                                     <tbody class="titem">
                                         <tr class="theader3" >
                                             
@@ -696,77 +768,61 @@
                                             <td>Condições de Pagamento</td>
                                             <td>Ações</td>
                                         </tr>
+                                           <?php $orcamento_feito = $this->orcamento_model->carregarOrcamentosRecebidos($orc->orcamento_id);
+                                    
+                                    foreach($orcamento_feito as $of){
+                                    ?>
                                         <tr class="tdata">
-                                            <td><img class="productimg" src="<?=base_url()?>assets/images/placeholders/mock1.jpg" height="100" width="100"></td>
-                                            <td colspan="2"><a><span class="glyphicon glyphicon-user"></span>Fazenda Sta. Agnobalda da Serra</a></td>    
-                                            <td><p> R$ 90,00 </p></td>
-                                            <td><p> R$ 9.000,00</p></td>
-                                            <td><p> R$ 1.000,00</p></td>
-                                            <td><p> R$ 10.000,00</p></td>
-                                            <td><p> Transportadora - EXW, Cliete Busca</p></td>
+                                            <td><img class="productimg" src="<?=base_url().$this->usuarios_model->fotoPerfil($of->usuario2_id)?>" height="100" width="100"></td>
+                                            <td colspan="2"><a><span class="glyphicon glyphicon-user"></span><?=$this->usuarios_model->nomeEmpresa($of->usuario2_id)?></a></td>    
+                                            <td><p> R$ <?=$of->of_precounitario?> </p></td>
+                                            <td><p> R$ <?=$of->of_total?></p></td>
+                                            <td><p> R$ <?=$of->of_frete?></p></td>
+                                            <td><p> R$ <?=$of->of_total + $of->of_frete?></p></td>
+                                            <td><p> <?php if($of->of_exw == 1){ ?>
+                                                Transportadora - EXW, 
+                                                 <?php } if($of->of_ddp == 1){ ?>
+                                                Transportadora - DDP,
+                                            <?php } if($of->of_correios == 1){ ?>
+                                                Correios,
+                                                <?php } if($of->of_entregar == 1){ ?>
+                                                Fornecedor Entrega
+                                                 <?php } if($of->of_buscar == 1){ ?>
+                                                Cliente busca
+                                                 <?php }?>
+                                                </p></td>
                                             <td><p> Boleto, Cartão de Crédito</p></td>
                                             <td>
                                             <div class="dropdown show" data-toggle="tooltip" title="Aceitar Orçamento">
                                                     <a class="glyphicon glyphicon-check dropdown-toggle" href="" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                     </a>
                                                     <div id="paymentdropdown" class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                                        <a class="dropdown-item" href="#">Transportadora - EXW</a>
-                                                        <a class="dropdown-item" href="#">Cliente Busca</a>
+                                                        
+                                                        <?php if($of->of_exw == 1){ ?>
+                                                <a class="dropdown-item" href="<?=base_url()?>index.php/dashboard/aceitarexw/<?=$of->of_id?>">Transportadora - EXW</a>
+                                                 <?php } if($of->of_ddp == 1){ ?>
+                                                <a class="dropdown-item" href="<?=base_url()?>index.php/dashboard/aceitarddp/<?=$of->of_id?>">Transportadora - DDP</a>
+                                            <?php } if($of->of_correios == 1){ ?>
+                                                <a class="dropdown-item" href="<?=base_url()?>index.php/dashboard/aceitarcorreios/<?=$of->of_id?>">Correios</a>
+                                                <?php } if($of->of_entregar == 1){ ?>
+                                                <a class="dropdown-item" href="<?=base_url()?>index.php/dashboard/aceitarentrega/<?=$of->of_id?>">Fornecedor Entrega</a>
+                                                 <?php } if($of->of_buscar == 1){ ?>
+                                                <a class="dropdown-item" href="<?=base_url()?>index.php/dashboard/aceitarbuscar/<?=$of->of_id?>">Cliente Busca</a>
+                                                 <?php }?>
+                                                        
+                                                        
                                                     </div>
                                                 </div>
-                                            <a href="#" data-toggle="tooltip" title="Recusar Orçamento"><span class="glyphicon glyphicon-remove"></span></a></td>
-                                        </tr>
-                                        <tr class="tdata">
-                                            <td><img class="productimg" src="<?=base_url()?>assets/images/placeholders/mock1.jpg" height="100" width="100"></td>
-                                            <td colspan="2"><a><span class="glyphicon glyphicon-user"></span>Sítio Santana do Livramento do Sudoeste</a></td>    
-                                            <td><p> R$ 110,00 </p></td>
-                                            <td><p> R$ 11.000,00</p></td>
-                                            <td><p> - </p></td>
-                                            <td><p> R$ 11.000,00</p></td>
-                                            <td><p> Transportadora - DDP, Fornecedor Entrega</p></td>
-                                            <td><p> Boleto, Cartão de Crédito</p></td>
-                                            <td>
-                                                <div class="dropdown show" data-toggle="tooltip" title="Aceitar Orçamento">
-                                                    <a class="glyphicon glyphicon-check dropdown-toggle" href="" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    </a>
-                                                    <div id="paymentdropdown" class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                                        <a class="dropdown-item" href="#">Transportadora - DDP</a>
-                                                        <a class="dropdown-item" href="#">Fornecedor Entrega</a>
-                                                    </div>
-                                                </div>
-                                                <a href="#" data-toggle="tooltip" title="Recusar Orçamento"><span class="glyphicon glyphicon-remove"></span></a></td>
-                                        </tr>
-                                        <tr class="tdata">
-                                            <td><img class="productimg" src="<?=base_url()?>assets/images/placeholders/mock1.jpg" height="100" width="100"></td>
-                                            <td colspan="2"><a><span class="glyphicon glyphicon-user"></span> Sítio do Gil Brother</a></td>    
-                                            <td><p> R$ 110,00 </p></td>
-                                            <td><p> R$ 11.000,00</p></td>
-                                            <td><p data-toggle="tooltip" title="O Fornecedor está cotando Frete com Transportadoras"> Em Cotação </p></td>
-                                            <td><p> Em Cotação</p></td>
-                                            <td><p> Transportadora - EXW</p></td>
-                                            <td><p> Boleto, Cartão de Crédito</p></td>
-                                            <td>
-                                                <div class="dropdown show" data-toggle="tooltip" title="Aceitar Orçamento">
-                                                    <a class="glyphicon glyphicon-check dropdown-toggle" href="" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    </a>
-                                                    <div id="paymentdropdown" class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                                        <a class="dropdown-item btn disabled" href="#">Transportadora - EXW</a>
-                                                    </div>
-                                                </div>
-                                                <a href="#" data-toggle="tooltip" title="Recusar Orçamento"><span class="glyphicon glyphicon-remove"></span></a></td>
-                                        </tr>
-                                        
+                                            <a href="<?=base_url()?>index.php/dashboard/recusarorcamento/<?=$of->of_id?>" data-toggle="tooltip" title="Recusar Orçamento"><span class="glyphicon glyphicon-remove"></span></a></td>
+                                        </tr>  
                                     </tbody>
                                 </table>  
                         <div class="container bottomnav" >
-                                    <ul class="pagination">
-                                        <li class="active"><a href="">1</a></li>
-                                        <li><a href="">2</a></li>
-                                        <li><a href="">3</a></li>
-                                        <li><a href="">&raquo;</a></li>
-                                    </ul>
+                               <?=$paginacao_orcamentos1?>
                                 </div>
-                    </div>    
+                    </div>  
+                                    <?php }
+                        }?>
                     <div id="orc1" class="tab-pane fade">
                         <table class="tabledisplay">
                                     <tbody class="titem">
@@ -821,7 +877,9 @@
                     </div>
                 </div>
                 </div>
-                
+                        <?php 
+                        
+                        } ?>
                 <div id="productModal" class="modal fade">
                             
                     <!-- Modal Contents -->
@@ -1035,11 +1093,11 @@
                                     <h2> Negociação Nº <em id="negocioid"></em></h2>
                                 </div>
                             <div class="modal-body">
-                                <h3 data-toggle="tooltip" title="Aguardando o Cliente fechar negócio">Aguardando o Cliente fechar negócio</h3>
+                                <h3 data-toggle="tooltip" id="status" title="Aguardando o Cliente fechar negócio">Aguardando o Cliente fechar negócio</h3>
                                 <br>
-                                <h5 data-toggle="tooltip" title="Data de início da negociação">12/12/2013</h5>
+                                <h5 data-toggle="tooltip" id="data" title="Data de início da negociação">12/12/2013</h5>
                                 <br>
-                                <h3> Preço Total <b> R$ 11.000,00</b></h3>
+                                <h3> Preço Total R$<b id="preco_total">  </b></h3>
                             </div>
                             <div class="modal-title">
                                 <h3> Produtos</h3>
@@ -1050,7 +1108,7 @@
                                     <tbody>
                                         <tr class="theader3" >
                                             <td></td>
-                                            <td><a><span class="glyphicon glyphicon-user"></span> Fazenda Sta. Agnobalda da Serra</a></td>
+                                            <td><a><span class="glyphicon glyphicon-user"></span> <div id='nomeEmpresa'>Fazenda Sta. Agnobalda da Serra</div></a></td>
                                             <td colspan="2"><p>Produto</p></td>
                                             <td><p>Quantidade</p></td>
                                             <td><p>Unidade</p></td>
@@ -1058,12 +1116,12 @@
                                             <td>Preço dos Produtos</td>
                                         </tr>
                                         <tr class="tdata">
-                                            <td colspan="2"><img class="productimg" src="<?=base_url()?>assets/images/placeholders/mock1.jpg" height="100" width="100"></td>
-                                            <td colspan="2"><a> Soja em Saca Bibibi Bobobó</a></td>    
-                                            <td><p> 100 </p></td>
-                                            <td><p> Sacas &#40;sc.&#41; </p></td>
-                                            <td><p> R$ 100,00 </p></td>
-                                            <td><p> R$ 10.000,00</p></td>
+                                            <td colspan="2"><img class="productimg" id="img" src="<?=base_url()?>assets/images/placeholders/mock1.jpg" height="100" width="100"></td>
+                                            <td colspan="2"><a id="titulo"> Soja em Saca Bibibi Bobobó</a></td>    
+                                            <td><p id='qtd'> 100 </p></td>
+                                            <td><p id='unidade'> Sacas &#40;sc.&#41; </p></td>
+                                            <td><p id='preocunitario'> R$ 100,00 </p></td>
+                                            <td><p id='precototal'> R$ 10.000,00</p></td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -1073,11 +1131,11 @@
                             </div>
                             <div class="modal-body">
                                 <h4>Quantidade:</h4>
-                                <p> 100</p><p> Sacas &#40;sc.&#41; </p>
+                                <p id='qtd_c'> 100</p><p id='_c'> Sacas &#40;sc.&#41; </p>
                                 <h4>Preço Unitário</h4>
-                                <p> R$ 100,00</p><p>/ Saca (sc.)</p>
+                                <p id='preco_uc'> R$ 100,00</p>/<p id='unidade_c2'>/ Saca (sc.)</p>
                                 <h4>Pagamento</h4>
-                                <p> <i class="fa fa-barcode" aria-hidden="true" data-toggle="tooltip" title="Boleto Bancário"></i><img src="images/ico/cards.png" width="100" data-toggle="tooltip" title="Cartões de Crédito"> </p>
+                                <p> <i class="fa fa-barcode" aria-hidden="true" data-toggle="tooltip" title="Boleto Bancário"></i><img src="<?=base_url()?>assets/images/ico/cards.png" width="100" data-toggle="tooltip" title="Cartões de Crédito"> </p>
                             </div>
                             <div class="modal-title">
                                 <h3> Condições de Frete</h3>
@@ -1090,8 +1148,8 @@
                                             
                                         </tr>
                                         <tr class="tdata">
-                                            <td><h4>Rua Charlinho de Menezes, 900</h4></td>
-                                            <td><h4>Marília - SP</h4></td>
+                                            <td><h4 id='rua'>Rua Charlinho de Menezes, 900</h4></td>
+                                            <td><h4 id='endereco'>Marília - <span id="estado">SP</span></h4></td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -1404,9 +1462,42 @@
     	$('#dealModal').on('show.bs.modal', function (event) {
 		 var button = $(event.relatedTarget) // Button that triggered the modal
                  var negocioid = button.data('negocioid');
+                 var preco = button.data('preco');
+                 var status = button.data('status');
+                 var data = button.data('data');
+                 var nomeEmpresa = button.data('nomeEmpresa');
+                 var img = button.data('img');
+                 var qtd = button.data('qtd');
+                 var titulo = button.data('titulo');
+                 var precounitario = button.data('precounitario');
+                 var unidade = button.data('unidade');
+                 var endereco = button.data('endereco');
+                 var rua = button.data('rua');
+                 var estado = button.data('estado');
+
+                 
+                 
                   // inserir na o nome na pergunta de confirmação dentro da modal
 		 var modal = $(this)
-		 modal.find('#negocioid').text(negocioid)
+		 modal.find('#negocioid').text(negocioid);
+                 modal.find('#preco_total').text(preco);
+                 modal.find('#data').text(data);
+                 modal.find('#status').text(status);
+                 modal.find('#nomeEmpresa').text(nomeEmpresa);
+                 modal.find('#qtd').text(qtd);
+                 modal.find('#titulo').text(titulo);
+                 modal.find('#preocunitario').text(precounitario);
+                 modal.find('#precototal').text(preco);
+                 modal.find('#unidade').text(unidade);
+                 modal.find('#unidade_c').text(unidade);
+                 modal.find('#unidade_c2').text(unidade);
+                 modal.find('#qtd_c').text(qtd);
+                 modal.find('#preco_uc').text(preco);
+                 modal.find('#preco_tc').text(preco);
+                 modal.find('#endereco').text(endereco);
+                 modal.find('#rua').text(rua);
+                 modal.find('#estado').text(estado);
+                 
 		  
 		})
                 

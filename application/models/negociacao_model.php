@@ -356,6 +356,222 @@ class Negociacao_model extends CI_Model{
            $this->db->where('negociacao_id',$negociacao_id);
            return $this->db->delete('negociacoes');
        }
+       public function pegarNegociacaoId($id){
+           $this->db->where('negociacao_id', $id);
+           return $this->db->get('negociacoes')->result();   
+       }
+       
+       public function editarNegociacao($negociacao_id){
+           $dados['negociacao_status'] = 0;
+           $dados['negociacao_aceitafornecedor'] = 0;
+           $dados['negociacao_aceitacliente'] = 0;
+           $dados['negociacao_qtd'] = $this->input->post('quantidade');
+           $dados['negociacao_precounitario'] = $this->input->post('preco');
+           $dados['negociacao_preco'] = $dados['negociacao_precounitario'] * $dados['negociacao_qtd'];
+           $dados['negociacao_entrega'] =   $this->input->post('fornecedor_entrega');
+           $this->db->where('negociacao_id', $negociacao_id);
+           $this->db->update('negociacoes', $dados);
+           
+           $this->db->where('negociacao_id', $negociacao_id);
+           $mensagem = 'A proposta da negociação foi alterada Observe os dados corretamente e faça a escolha de um prestador de serviços para' 
+               .' dar mais opções de frete para seu cliente!<br>'.
+               'Anuncio : <a href="'.base_url().'index.php/anuncios/visualizarproduto/'.$this->db->get("negociacoes")->row()->anuncio_id.'">'.$this->anuncios_model->pegarTituloPorId($this->db->get("negociacoes")->row()->anuncio_id).'</a><br>'.
+               'Preco unitario : R$'.$dados['negociacao_precounitario'].'<br>'.
+               'Quantidade : '.$dados['negociacao_qtd'].'<br>'.
+               'Caso você entregue : '.$dados['negociacao_entrega'].'<br>';
+           $this->anuncios_model->novanotificacao(3, $this->db->get("negociacoes")->row()->usuario2_id);
+           return $this->usuarios_model->enviarMensagem($this->db->get("negociacoes")->row()->usuario2_id, $mensagem);
+       }
 
+             public function listarNegociacoes1($limit, $offset){
+           $this->db->where('negociacao_status', 0);
+           $this->db->where('negociacao_cancelada', 0);
+           $this->db->where('cotacao_id', 0);
+           $this->db->limit($limit,$offset);
+           $this->db->order_by("negociacao_id","desc");
+           return $this->db->get('negociacoes')->result();
+       }
+              public function qtdNegociacoes1(){
+           $this->db->where('negociacao_status', 0);
+           $this->db->where('negociacao_cancelada', 0);
+           $this->db->where('cotacao_id', 0);
+           return $this->db->get('negociacoes')->num_rows();
+       }
+            public function listarNegociacoesUsu1($limit, $offset){
+           $this->db->where('negociacao_status', 0);
+           $this->db->where('negociacao_cancelada', 0);
+            $this->db->where('usuario2_id', $this->session->userdata['usuario_id']);
+           $this->db->where('cotacao_id', 0);
+           $this->db->limit($limit,$offset);
+           $this->db->order_by("negociacao_id","desc");
+           return $this->db->get('negociacoes')->result();
+       }
+              public function qtdNegociacoesUsu1(){
+           $this->db->where('negociacao_status', 0);
+           $this->db->where('negociacao_cancelada', 0);
+           $this->db->where('usuario2_id', $this->session->userdata['usuario_id']);
+           $this->db->where('cotacao_id', 0);
+           return $this->db->get('negociacoes')->num_rows();
+       }
+         public function listarCotacoesUsu($usuario, $limit, $offset){
+            $this->db->where('usuario_id', $usuario);
+           $this->db->limit($limit,$offset);
+           $this->db->order_by("cotacao_id","desc");
+           return $this->db->get('cotacoes')->result();
+       }
+              public function qtdCotacoesUsu($usuario){
+           $this->db->where('usuario_id', $usuario);
+           return $this->db->get('cotacoes')->num_rows();
+       }
+       
+       public function listarCotacoesNego($negociacao_id){
+           $this->db->where('negociacao_id', $negociacao_id);
+            $this->db->where('cotacao_finalizada', 0);
+           return $this->db->get('cotacoes')->result();
+           
+       }
+       
+       public function pegarDistanciaEstimada($origem, $destino){
+           $link = "http://maps.googleapis.com/maps/api/distancematrix/xml?origins=".$origem."&destinations=".$destino."&mode=driving&language=pt-BR&sensor=false";
+            $curl = curl_init($link);
+        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+        $transaction= curl_exec($curl);
+        curl_close($curl);
+           $xml = simplexml_load_string($transaction); //carrega o arquivo XML e retornando um Array
+     
+    
+            return $xml->row->element->distance->text;
+        
+    }
+    
+    
+    public function criarCotacao($negociacao_id){
+        
+        
+        $dados['negociacao_id'] = $negociacao_id;
+        
+        $this->db->where('negociacao_id', $negociacao_id);
+        $dados['cotacao_origem'] = $this->usuarios_model->cidadeEstado($this->db->get("negociacoes")->row()->usuario2_id);
+        $dados['cotacao_destino'] = $this->usuarios_model->cidadeEstado($this->db->get("negociacoes")->row()->usuario1_id);
+        $dados['cotacao_preco'] = $this->input->post('preco');
+        $dados['cotacao_embarque'] = $this->input->post('prazo');
+        $dados['cotacao_responsavel'] = $this->input->post('responsavel');
+        $dados['usuario_id'] = $this->session->userdata['usuario_id'];
+        $dados['cotacao_categoria'] = $this->anuncios_model->pegarTransportadoraTipo( $this->db->get("negociacoes")->row()->anuncio_id);
+        $dados['cotacao_distancia'] = $this->negociacao_model->pegarDistanciaEstimada($this->usuarios_model->cidadeCotacao($this->db->get("negociacoes")->row()->usuario2_id),$this->usuarios_model->cidadeCotacao($this->db->get("negociacoes")->row()->usuario2_id));
+        $this->db->insert('cotacoes', $dados);
+        if($cotacao_responsavel == 0){
+            $responsavel = "Transportadora";
+        }else{
+            $responsavel = "Contratante";
+        }
 
+        $mensagem = 'Você recebeu uma nova cotação para a negociação nº : '.$negociacao_id.'<br>'.
+                'Prazo para embarque : '.$dados['cotacao_embarque'].' dias úteis'.'<br>'.
+                'Responsável pela carga : '.$responsavel.'<br>'.
+                'Preço : R$'.$dados['cotacao_preco'].'<br>'.
+                'Visualize suas cotações ao clicar <a href="'.base_url().'index.php/dashboard/transportes">aqui</a>'.'<br>';
+        
+        $this->anuncios_model->novanotificacao(5, $this->db->get("negociacoes")->row()->usuario2_id);
+        $this->anuncios_model->novanotificacao(3, $this->db->get("negociacoes")->row()->usuario2_id);
+        return $this->usuarios_model->enviarMensagem($this->db->get("negociacoes")->row()->usuario2_id, $mensagem);
+    }
+    public function aceitarCotacao($cotacao_id){
+        $this->db->where('cotacao_id', $cotacao_id);
+        $negociacao = $this->db->get('cotacoes')->row()->negociacao_id;
+        
+        $this->db->where('negociacao_id', $negociacao);
+        $dados['cotacao_id'] = $cotacao_id;
+        $this->db->update('negociacoes', $dados);
+        
+       $this->db->where('cotacao_id', $cotacao_id);
+       $data['cotacao_finalizada'] = 1;
+       $this->db->update('cotacoes', $data);
+       
+       $this->db->where('cotacao_id', $cotacao_id);
+       if($this->db->get('cotacoes')->row()->cotacao_responsavel == 0){
+            $responsavel = "Transportadora";
+        }else{
+            $responsavel = "Contratante";
+        }
+        $mensagem = 'A sua cotação foi aceita, na seguinte negociação : '.$this->db->get('cotacoes')->row()->negociacao_id.'<br>'.
+                'Prazo para embarque : '.$this->db->get('cotacoes')->row()->cotacao_embarque.' dias úteis'.'<br>'.
+                'Responsável pela carga : '.$responsavel.'<br>'.
+                'Preço : R$'.$this->db->get('cotacoes')->row()->cotacao_preco.'<br>'.
+                'Origem : '.$this->db->get('cotacoes')->row()->cotacao_origem.'<br>'.
+                'Destino : '.$this->db->get('cotacoes')->row()->cotacao_destino.'<br>'.
+                'Comecem a planejar o horario de embarque!';
+        
+        $this->db->where('negociacao_id', $negociacao);
+        $this->anuncios_model->novanotificacao(6, $this->db->get('cotacoes')->row()->usuario_id);
+        $this->anuncios_model->novanotificacao(3, $this->db->get('cotacoes')->row()->usuario_id);
+        return $this->usuarios_model->enviarMensagem($this->db->get('cotacoes')->row()->usuario_id, $mensagem);
+    }
+    
+     public function recusarCotacao($cotacao_id){
+        $this->db->where('cotacao_id', $cotacao_id);
+        $negociacao = $this->db->get('cotacoes')->row()->negociacao_id;
+       
+       $data['cotacao_finalizada'] = 1;
+       $this->db->where('cotacao_id', $cotacao_id);
+       $this->db->update('cotacoes', $data);
+       
+       $this->db->where('cotacao_id', $cotacao_id);
+       if($this->db->get('cotacoes')->row()->cotacao_responsavel == 0){
+            $responsavel = "Transportadora";
+        }else{
+            $responsavel = "Contratante";
+        }
+        $mensagem = 'A sua cotação foi recusada, na seguinte negociação : '.$this->db->get('cotacoes')->row()->negociacao_id.'<br>'.
+                'Você pode tentar novamente, ou procurar novas negociações para os transportes!';
+        
+        $this->db->where('negociacao_id', $negociacao);
+        $this->anuncios_model->novanotificacao(6, $this->db->get('cotacoes')->row()->usuario_id);
+        $this->anuncios_model->novanotificacao(3, $this->db->get('cotacoes')->row()->usuario_id);
+        return $this->usuarios_model->enviarMensagem($this->db->get('cotacoes')->row()->usuario_id, $mensagem);
+    }
+      public function listarNegociacoesCotas1($limit, $offset){
+           $this->db->where('usuario2_id', $this->session->userdata['usuario_id']);
+           $this->db->where('negociacao_status', 0);
+           $this->db->where('negociacao_cancelada', 0);
+           $this->db->where('cotacao_id', 0);
+           $this->db->limit($limit,$offset);
+           $this->db->order_by("negociacao_id","desc");
+           return $this->db->get('negociacoes')->result();
+       }
+       public function qtdNegociacoesCotas1(){
+           $this->db->where('usuario2_id', $this->session->userdata['usuario_id']);
+           $this->db->where('negociacao_status', 0);
+           $this->db->where('cotacao_id', 0);
+           $this->db->where('negociacao_cancelada', 0);
+           return $this->db->get('negociacoes')->num_rows();
+       }
+    public function pegarCotacoesRecebidas($negociacao_id){
+        $this->db->where('negociacao_id', $negociacao_id);
+         $this->db->order_by("cotacao_id","desc");
+         $this->db->where('cotacao_finalizada', 0);
+       return $this->db->get('cotacoes')->result();
+        
+    }
+    public function pegarNegociacoesPesquisa($limit, $offset, $normal, $viva, $controlada, $temp, $cidade){
+        $this->db->where('negociacao_status', 0);
+           $this->db->where('negociacao_cancelada', 0);
+           $this->db->where('cotacao_id', 0);
+           $this->db->limit($limit,$offset);
+           $this->db->order_by("negociacao_id","desc");
+           
+           
+           
+           
+           
+           return $this->db->get('negociacoes')->result();
+    }
+         
+              public function qtddNegociacoesPesquisa(){
+           $this->db->where('negociacao_status', 0);
+           $this->db->where('negociacao_cancelada', 0);
+           $this->db->where('cotacao_id', 0);
+           return $this->db->get('negociacoes')->num_rows();
+       }
 }

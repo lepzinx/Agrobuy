@@ -96,10 +96,42 @@ $route['dashboard/c5'] = 'dashboard';
 $route['dashboard/c5/(:num)'] = 'dashboard';
 $route['dashboard/c6'] = 'dashboard';
 $route['dashboard/c6/(:num)'] = 'dashboard';
+$route['dashboard/o1'] = 'dashboard';
+$route['dashboard/o1/(:num)'] = 'dashboard';
+$route['dashboard/venda/v1'] = 'dashboard/venda';
+$route['dashboard/venda/v1/(:num)'] = 'dashboard/venda';
+$route['dashboard/venda/v2'] = 'dashboard/venda';
+$route['dashboard/venda/v2/(:num)'] = 'dashboard/venda';
+$route['dashboard/venda/v3'] = 'dashboard/venda';
+$route['dashboard/venda/v3/(:num)'] = 'dashboard/venda';
+$route['dashboard/venda/v4'] = 'dashboard/venda';
+$route['dashboard/venda/v4/(:num)'] = 'dashboard/venda';
+$route['dashboard/venda/v5'] = 'dashboard/venda';
+$route['dashboard/venda/v5/(:num)'] = 'dashboard/venda';
+$route['dashboard/venda/v6'] = 'dashboard/venda';
+$route['dashboard/venda/v6/(:num)'] = 'dashboard/venda';
 $route['dashboard/aceitarproposta/(:num)'] = 'dashboard/aceitarproposta/$1';
 $route['dashboard/fecharnegocio/(:num)'] = 'dashboard/fecharnegocio/$1';
 $route['dashboard/recusarproposta/(:num)'] = 'dashboard/recusarproposta/$1';
 $route['dashboard/excluirproposta/(:num)'] = 'dashboard/excluirproposta/$1';
+$route['dashboard/alterarnegociacao/(:num)'] = 'dashboard/alterarnegociacao/$1';
+$route['dashboard/editarnegociacao/(:num)'] = 'dashboard/editarnegociacao/$1';
+$route['dashboard/transportes/p'] = 'dashboard/transportes';
+$route['dashboard/transportes/c'] = 'dashboard/transportes';
+$route['dashboard/transportes/r'] = 'dashboard/transportes';
+$route['dashboard/transportes/(:num)'] = 'dashboard/transportes';
+$route['dashboard/criarCotacao/(:num)'] = 'dashboard/criarCotacao/$1';
+$route['dashboard/aceitarCotacao/(:num)'] = 'dashboard/aceitarCotacao/$1';
+$route['dashboard/recusarCotacao/(:num)'] = 'dashboard/recusarCotacao/$1';
+$route['dashboard/recusarorcamento/(:num)'] = 'dashboard/recusarorcamento/$1';
+$route['dashboard/aceitarexw/(:num)'] = 'dashboard/aceitarexw/$1';
+$route['dashboard/aceitarddp/(:num)'] = 'dashboard/aceitarddp/$1';
+$route['dashboard/aceitarcorreios/(:num)'] = 'dashboard/aceitarcorreios/$1';
+$route['dashboard/aceitarbuscar/(:num)'] = 'dashboard/aceitarbuscar/$1';
+$route['dashboard/aceitarentrega/(:num)'] = 'dashboard/aceitarentrega/$1';
+
+
+
 
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

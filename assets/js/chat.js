@@ -1,6 +1,5 @@
 $(document).ready(function() {
-	                   
-    $('#mensagens').animate({ scrollTop: 9999999 }, 500);
+$('#mensagens').animate({ scrollTop: 9999999 }, 5);
 
 	                    carregarmensagens();
 	                    setInterval(function(){
@@ -32,7 +31,7 @@ $("#enviarMensagem").click(function (e) {
         dataType: 'json',
         success: function () {
             document.getElementById("texto").value = "";
-            $('#mensagens').animate({ scrollTop: 9999999 }, 500);
+            $('#mensagens').animate({ scrollTop: 9999999 }, 5);
 		    carregarmensagens();
            
         },
@@ -59,7 +58,7 @@ $('#texto').keydown(function(e){
         success: function () {
             document.getElementById("texto").value = "";
 
-            $('#mensagens').animate({ scrollTop: 9999999 }, 500);
+            $('#mensagens').animate({ scrollTop: 9999999 }, 5);
 		    carregarmensagens();
            
         },

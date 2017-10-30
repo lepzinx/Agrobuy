@@ -117,18 +117,8 @@
                 </div>        
             <div class="col-sm-9" id="content"  >
             <h2>Cotações</h2>
-                <div class="notify">
-                    <ul class="notifications">
-                        <li><a href="" class="notificated"><i class="fa fa-comments" aria-hidden="true"><span class="buttonbadge alert">40</span></i>Cotações Recebidas</a></li>
-                
-                        <li><a href=""><i class="fa fa-truck" aria-hidden="true"><span class="buttonbadge">0</span></i>Entregas Agendadas </a></li>        
-                    </ul>
-                    <ul class="notifications">
-                        <li><a href="" class="notificated"><i class="fa fa-list" aria-hidden="true"><span class="buttonbadge alert">2</span></i>Ações Pendentes</a></li>
-                        
-                
-                        <li><a href=""><i class="fa fa-barcode" aria-hidden="true"><span class="buttonbadge">0</span></i>Confirmações de Entregas em Aberto </a></li>
-                    </ul>
+                <div id='notify' class="notify">
+                    
                 </div>
             <div class="outterborder">
                 <div id="pannel-content">
@@ -240,7 +230,9 @@
                                 </div>
                               </div>
                             </div>
+                                
                             <table class="tabledisplay">
+                                <?php foreach($negociacoes as $nego) {?>
                                 <tbody class="titem">
                                     <tr class="theader1">
                                         <th>Frete Nº</th>
@@ -255,35 +247,47 @@
                                         
                                     </tr>      
                                     <tr class="theader2">
-                                        <td><span data-toggle="tooltip" title="Clique para ver detalhes do Frete"><a href="" data-toggle="modal" data-target="#freightModal">12394</a></span></td>
-                                        <td> Normal</td>
-                                        <td><span data-toggle="tooltip" title="Clique para ver detalhes da Negociação"><a href="" data-toggle="modal" data-target="#dealModal">12345678</a></span></td>
-                                        <td><span data-toggle="tooltip" title="Clique para ver detalhes do Produto"><a href="" data-toggle="modal" data-target="#productModal"> Soja em Saca Bibibi Bobobó</a></span></td>
-                                        <td><p>100 Sacas (sc.) </p></td>
-                                        <td><p>Santana do Livramento do Sudoeste - TO</p></td>
-                                        <td> Marília - SP </td>
-                                        <td><p>233 Km</p></td>
+                                        
+                                        <td><span data-toggle="tooltip" title="Clique para ver detalhes do Frete"><a href="" data-toggle="modal" 
+                                                                                                                     data-mapa="https://www.google.com/maps/embed/v1/directions?key=AIzaSyCFylacez159N8j2PIGoaNev9xnh_9IuP8&origin=<?=$this->usuarios_model->cidadeCotacao($nego->usuario2_id)?>&destination=<?=$this->usuarios_model->cidadeCotacao($nego->usuario1_id)?>&avoid=tolls|highways"
+                                                                                                                     data-titulo="<?=$this->anuncios_model->pegarTituloPorId($nego->anuncio_id)?>"
+                                                                                                                     data-id="<?=$nego->anuncio_id?>"
+                                                                                                                     data-origem="<?=$this->usuarios_model->ruaempresa($nego->usuario2_id).' '.$this->usuarios_model->cidadeEstado($nego->usuario2_id)?>"
+                                                                                                                     data-destino="<?=$this->usuarios_model->ruaempresa($nego->usuario1_id).' '.$this->usuarios_model->cidadeEstado($nego->usuario1_id)?>"
+                                                                                                                     data-complemento="<?=$this->usuarios_model->complemento($nego->usuario1_id)?>"
+                                                                                                                     data-distancia="<?=$this->negociacao_model->pegarDistanciaEstimada($this->usuarios_model->cidadeCotacao($nego->usuario2_id),$this->usuarios_model->cidadeCotacao($nego->usuario2_id))?>"
+                                                                                                                     data-categorias="<?=$this->anuncios_model->pegarCategorias($nego->anuncio_id)?>"
+                                                                                                                     data-categoriafrete="<?=$this->anuncios_model->pegarTransportadoraTipo($nego->anuncio_id);?>"
+                                                                                                                     data-act='<?=base_url()?>index.php/dashboard/criarcotacao/<?=$nego->negociacao_id?>'
+                                                                                                                     
+                                                                                                                     data-target="#freightModal"><?=$nego->anuncio_id?></a></span></td>
+                                        <td> <?=$this->anuncios_model->pegarTransportadoraTipo($nego->anuncio_id);?></td>
+                                        <td><span data-toggle="tooltip" title="Clique para ver detalhes da Negociação"><a href="" data-toggle="modal" data-target="#dealModal"><?=$nego->negociacao_id?></a></span></td>
+                                        <td><span data-toggle="tooltip" title="Clique para ver detalhes do Produto"><a href="" data-toggle="modal" data-target="#productModal"> <?=$this->anuncios_model->pegarTituloPorId($nego->anuncio_id)?></a></span></td>
+                                        <td><p><?=$nego->negociacao_qtd?> <?=$this->anuncios_model->pegarUnidadePorId($nego->anuncio_id)?>  </p></td>
+                                        <td><p><?=$this->usuarios_model->cidadeEstado($nego->usuario2_id)?></p></td>
+                                        <td> <?=$this->usuarios_model->cidadeEstado($nego->usuario1_id)?> </td>
+                                        <td><p><?=$this->negociacao_model->pegarDistanciaEstimada($this->usuarios_model->cidadeCotacao($nego->usuario2_id),$this->usuarios_model->cidadeCotacao($nego->usuario2_id))?></p></td>
                                         <td><a data-toggle="tooltip" title="Por gentileza, selecione uma cotação ou aguarde para receber mais.">Em Cotação</a></td>
                                         
                                     </tr>
-                                </tbody>
+                                    
+                                </tbody><?php }?>
                             </table>
                                  
                                 <div class="container bottomnav" >
-                                    <ul class="pagination">
-                                        <li class="active"><a href="">1</a></li>
-                                        <li><a href="">2</a></li>
-                                        <li><a href="">3</a></li>
-                                        <li><a href="">&raquo;</a></li>
-                                    </ul>
+                                      <?=$paginacao_trans1?>
                                 </div>
                             
                         </div>
                     </div>
-                        <div id="freightd" class="tab-pane fade in active">
+                           <div id="freightd" class="tab-pane fade in active">
                         <div class="tab-content">
+                          
                             <table class="tabledisplay">
-                                <tbody class="titem">
+                                  <?php foreach($recebidas as $rec){?>
+                           <tbody class="titem">
+                               
                                     <tr class="theader1">
                                         <th>Frete Nº</th>
                                         <th>Categoria</th>
@@ -297,19 +301,21 @@
                                         
                                     </tr>      
                                     <tr class="theader2">
-                                        <td><span data-toggle="tooltip" title="Clique para ver detalhes do Frete"><a href="" data-toggle="modal" data-target="#freightModal">12394</a></span></td>
-                                        <td> Normal</td>
-                                        <td><span data-toggle="tooltip" title="Clique para ver detalhes da Negociação"><a href="" data-toggle="modal" data-target="#dealModal">12345678</a></span></td>
-                                        <td><span data-toggle="tooltip" title="Clique para ver detalhes do Produto"><a href="" data-toggle="modal" data-target="#productModal"> Soja em Saca Bibibi Bobobó</a></span></td>
-                                        <td><p>100 Sacas (sc.) </p></td>
-                                        <td><p>Santana do Livramento do Sudoeste - TO</p></td>
-                                        <td> Marília - SP </td>
-                                        <td><p>233 Km</p></td>
+                                        
+                                        <td><span data-toggle="tooltip" title="Clique para ver detalhes do Frete"><a href="#"><?=$rec->anuncio_id?></a></span></td>
+                                        <td> <?=$this->anuncios_model->pegarTransportadoraTipo($rec->anuncio_id);?></td>
+                                        <td><span data-toggle="tooltip" title="Clique para ver detalhes da Negociação"><a href="" data-toggle="modal" data-target="#dealModal"><?=$rec->negociacao_id?></a></span></td>
+                                        <td><span data-toggle="tooltip" title="Clique para ver detalhes do Produto"><a href="" data-toggle="modal" data-target="#productModal"> <?=$this->anuncios_model->pegarTituloPorId($rec->anuncio_id)?></a></span></td>
+                                        <td><p><?=$rec->negociacao_qtd?> <?=$this->anuncios_model->pegarUnidadePorId($rec->anuncio_id)?>  </p></td>
+                                        <td><p><?=$this->usuarios_model->cidadeEstado($rec->usuario2_id)?></p></td>
+                                        <td> <?=$this->usuarios_model->cidadeEstado($rec->usuario1_id)?> </td>
+                                        <td><p><?=$this->negociacao_model->pegarDistanciaEstimada($this->usuarios_model->cidadeCotacao($rec->usuario2_id),$this->usuarios_model->cidadeCotacao($rec->usuario2_id))?></p></td>
                                         <td><a data-toggle="tooltip" title="Por gentileza, selecione uma cotação ou aguarde para receber mais.">Em Cotação</a></td>
                                         
                                     </tr>
                                 </tbody>
                                 <tbody class="titem">
+                                   
                                     <tr class="theader3" >
                                        <td><p> Cotação Nº</p></td>
                                         <td colspan="3"> Trasportador</td>
@@ -318,107 +324,80 @@
                                         <td colspan="2"><p>Preço Cotado</p></td>
                                         <td>Ações</td>
                                     </tr>
+                                     <?php $cot_recebidas = $this->negociacao_model->pegarCotacoesRecebidas($rec->negociacao_id);
+                                     foreach($cot_recebidas as $cot){?>
                                     <tr class="tdata">
-                                        <td><p>19100</p></td>
-                                        <td colspan="3"> <a data-toggle="tooltip" title="Clique para ver as informações do transportador."><i class="fa fa-truck" aria-hidden="true"></i> Heavy Charge Logística</a></td>  
-                                        <td>2 dias úteis</td>
-                                        <td>Cliente</td>
-                                        <td colspan="2"><p> R$ 1.000,00</p></td>
+                                        <td><p><?=$cot->cotacao_id?></p></td>
+                                        <td colspan="3"> <a data-toggle="tooltip" title="Clique para ver as informações do transportador."><i class="fa fa-truck" aria-hidden="true"></i> <?=$this->usuarios_model->nomeEmpresa($cot->usuario_id)?></a></td>  
+                                        <td><?=$cot->cotacao_embarque?> dias úteis</td>
+                                        <td><?php if($cot->cotacao_responsavel == 0){
+                                            echo 'Transportadora';
+                                        }else{
+                                            echo 'Cliente';
+                                        }?></td>
+                                        <td colspan="2"><p> R$ <?=$cot->cotacao_preco?></p></td>
                                         <td><div class="dropdown show">
                                             <a class="btn btn-primary dropdown-toggle" href="" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                 <i class="fa fa-list" aria-hidden="true"></i>
                                             </a>
                                             <ul id="actiondropdown" class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                                <li class=""><a href="#" data-toggle="modal" data-target="#confirmationModal"><i         class="fa fa-handshake-o" aria-hidden="true"></i> Selecionar Cotação</a></li>
-                                                <li><a href="#" data-toggle="modal" data-target="#confirmationModal"><i class="fa fa-thumbs-o-down" aria-hidden="true"></i> Recusar Cotação</a></li>
+                                                <li class=""><a href="#" data-toggle="modal" data-per="aceitar a cotação?" data-act="<?=base_url()?>index.php/dashboard/aceitarcotacao/<?=$rec->negociacao_id?>" data-target="#confirmationModal"><i         class="fa fa-handshake-o" aria-hidden="true"></i> Selecionar Cotação</a></li>
+                                                <li><a href="#" data-toggle="modal" data-per="recusar a cotação?" data-act="<?=base_url()?>index.php/dashboard/recusarcotacao/<?=$rec->negociacao_id?>" data-target="#confirmationModal"><i class="fa fa-thumbs-o-down" aria-hidden="true"></i> Recusar Cotação</a></li>
                                                 <li role="separator"><hr class="divider"></li>
                                                 <li class="disabled"><a href="#"><i class="fa fa-calendar-check-o" aria-hidden="true"></i> Agendar Embarque</a></li>
                                             </ul>
                                             </div>
                                         </td>
                                     </tr>
-                                    <tr class="tdata">
-                                         <td>19230</td>
-                                        <td colspan="3"> <a data-toggle="tooltip" title="Clique para ver as informações do transportador."><i class="fa fa-truck" aria-hidden="true"></i> Pedro &amp; Bino Logistics</a></td>  
-                                        <td>3 dias úteis</td>
-                                        <td>Transportador</td>
-                                        <td colspan="2"><p> R$ 1.200,00</p></td>
-                                        <td><div class="dropdown show">
-                                            <a class="btn btn-primary dropdown-toggle" href="" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                <i class="fa fa-list" aria-hidden="true"></i>
-                                            </a>
-                                            <ul id="actiondropdown" class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                                <li class=""><a href="#" data-toggle="modal" data-target="#confirmationModal"><i         class="fa fa-handshake-o" aria-hidden="true"></i> Selecionar Cotação</a></li>
-                                                <li><a href="#" data-toggle="modal" data-target="#confirmationModal"><i class="fa fa-thumbs-o-down" aria-hidden="true"></i> Recusar Cotação</a></li>
-                                                <li role="separator"><hr class="divider"></li>
-                                                <li class="disabled"><a href="#"><i class="fa fa-calendar-check-o" aria-hidden="true"></i> Agendar Embarque</a></li>
-                                            </ul>
-                                            </div>
-                                        </td>
-                                    </tr>
+                                     <?php } ?>
                                 </tbody>
+                             <?php }?>
                             </table>
-                                 
+                                
                                 <div class="container bottomnav" >
-                                    <ul class="pagination">
-                                        <li class="active"><a href="">1</a></li>
-                                        <li><a href="">2</a></li>
-                                        <li><a href="">3</a></li>
-                                        <li><a href="">&raquo;</a></li>
-                                    </ul>
+                                  <?=$paginacao_trans3?>
                                 </div>
                             
                         </div>
                     </div>
                         <div id="freights" class="tab-pane fade">
+                             <?php foreach($cotacoes as $cot){?>
                         <table class="tabledisplay">
+                             
                                     <tbody class="titem">
+                                      
                                         <tr class="theader1">
-                                            <th></th>
-                                            <th>Negociação Nº</th>
-                                            <th>Data</th>
-                                            <th>Preço do Frete</th>
-                                            <th >Preço Total</th>
-                                            <th colspan="2">Status</th>
-                                            <th>Ações</th>
+                                       <th>Frete Nº</th>
+                                        <th>Categoria</th>
+                                        <th>Negociação</th>                    
+                                        <th>Origem</th>
+                                        <th>Destino</th>
+                                        <th>Distância&#40;est.&#41;</th>
+                                        <th>Status</th>
+                                        <th>Preço</th>
                                         </tr>      
+                                        
                                         <tr class="theader2">
-                                            <td></td>
-                                            <td><span data-toggle="tooltip" title="Clique para ver mais detalhes"><a href="" data-toggle="modal" data-target="#dealModal">12345678</a></span></td>
-                                            <td><p>12/12/2013</p></td>
-                                            <td> R$ 1,000.00</td>
-                                            <td> R$ 11,000.00</td>
-                                            <td colspan="2"> <a href="#" data-toggle="tooltip" title="O negócio foi concluído com sucesso.">Negócio Concluído</a></td>
-                                            <td ><a href="#" data-toggle="tooltip" title="Houve algo de errado após a negociação.Fazer uma Reclamação"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i></a></td>
-                                        </tr>
+                                            
+                                        <td><span data-toggle="tooltip" title="Clique para ver detalhes do Frete"><a><?=$cot->cotacao_id?></a></span></td>
+                                        <td> <?=$cot->cotacao_categoria?></td>
+                                        <td><span ><a><?=$cot->negociacao_id?></a></span></td>
+                                        <td><p><?=$cot->cotacao_origem?></p></td>
+                                        <td> <?=$cot->cotacao_destino?> </td>
+                                        <td><p><?=$cot->cotacao_distancia?></p></td>
+                                        <td><a data-toggle="tooltip"><?php if($cot->cotacao_finalizada == 1){
+                                            echo "Finalizada";
+                                        }else{
+                                            echo "Em Cotação";
+                                        }?></a></td>
+                                        <td>R$<?=$cot->cotacao_preco?></td>
+                                            <?php }?>
                                     </tbody>
-                                    <tbody class="titem">
-                                        <tr class="theader3" >
-                                            <td></td>
-                                            <td><a data-toggle="tooltip" title="Clique para ver as informações do fornecedor."><span class="glyphicon glyphicon-user"></span>Fazenda Sta. Agnobalda da Serra</a></td>
-                                            <td colspan="2"><p>Produto</p></td>
-                                            <td><p>Quantidade</p></td>
-                                            <td><p>Unidade</p></td>
-                                            <td><p>Preço Unitário</p></td>
-                                            <td>Preço dos Produtos</td>
-                                        </tr>
-                                        <tr class="tdata">
-                                            <td colspan="2"><img class="productimg" src="<?=base_url()?>assets/images/placeholders/mock1.jpg" height="100" width="100"></td>
-                                            <td colspan="2"><a> Soja em Saca Bibibi Bobobó</a></td>    
-                                            <td><p> 100 </p></td>
-                                            <td><p> Sacas &#40;sc.&#41; </p></td>
-                                            <td><p> R$ 100,00 </p></td>
-                                            <td><p> R$ 10.000,00</p></td>
-                                        </tr>
-                                    </tbody>
+                                    
+                                
                                 </table>  
                         <div class="container bottomnav" >
-                                    <ul class="pagination">
-                                        <li class="active"><a href="">1</a></li>
-                                        <li><a href="">2</a></li>
-                                        <li><a href="">3</a></li>
-                                        <li><a href="">&raquo;</a></li>
-                            </ul>
+                                <?=$paginacao_trans2?>
                         </div>
                             </div>
                         </div>
@@ -745,14 +724,11 @@
                                 <!-- show map -->
                                 <div class="row">
                                     <div id="map">
-                                        <iframe
+                                        <iframe id="mapa"
   width="420"
   height="450"
   frameborder="0" style="border:0"
-  src="https://www.google.com/maps/embed/v1/directions?key=AIzaSyCFylacez159N8j2PIGoaNev9xnh_9IuP8
-    &origin=Piracicaba+Sao+Paulo
-    &destination=Lins+Sao+Paulo
-    &avoid=tolls|highways" allowfullscreen>
+  src="" allowfullscreen>
 </iframe>
                                     </div>
                                 </div>
@@ -769,21 +745,17 @@
                         <div class="product-information"><!--/product-information-->                            
 								<div id="product-information">
                                     
-                                    <h2 id="itemtitle">Frete 12394: Soja em Saca</h2>
+                                                                    <h2 id="itemtitle">Frete <span id="id">12394</span>: <span id="titulo">Soja em Saca</span></h2>
                                     <hr>
                                     <div>
-                                        <p><b>Origem:</b>Av. Marechal Deodoro 33 <em>Piracicaba - SP</em></p>
-                                        <p><b>Destino:</b>Rua Charlinho de Menezes, 970 <em>Lins - SP</em></p>
-                                        <p><b>Complemento:</b></p>
-                                       <p><b>Distância&#40;estimada&#41;:</b>233 KM</p>
-                                       <p><b>Peso:</b> Não Informado</p>
+                                        <p><b>Origem:</b><span id="origem">Av. Marechal Deodoro 33 <em>Piracicaba - SP</em></span></p>
+                                        <p><b>Destino:</b><span id="destino">Rua Charlinho de Menezes, 970 <em>Lins - SP</em></span></p>
+                                        <p><b>Complemento:</b><span id="complemento"></span></p>
+                                        <p><b>Distância&#40;estimada&#41;:</b><span id="distancia">233 KM</span></p>
+                                        <p><b>Peso:</b> <span id="peso">Não Informado</span></p>
                                         <p><b>Categoria do Produto:</b></p>
-                                            <ol class="breadcrumb">
-                                            <li class="breadcrumb-item"><a href="#">Produção Vegetal</a></li>
-                                            <li class="breadcrumb-item"><a href="#">Soja em Saca</a></li>
-                                            <li class="breadcrumb-item">    </li>
-                                            </ol>
-                                       <p><b>Categoria de Frete:</b> Normal</p>
+                                        <span id="categorias"></span>
+                                        <p><b>Categoria de Frete:</b> <span id='categoriafrete'>Normal</span></p>
                                     </div>
                                     <hr>
                                     <div id="buyingcond">
@@ -798,59 +770,41 @@
                     <div class="row">
                     <div class="col-sm-3" data-dismiss="modal"></div>
                     <div id="category" class="category-tab shop-details-tab col-sm-7 modalbg col"><!--category-tab-->
-                       <h3> Suas Cotações para esse Frete:</h3>
-                        <table>
-                        <tbody class="titem">
-                                    <tr class="theader3" >
-                                       <td><p> Cotação Nº</p></td>
-                                        <td colspan="2"> Trasportador</td>
-                                        <td><p> Prazo para Embarque</p></td>
-                                        <td><p> Responsável pela Carga</p></td>
-                                        <td colspan="2"><p>Preço Cotado</p></td>
-                                    </tr>
-                                    <tr class="tdata">
-                                        <td><p>19100</p></td>
-                                        <td colspan="2"> <a data-toggle="tooltip" title="Clique para ver as informações do transportador."><i class="fa fa-truck" aria-hidden="true"></i> Heavy Charge Logística</a></td>  
-                                        <td>2 dias úteis</td>
-                                        <td>Cliente</td>
-                                        <td colspan="2"><p> R$ 1.000,00</p></td>
-                                    </tr>
-                                </tbody>
-                        </table>
+                    
                         <h3> Ofereça uma Cotação:</h3>
-                        <form class="criarcot">
+                        <form class="criarcot" id='cotacao' method='post'>
                          <div class="btn-group btn-group-justified">
                           <div class="btn btn-default">Prazo para Embarque:
                           <div class="input-group">
-                          <input type="number" placeholder="    " class="form-control" aria-describedby="basic-addon2">
-                          <span class="input-group-addon" id="basic-addon2">dias úteis</span>
+                          <input type="number" name="prazo" class="form-control">
+                          <span class="">dias úteis</span>
                         </div>
                             </div>
                           <div class="btn btn-default">Responsável pela Carga: 
                           <br>
-                          <select>
-                              <option selected>Transportadora</option>
-                              <option>Contratante</option>
+                          <select name="responsavel">
+                              <option value='0' selected>Transportadora</option>
+                              <option value='1'>Contratante</option>
                           </select>
                           
                           </div>
                           <div class="btn btn-default">Preço da sua Cotação:
                           <br>
-                          <input type="number" class="form-control">
+                          <input name='preco' type="number" class="form-control">
                           </div>
-                          <div class="btn btn-default"> <span class="glyphicon glyphicon-plus"></span>  Enviar nova Cotação</div>
+                             <div class="btn btn-default" type="submit"> <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-plus"></span>Enviar nova Cotação</button></div>
                         </div>
                        </form>
 			</div>
                     <div class="col-sm-2" data-dismiss="modal"></div>
                         </div>
                 </div><!-- FREIGHT MODAL ------------------------------>
-                <div Id="confirmationModal" class="modal fade">
+                   <div Id="confirmationModal" class="modal fade">
                     <div class="modal-dialog modal-sm" role="document">
                         <div class="modal-content">
                             <div class="modal-body">
-                                <h5> Você tem certeza? que deseja <p> ISSO AKI?</p></h5>
-                                <button type="button" class="btn btn-success">Sim</button>
+                                <h5> Você tem certeza que deseja <p id="pergunta"> ISSO AKI?</p></h5><br />
+                                <a type="button" id="confirmar" href="#" class="btn btn-success">Sim</a>
                                 <button type="button" class="btn btn-danger" data-dismiss="modal">Não</button>
                             </div>
                         </div>
@@ -960,6 +914,76 @@
     $( "#amount" ).val( $( "#slider-range" ).slider( "values", 0 ) + "Km - " +
        $( "#slider-range" ).slider( "values", 1 ) + " Km" );
   } );
+  </script>
+  <form id='url' action='<?=base_url()?>index.php/dashboard/atualizarNotificacoesTransportes'/>
+  <script>
+      $(document).ready(function () {
+
+
+    carregarnotificacoes();
+    setInterval(function () {
+        carregarnotificacoes();
+    }, 1000);
+});
+function carregarnotificacoes() {
+    var url;
+    url = $('#url').attr('action');
+    jQuery.post(url, function (data) {
+        $("#notify").empty().append(data);
+    });
+}
+
+  
+  
+  $('#freightModal').on('show.bs.modal', function (event) {
+		 var button = $(event.relatedTarget);// Button that triggered the modal
+                 var mapa = button.data('mapa');
+                 var id = button.data('id');
+                 var titulo = button.data('titulo');
+                 var origem = button.data('origem');
+                 var destino = button.data('destino');
+                 var complemento = button.data('complemento');
+                 var distancia = button.data('distancia');
+                 var peso = button.data('peso');
+                 var categorias = button.data('categorias');
+                 var categoriafrete = button.data('categoriafrete');
+                 var act = button.data('act');
+         
+
+                 
+                 
+                  // inserir na o nome na pergunta de confirmação dentro da modal
+		 var modal = $(this)
+		 modal.find('#mapa').attr('src',mapa);
+                 modal.find('#id').text(id);
+                 modal.find('#titulo').text(titulo);
+                 modal.find('#origem').text(origem);
+                 modal.find('#destino').text(destino);
+                 modal.find('#complemento').text(complemento);
+                 modal.find('#distancia').text(distancia);
+                 modal.find('#peso').text(peso);
+                 modal.find('#categorias').text(categorias);
+                 modal.find('#categoriafrete').text(categoriafrete);
+                 modal.find('#cotacao').attr('action',act);;
+                          
+                 
+		  
+		})
+                
+     $('#confirmationModal').on('show.bs.modal', function (event) {
+		 var button = $(event.relatedTarget) // Button that triggered the modal
+                  var id = button.data('act'); // vamos buscar o valor do atributo data-id
+                  var pergunta = button.data('per');
+                  // inserir na o nome na pergunta de confirmação dentro da modal
+		 var modal = $(this)
+		 modal.find('p#pergunta').text(pergunta);
+                 modal.find('a#confirmar').attr('href', id); // mudar dinamicamente o link, href do botão confirmar da modal
+		  
+		})
+  
+  
+  
+  
   </script>
 </body>
 </html>

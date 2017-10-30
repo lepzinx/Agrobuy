@@ -288,9 +288,8 @@ class Anuncios extends CI_Controller {
          }else{
              redirect(base_url() . "index.php/usuarios");
          }
-
-
     }
+ 
 
 
 }

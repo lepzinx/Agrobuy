@@ -259,6 +259,14 @@ $config['charset']  = 'UTF-8';
         $this->db->where('usuario_id', $id);
         return $this->db->get('usuarios')->row()->usuario_municipio;
     }
+       public function ruaEmpresa($id){
+        $this->db->where('usuario_id', $id);
+        return $this->db->get('usuarios')->row()->usuario_ruaouacesso .' - '. $this->db->get('usuarios')->row()->usuario_numerooukm;
+    }
+      public function complemento($id){
+        $this->db->where('usuario_id', $id);
+        return $this->db->get('usuarios')->row()->usuario_complemento;
+    }
        public function estadoEmpresa($id){
         $this->db->where('usuario_id', $id);
         return  $this->db->get('usuarios')->row()->usuario_estado;
@@ -483,5 +491,17 @@ $produtorRural = $this->input->post('ProdutorRural');
         return $this->db->update('usuairos', $dados);
     }
 
+       public function cidadeCotacao($id){
+        $this->db->where('usuario_id', $id);
+        $string = $this->db->get('usuarios')->row()->usuario_municipio . " - " .$this->db->get('usuarios')->row()->usuario_estado;
+        $stringCorrigida = str_replace(' ', '+', $string);
+        return $stringCorrigida;
+    }
+    
+     public function cidadeEstado($id){
+        $this->db->where('usuario_id', $id);
+        $string = $this->db->get('usuarios')->row()->usuario_municipio . " - " .$this->db->get('usuarios')->row()->usuario_estado;
+        return $string;
+    }
 
 }

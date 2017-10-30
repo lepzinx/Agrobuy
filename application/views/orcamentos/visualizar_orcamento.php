@@ -176,30 +176,31 @@
                             </div>
                             <div class="box-body">
                                 <table>
-                                    
+                                <form method='post' action='<?=base_url()?>index.php/dashboard/fazerorcamento/<?=$orc->orcamento_id?>'
                                 <tr><td><h4>Orçamento Solicitado pelo Cliente</h4></td><td><h4>Seu Orçamento:</h4></td></tr>
                                 <tr class="titlerow"><td><p class="ptitle">Quantidade Solicitada:</p></td><td><p class="ptitle">Quantidade:</p></td></tr>
                                 <tr><td><p> <?=$orc->orcamento_qtd?> </p><p><?=$orc->orcamento_unidade?>;</p></td><td><p> <?=$orc->orcamento_qtd?> </p><p><?=$orc->orcamento_unidade?>; </p></td></tr>
                                 <tr class="titlerow"><td><p class="ptitle">Preço Desejado:</p></td><td> <p class="ptitle">Seu Preço:</p></td></tr>
-                                <tr><td><p><?=$orc->orcamento_preco?> </p><b> /<?=$orc->orcamento_unidade?> </b></td><td><p><input class="form-control qtd" type="number"></p><b> <?=$orc->orcamento_unidade?></b></td></tr>
+                                <tr><td><p><?=$orc->orcamento_preco?> </p><b> /<?=$orc->orcamento_unidade?> </b></td><td><p><input  name='preco_unitario' class="form-control qtd" type="number"></p><b> <?=$orc->orcamento_unidade?></b></td></tr>
                                 <tr><td><p> Preço Total:<b> R$ <?=$orc->orcamento_preco?></b></p></td><td><p class="ptitle"> Seu Total:<b> R$ 10.000,00</b></p></td></tr>
                                 <?php if($orc->orcamento_creditoon == 1){?>
-                                <tr><td><p> O Cliente solicita que o Fornecedor também <b>aceite</b> cartões de crédito</p></td><td><label><input type="checkbox"> <p>Aceito Cartões de Crédito</p></label></td></tr>
+                                <tr><td><p> O Cliente solicita que o Fornecedor também <b>aceite</b> cartões de crédito</p></td><td><label><input name="credito" value='1' type="checkbox"> <p>Aceito Cartões de Crédito</p></label></td></tr>
                                 <?php }?>
                                 <tr class="titlerow"><td><p class="ptitle"> O Cliente solicita que você aceite Fretes por:</p></td><td><p>Destes, quais você aceita?</p></td></tr>
-                                    <tr><td>Correios</td><td><label><input type="checkbox" checked>Aceito</label></td></tr>
+                                    <tr><td>Correios</td><td><label><input name="correios" value='1' type="checkbox" checked>Aceito</label></td></tr>
                                     <?php if($orc->orcamento_exwon == 1){?>
-                                    <tr><td>Transportadora - EXW</td><td><label><input type="checkbox">Aceito</label></td></tr>
+                                    <tr><td>Transportadora - EXW</td><td><label><input name="exw" value='1' type="checkbox">Aceito</label></td></tr>
                                     <?php } ?>
                                     <?php if($orc->orcamento_ddpon == 1){?>
-                                    <tr><td>Transportadora - DDP</td><td><label><input type="checkbox">Aceito</label></td></tr>
+                                    <tr><td>Transportadora - DDP</td><td><label><input name="ddp" value='1' type="checkbox">Aceito</label></td></tr>
                                     <?php }?>
                                     <?php if($orc->orcamento_buscaon == 1){?>
-                                    <tr><td>Cliente Buscar</td><td><label><input type="checkbox">Aceito</label></td></tr>
+                                    <tr><td>Cliente Buscar</td><td><label><input name="busca" value='1' type="checkbox">Aceito</label></td></tr>
                                     <?php } ?>
                                     <?php if($orc->orcamento_levaon == 1){?>
-                                    <tr><td>Fornecedor Entregar</td><td><label><input type="checkbox">Aceito</label></td></tr>
+                                    <tr><td>Fornecedor Entregar</td><td><label><input name="leva" value='1' type="checkbox">Aceito</label></td></tr>
                                     <?php }?>
+                                
                                 </table>
                             </div>
                             <div class="title">
@@ -207,8 +208,9 @@
                             </div>
                             <div class="modal-body action-buttons">
                                 <button href="#" data-toggle="modal" data-target="#confirmationModal"><i class="fa fa-floppy-o" aria-hidden="true"></i> Salvar Pedido de Orçamento</button>
-                                <button href="#" data-toggle="modal" data-target="#confirmationModal"><i class="fa fa-file-text" aria-hidden="true"></i> Enviar Orçamento</button>
+                                <button type='submit'><i class="fa fa-file-text" aria-hidden="true"></i> Enviar Orçamento</button>
                             </div>
+                                </form>
 						</div>
                 </div>            
             </div>

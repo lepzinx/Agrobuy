@@ -948,6 +948,34 @@ class Anuncios_model extends CI_Model{
          $this->db->where('notificacao_visto', 0);
          return $this->db->get('notificacoes')->num_rows();
      }
+      public function carregarNotificacaoCotacoes(){
+         $this->db->where('usuario_id', $this->session->userdata['usuario_id']);
+         $this->db->where('notificacao_tipo', 5);
+         $this->db->where('notificacao_visto', 0);
+         return $this->db->get('notificacoes')->num_rows();
+     }
+     public function carregarNotificacaoCotacoesAceitas(){
+         $this->db->where('usuario_id', $this->session->userdata['usuario_id']);
+         $this->db->where('notificacao_tipo', 6);
+         $this->db->where('notificacao_visto', 0);
+         return $this->db->get('notificacoes')->num_rows();
+     }
+         public function carregarLinksCotacoes(){
+         $this->db->where('usuario_id', $this->session->userdata['usuario_id']);
+         $this->db->where('notificacao_tipo', 5);
+         //$this->db->where("notificacao_remetente")->distinct();
+         $this->db->where('notificacao_visto', 0);
+         return  $this->db->get('notificacoes')->row()->notificacao_remetente;
+
+     }
+        public function carregarLinksCotacoesAceitas(){
+         $this->db->where('usuario_id', $this->session->userdata['usuario_id']);
+         $this->db->where('notificacao_tipo', 6);
+         //$this->db->where("notificacao_remetente")->distinct();
+         $this->db->where('notificacao_visto', 0);
+         return  $this->db->get('notificacoes')->row()->notificacao_remetente;
+
+     }
      public function pegarTituloPorId($anuncio_id){
          $this->db->where('anuncio_id', $anuncio_id);
          return $this->db->get('anuncios')->row()->anuncio_titulo;
@@ -955,6 +983,24 @@ class Anuncios_model extends CI_Model{
      public function pegarUnidadePorId($anuncio_id){
          $this->db->where('anuncio_id', $anuncio_id);
          return $this->db->get('anuncios')->row()->anuncio_unidade;
+     }
+     public function pegarTransportadoraTipo($anuncio_id){
+         $this->db->where('anuncio_id', $anuncio_id);
+         $res = $this->db->get('anuncios')->row()->anuncio_transportadoratipo;
+         if($res == 0){
+             return "Normal";
+         }else if($res == 1){
+             return "Carga viva";
+         }else if($res == 2){
+             return "Carga controlada";
+         }else if($res == 3){
+             return "Temperatura Controlada";
+         }
+     }
+     public function pegarCategorias($anuncio_id){
+         $this->db->where('anuncio_id', $anuncio_id);
+         return $this->db->get('anuncios')->row()->anuncio_categoria1.'/'.$this->db->get('anuncios')->row()->anuncio_categoria2.'/'.$this->db->get('anuncios')->row()->anuncio_categoria3;
+         
      }
 
 

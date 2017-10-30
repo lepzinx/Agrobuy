@@ -14,7 +14,6 @@ class Orcamento_model extends CI_Model{
          $this->db->limit($limit,$offset);
         $this->db->order_by("orcamento_id","desc");
         return $this->db->get('orcamentos')->result();
-        
     }
     
     public function cadastrarOrcamento(){
@@ -661,7 +660,111 @@ class Orcamento_model extends CI_Model{
        
         return $resultado2;
     }
-    
+        
+    public function fazerOrcamento($orcamento_id){
+        $this->db->where('orcamento_id', $orcamento_id);
+        $orcamentos = $this->db->get('orcamentos');
+        $dados['usuario1_id'] = $orcamentos->row()->usuario_id;
+        $dados['usuario2_id'] = $this->session->userdata['usuario_id'];
+        $dados['of_qtd'] = $orcamentos->row()->orcamento_qtd;
+        $dados['of_unidade'] = $orcamentos->row()->orcamento_unidade;
+        $dados['of_status'] = "Recebendo orçamentos";
+        $dados['of_precounitario'] = $this->input->post('preco_unitario');
+        $dados['of_total'] = $dados['of_precounitario'] * $dados['of_qtd'];
+        $dados['orcamento_id'] = $orcamento_id;
+        $credito = $this->input->post('credito'); 
+        if((int)$credito == 1){
+             $dados['of_credito'] = 1;
+        }else{
+            $dados['of_credito'] = 0;
+        }
+        
+          $correio = $this->input->post('correios'); 
+        if((int)$correio == 1){
+             $dados['of_correios'] = 1;
+        }else{
+            $dados['of_correios'] = 0;
+        }
+          $exw = $this->input->post('exw'); 
+        if((int)$exw == 1){
+             $dados['of_exw'] = 1;
+        }else{
+            $dados['of_exw'] = 0;
+        }
+          $ddp = $this->input->post('ddp'); 
+        if((int)$ddp == 1){
+             $dados['of_ddp'] = 1;
+        }else{
+            $dados['of_ddp'] = 0;
+        }
+          $leva = $this->input->post('leva'); 
+        if((int)$leva == 1){
+             $dados['of_entregar'] = 1;
+        }else{
+            $dados['of_entregar'] = 0;
+        }
+          $busca = $this->input->post('busca'); 
+        if((int)$busca == 1){
+             $dados['of_buscar'] = 1;
+        }else{
+            $dados['of_buscar'] = 0;
+        }
+        return $this->db->insert('orcamento_feito', $dados);
+        
+    }
+    public function carregarOrcamentosRecebidos($orcamento_id){
+        $this->db->where('usuario1_id',$this->session->userdata['usuario_id'] );
+        $this->db->where('orcamento_id', $orcamento_id);
+        $this->db->where('of_finalizado', 0);
+        $this->db->order_by("of_id","desc");
+        return $this->db->get('orcamento_feito')->result();
+        
+    }
+    public function recusarOrcamento($of_id){
+        $this->db->where('of_id', $of_id);
+        $of = $this->db->get('orcamento_feito');
+        $dados['of_finalizado'] = 2; // 2 = Recusado.
+        $this->db->update('orcamento_feito', $dados);
+          $mensagem = 'Infelizmente seu orçamento não foi aceito, verifique as condições dos clientes!';
+           $this->anuncios_model->novanotificacao(3, $of->row()->usuario2_id);
+           return $this->usuarios_model->enviarMensagem($of->row()->usuario2_id, $mensagem);
+    }
+    public function aceitarOrcamento($of_id, $tipo_frete){
+        $this->db->where('of_id',$of_id);
+       $of = $this->db->get('orcamento_feito');
+        
+           $dados['negociacao_status'] = 1;
+           $dados['usuario1_id'] = $this->session->userdata['usuario_id'];
+           $dados['usuario2_id'] = $of->row()->usuario2_id;
+           $dados['negociacao_qtd'] = $of->row()->of_qtd;
+           $dados['negociacao_precounitario'] = $of->row()->of_precounitario;
+           $dados['negociacao_preco'] = $of->row()->of_total + $of->row()->of_frete;
+           $dados['negociacao_tipofrete'] = $tipo_frete;
+
+           $this->db->insert('negociacoes', $dados);
+
+           $mensagem = 'Seu orçamento foi aceito e uma nova venda iniciada<br>'.
+               'Preço unitario : R$'.$dados['negociacao_precounitario'].'<br>'.
+               'Preço frete : R$'.$of->row()->of_frete.'<br>'.
+               'Preço Total : R$'.$dados['negociacao_preco'].'<br>'.
+               'Quantidade : '.$dados['negociacao_qtd'].'<br>'.
+               'Tipo de frete : '.$tipo_frete.'<br>';
+           
+           $this->db->where('of_id',$of_id);
+           $data['of_finalizado'] = 1; // 1 = Aceito.
+           $this->db->update('orcamento_feito', $data);
+           $this->anuncios_model->novanotificacao(3, $dados['usuario2_id']);
+           return $this->usuarios_model->enviarMensagem($dados['usuario2_id'], $mensagem);
+        
+    } 
+    public function pegarTituloPorId($anuncio_id){
+         $this->db->where('orcamento_id', $anuncio_id);
+         return $this->db->get('orcamentos')->row()->orcamento_titulo;
+     }
+     public function pegarUnidadePorId($anuncio_id){
+         $this->db->where('orcamento_id', $anuncio_id);
+         return $this->db->get('orcamentos')->row()->orcamento_unidade;
+     }
     
     
 }

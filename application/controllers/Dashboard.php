@@ -17,6 +17,7 @@ class Dashboard extends CI_Controller {
 	{
          $this->load->model('usuarios_model');
          $this->load->model('negociacao_model');
+         $this->load->model('orcamento_model');
      if($this->usuarios_model->checarSessao()){
          $dados['qtd1'] = $this->negociacao_model->qtdNegociacoesCompra1();
          $dados['qtd2'] = $this->negociacao_model->qtdNegociacoesCompra2();
@@ -199,21 +200,60 @@ class Dashboard extends CI_Controller {
          $dados['usuario'] = $this->usuarios_model->pegarUsuarioPorId($this->session->userdata['usuario_id']);
          $dados['compra5'] = $this->negociacao_model->listarNegociacoesCompra5($config['per_page'],$offset);
 
+         
+                 //Compra 5
+        $this->load->library('pagination');
+
+        $config = array(
+        "base_url" => base_url()."index.php/dashboard/o1",
+        "per_page" => 3,
+        "num_links" => 6,
+        "uri_segment" => 4,
+        "total_rows" => $this->orcamento_model->pegarQtdOrcamentosUsu(),
+        "full_tag_open" => "<ul class='pagination'>",
+        "full_tag_close" => "</ul>",
+        "first_link" => TRUE,
+        "last_link" => FALSE,
+        "first_tag_open" => "<li>",
+        "first_tag_close" => "</li>",
+        "prev_link" => "Anterior",
+        "prev_tag_open" => "<li class='prev'>",
+        "prev_tag_close" => "</li>",
+        "next_link" => "Próxima",
+        "next_tag_open" => "<li class='next'>",
+        "next_tag_close" => "</li>",
+        "last_tag_open" => "<li>",
+        "last_tag_close" => "</li>",
+        "cur_tag_open" => "<li class='active'><a href='#'>",
+        "cur_tag_close" => "</a></li>",
+        "num_tag_open" => "<li>",
+        "num_tag_close" => "</li>"
+    );
+        $this->pagination->initialize($config);
+
+        $dados["paginacao_orcamentos1"] = $this->pagination->create_links();
+        $offset = ($this->uri->segment(4)) ? $this->uri->segment(4) :0;
+        $dados['orcamentos'] = $this->orcamento_model->pegarOrcamentosUsuId($this->session->userdata['usuario_id'],$config['per_page'],$offset);
 
 
 		      $this->load->view('dashboard/dashboard_comp', $dados);
            }else{
                redirect(base_url()."index.php/usuarios");
            }
+           
+           
 
 
 	}
+        
+     
 
         public function venda()
 	{
             $this->load->model('usuarios_model');
             $this->load->model('anuncios_model');
             $this->load->model('negociacao_model');
+            $this->load->model('orcamento_model');
 
 
                if($this->usuarios_model->checarSessao()){
@@ -544,12 +584,116 @@ class Dashboard extends CI_Controller {
 
        public function transportes(){
             $this->load->model('usuarios_model');
-                 if($this->usuarios_model->checarSessao()){
-		$this->load->view('dashboard/dashboard_freight');
-           }else{
-               redirect(base_url()."index.php/usuarios");
-           }
-       }
+            $this->load->model('negociacao_model');
+             $this->load->model('anuncios_model');
+               $this->load->model('orcamento_model');
+             
+        if ($this->usuarios_model->checarSessao()) {
+           $this->load->library('pagination');
+
+            $config = array(
+            "base_url" => base_url()."index.php/dashboard/transportes/p",
+            "per_page" => 3,
+            "num_links" => 6,
+            "uri_segment" => 4,
+            "total_rows" => $this->negociacao_model->qtdNegociacoes1(),
+            "full_tag_open" => "<ul class='pagination'>",
+            "full_tag_close" => "</ul>",
+            "first_link" => TRUE,
+            "last_link" => FALSE,
+            "first_tag_open" => "<li>",
+            "first_tag_close" => "</li>",
+            "prev_link" => "Anterior",
+            "prev_tag_open" => "<li class='prev'>",
+            "prev_tag_close" => "</li>",
+            "next_link" => "Próxima",
+            "next_tag_open" => "<li class='next'>",
+            "next_tag_close" => "</li>",
+            "last_tag_open" => "<li>",
+            "last_tag_close" => "</li>",
+            "cur_tag_open" => "<li class='active'><a href='#'>",
+            "cur_tag_close" => "</a></li>",
+            "num_tag_open" => "<li>",
+            "num_tag_close" => "</li>"
+        );
+              $this->pagination->initialize($config);
+
+        $dados["paginacao_trans1"] = $this->pagination->create_links();
+        $offset = ($this->uri->segment(4)) ? $this->uri->segment(4) :0;
+
+        $dados['negociacoes'] = $this->negociacao_model->listarNegociacoes1( $config['per_page'],$offset);
+        
+           $config = array(
+            "base_url" => base_url()."index.php/dashboard/transportes/c",
+            "per_page" => 3,
+            "num_links" => 6,
+            "uri_segment" => 4,
+            "total_rows" => $this->negociacao_model->qtdCotacoesUsu($this->session->userdata['usuario_id']),
+            "full_tag_open" => "<ul class='pagination'>",
+            "full_tag_close" => "</ul>",
+            "first_link" => TRUE,
+            "last_link" => FALSE,
+            "first_tag_open" => "<li>",
+            "first_tag_close" => "</li>",
+            "prev_link" => "Anterior",
+            "prev_tag_open" => "<li class='prev'>",
+            "prev_tag_close" => "</li>",
+            "next_link" => "Próxima",
+            "next_tag_open" => "<li class='next'>",
+            "next_tag_close" => "</li>",
+            "last_tag_open" => "<li>",
+            "last_tag_close" => "</li>",
+            "cur_tag_open" => "<li class='active'><a href='#'>",
+            "cur_tag_close" => "</a></li>",
+            "num_tag_open" => "<li>",
+            "num_tag_close" => "</li>"
+        );
+              $this->pagination->initialize($config);
+
+        $dados["paginacao_trans2"] = $this->pagination->create_links();
+        $offset = ($this->uri->segment(4)) ? $this->uri->segment(4) :0;
+        
+        $dados['cotacoes'] = $this->negociacao_model->listarCotacoesUsu($this->session->userdata['usuario_id'] ,$config['per_page'],$offset);
+
+   $config2 = array(
+            "base_url" => base_url()."index.php/dashboard/transportes/r",
+            "per_page" => 3,
+            "num_links" => 6,
+            "uri_segment" => 4,
+            "total_rows" => $this->negociacao_model->QtdNegociacoesCotas1(),
+            "full_tag_open" => "<ul class='pagination'>",
+            "full_tag_close" => "</ul>",
+            "first_link" => TRUE,
+            "last_link" => FALSE,
+            "first_tag_open" => "<li>",
+            "first_tag_close" => "</li>",
+            "prev_link" => "Anterior",
+            "prev_tag_open" => "<li class='prev'>",
+            "prev_tag_close" => "</li>",
+            "next_link" => "Próxima",
+            "next_tag_open" => "<li class='next'>",
+            "next_tag_close" => "</li>",
+            "last_tag_open" => "<li>",
+            "last_tag_close" => "</li>",
+            "cur_tag_open" => "<li class='active'><a href='#'>",
+            "cur_tag_close" => "</a></li>",
+            "num_tag_open" => "<li>",
+            "num_tag_close" => "</li>"
+        );
+              $this->pagination->initialize($config2);
+
+        $dados["paginacao_trans3"] = $this->pagination->create_links();
+        $offset = ($this->uri->segment(4)) ? $this->uri->segment(4) :0;
+
+        $dados['recebidas'] = $this->negociacao_model->listarNegociacoesCotas1($config2['per_page'],$offset);
+
+
+
+            $this->load->view('dashboard/dashboard_freight', $dados);
+        } else {
+            redirect(base_url() . "index.php/usuarios");
+        }
+    }
 
 
         public function perfil(){
@@ -838,5 +982,249 @@ class Dashboard extends CI_Controller {
                 redirect(base_url()."index.php/usuarios");
             }
         }
+              public function editarNegociacao($indice){
+            $this->load->model('usuarios_model');
+
+            $this->load->model('negociacao_model');
+            if($this->usuarios_model->checarSessao()){
+                if($indice  != null){
+                    if($this->negociacao_model->editarNegociacao($indice)){
+                        redirect(base_url()."index.php/dashboard");
+                    }
+                }else{
+                    redirect(base_url()."index.php/dashboard");
+                }
+            }else{
+                redirect(base_url()."index.php/usuarios");
+            }
+        }
+       public function alterarNegociacao($indice = null){
+         $this->load->model('anuncios_model');
+         $this->load->model('negociacao_model');
+        $this->load->model('usuarios_model');
+        if ($indice == null) {
+            redirect(base_url());
+        } else if($this->anuncios_model->contarAnuncioId($indice) == 1){
+            $dados['anuncio'] = $this->anuncios_model->pegarAnuncioId($indice);
+            $dados['negociacao'] = $this->negociacao_model->pegarNegociacaoId($indice);
+
+            $this->load->view('dashboard/dashboard_editarnegocio', $dados);
+        }else{
+             $dados['heading'] = "A negociação não existe";
+        }
+        
+    }
+    
+             public function criarCotacao($indice){
+            $this->load->model('usuarios_model');
+
+            $this->load->model('negociacao_model');
+            if($this->usuarios_model->checarSessao()){
+                if($indice  != null){
+                    if($this->negociacao_model->criarCotacao($indice)){
+                        redirect(base_url()."index.php/dashboard/transportes");
+                    }
+                }else{
+                    redirect(base_url()."index.php/dashboard");
+                }
+            }else{
+                redirect(base_url()."index.php/usuarios");
+            }
+        }
+          public function aceitarCotacao($indice){
+            $this->load->model('usuarios_model');
+
+            $this->load->model('negociacao_model');
+            if($this->usuarios_model->checarSessao()){
+                if($indice  != null){
+                    if($this->negociacao_model->aceitarCotacao($indice)){
+                        redirect(base_url()."index.php/dashboard/transportes");
+                    }
+                }else{
+                    redirect(base_url()."index.php/dashboard");
+                }
+            }else{
+                redirect(base_url()."index.php/usuarios");
+            }
+        }
+            public function recusarCotacao($indice){
+            $this->load->model('usuarios_model');
+
+            $this->load->model('negociacao_model');
+            if($this->usuarios_model->checarSessao()){
+                if($indice  != null){
+                    if($this->negociacao_model->recusarCotacao($indice)){
+                        redirect(base_url()."index.php/dashboard/transportes");
+                    }
+                }else{
+                    redirect(base_url()."index.php/dashboard");
+                }
+            }else{
+                redirect(base_url()."index.php/usuarios");
+            }
+        }
+        
+        
+         public function atualizarNotificacoesTransportes(){
+            $this->load->model('anuncios_model');
+            $notificaMensagem = $this->anuncios_model->carregarNotificacaoCotacoes();
+            $notificaDisputas = $this->anuncios_model->carregarNotificacaoCotacoesAceitas();
+            $notificaAcoes = $this->anuncios_model->carregarNotificacaoAcoes();
+            $notificaAvaliacoes = $this->anuncios_model->carregarNotificacaoAvaliacao();
+            $exibeMensagem = "";
+            $exibeDisputas = "";
+            $exibeAcoes = "";
+            $exibeAvaliacoes = "";
+            $linkMensagem = "";
+            $linkDisputa = "";
+
+            if($notificaMensagem == 0){
+                $linkMensagem = base_url()."index.php/usuarios/mensagens";
+                $exibeMensagem =  '<li><a href="'.$linkMensagem.'" ><i class="fa fa-comment" aria-hidden="true"></i>Você não tem novas cotações</a></li>';
+            }else{
+                $linkMensagem = base_url()."index.php/usuarios/mensagens/".$this->anuncios_model->carregarLinksCotacoes();
+                $exibeMensagem =  '<li><a href="'.$linkMensagem.'" class="notificated" ><i class="fa fa-comment" aria-hidden="true"><span class="buttonbadge alert">'.$notificaMensagem.'</span></i>Cotações recebidas</a></li>';
+            }
+
+            if($notificaDisputas == 0){
+                $exibeDisputas = '<li><a href="" ><i class="fa fa-truck" aria-hidden="true"></i>Entregas agendadas</a></li>';
+            }else{
+                $linkDisputa = base_url()."index.php/usuarios/mensagens/".$this->anuncios_model->carregarLinksCotacoesAceitas();
+                $exibeDisputas = '<li><a href="'.$linkDisputa.'" class="notificated"><i class="fa fa-truck" aria-hidden="true"><span class="buttonbadge alert">'.$notificaDisputas.'</span></i>Entregas agendadas</a></li>';
+            }
+
+            if($notificaAcoes == 0){
+                $exibeAcoes = '<li><a href="" ><i class="fa fa-list" aria-hidden="true"></i>Você não tem novas ações</a></li>';
+            }else{
+                $exibeAcoes = '<li><a href="" class="notificated"><i class="fa fa-list" aria-hidden="true"><span class="buttonbadge alert">'.$notificaAcoes.'</span></i>Ações Pendentes</a></li>';
+            }
+
+            if($notificaAvaliacoes == 0){
+                $exibeAvaliacoes = '<li><a href="" ><i class="fa fa-barcode" aria-hidden="true"></i>Confirmações de entregas em aberto</a></li>';
+            }else{
+                $exibeAvaliacoes = '<li><a href="" class="notificated"><i class="fa fa-barcode" aria-hidden="true"><span class="buttonbadge alert">'.$notificaAvaliacoes.'</span></i>Confirmação de entregas em aberto</a></li>';
+            }
+
+            echo '  <ul class="notifications">'.$exibeMensagem.$exibeDisputas.
+                   ' </ul>
+                    <ul class="notifications">'.
+                        $exibeAcoes.$exibeAvaliacoes.'
+                    </ul>';
+        }
+        
+           public function fazerOrcamento($indice=null){
+               
+                   $this->load->model('usuarios_model');
+
+            $this->load->model('orcamento_model');
+            if($this->usuarios_model->checarSessao()){
+                if($indice  != null){
+                    if($this->orcamento_model->fazerOrcamento($indice)){
+                        redirect(base_url()."index.php/dashboard");
+                    }
+                }else{
+                    redirect(base_url()."index.php/dashboard");
+                }
+            }else{
+                redirect(base_url()."index.php/usuarios");
+            }
+               
+           }
+           public function recusarOrcamento($indice=null){     
+                   $this->load->model('usuarios_model');
+
+            $this->load->model('orcamento_model');
+            if($this->usuarios_model->checarSessao()){
+                if($indice  != null){
+                    if($this->orcamento_model->recusarOrcamento($indice)){
+                        redirect(base_url()."index.php/dashboard");
+                    }
+                }else{
+                    redirect(base_url()."index.php/dashboard");
+                }
+            }else{
+                redirect(base_url()."index.php/usuarios");
+            }
+           }
+                 public function aceitarExw($indice=null){     
+                   $this->load->model('usuarios_model');
+
+            $this->load->model('orcamento_model');
+            if($this->usuarios_model->checarSessao()){
+                if($indice  != null){
+                    if($this->orcamento_model->aceitarOrcamento($indice, "Transportadora EXW")){
+                        redirect(base_url()."index.php/dashboard");
+                    }
+                }else{
+                    redirect(base_url()."index.php/dashboard");
+                }
+            }else{
+                redirect(base_url()."index.php/usuarios");
+            }
+           }
+                  public function aceitarDdp($indice=null){     
+                   $this->load->model('usuarios_model');
+
+            $this->load->model('orcamento_model');
+            if($this->usuarios_model->checarSessao()){
+                if($indice  != null){
+                    if($this->orcamento_model->aceitarOrcamento($indice, "Transportadora DDP")){
+                        redirect(base_url()."index.php/dashboard");
+                    }
+                }else{
+                    redirect(base_url()."index.php/dashboard");
+                }
+            }else{
+                redirect(base_url()."index.php/usuarios");
+            }
+           }
+                  public function aceitarCorreios($indice=null){     
+                   $this->load->model('usuarios_model');
+
+            $this->load->model('orcamento_model');
+            if($this->usuarios_model->checarSessao()){
+                if($indice  != null){
+                    if($this->orcamento_model->aceitarOrcamento($indice, "Correios")){
+                        redirect(base_url()."index.php/dashboard");
+                    }
+                }else{
+                    redirect(base_url()."index.php/dashboard");
+                }
+            }else{
+                redirect(base_url()."index.php/usuarios");
+            }
+           }
+                  public function aceitarEntrega($indice=null){     
+                   $this->load->model('usuarios_model');
+
+            $this->load->model('orcamento_model');
+            if($this->usuarios_model->checarSessao()){
+                if($indice  != null){
+                    if($this->orcamento_model->aceitarOrcamento($indice, "Fornecedor entrega")){
+                        redirect(base_url()."index.php/dashboard");
+                    }
+                }else{
+                    redirect(base_url()."index.php/dashboard");
+                }
+            }else{
+                redirect(base_url()."index.php/usuarios");
+            }
+           }
+                public function aceitarBuscar($indice=null){     
+                   $this->load->model('usuarios_model');
+
+            $this->load->model('orcamento_model');
+            if($this->usuarios_model->checarSessao()){
+                if($indice  != null){
+                    if($this->orcamento_model->aceitarOrcamento($indice, "Cliente busca")){
+                        redirect(base_url()."index.php/dashboard");
+                    }
+                }else{
+                    redirect(base_url()."index.php/dashboard");
+                }
+            }else{
+                redirect(base_url()."index.php/usuarios");
+            }
+           }
 
 }
